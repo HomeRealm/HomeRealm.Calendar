@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FamMan.AppHost/FamMan.AppHost.csproj" />
+  <Project Path="FamMan.ServiceDefaults/FamMan.ServiceDefaults.csproj" />
+  <Project Path="FamMan/FamMan.Client/FamMan.Client.csproj" />
+  <Project Path="FamMan/FamMan/FamMan.csproj" />
+</Solution>
