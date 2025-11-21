@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamMan.Api.Events\FamMan.Api.Events.csproj" />
     <ProjectReference Include="..\FamMan\FamMan\FamMan.csproj" />
   </ItemGroup>
 
