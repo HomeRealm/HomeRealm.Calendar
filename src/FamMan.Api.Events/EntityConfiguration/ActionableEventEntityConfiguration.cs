@@ -16,7 +16,7 @@ namespace FamMan.Api.Events.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(200);
             
-            builder.Property(p => p.Type)
+            builder.Property(p => p.EventType)
                 .IsRequired()
                 .HasMaxLength(100);
             
@@ -42,7 +42,7 @@ namespace FamMan.Api.Events.EntityConfiguration
                 .IsRequired();
             
             // Indexes for common queries
-            builder.HasIndex(p => p.Type);
+            builder.HasIndex(p => p.EventType);
             builder.HasIndex(p => p.IsActive);
         }
     }
