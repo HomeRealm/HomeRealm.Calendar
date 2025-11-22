@@ -1,4 +1,5 @@
-﻿using FamMan.Api.Events.Dtos;
+﻿using System.Text.Json;
+using FamMan.Api.Events.Dtos;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FamMan.Api.Events
@@ -13,7 +14,11 @@ namespace FamMan.Api.Events
             {
                 return Results.Ok(new ActionableEventDto
                 {
-                    Guid = Guid.CreateVersion7()
+                    Id = Guid.CreateVersion7(),
+                    Description = "This is a sample actionable event.",
+                    Name = "Sample Event",
+                    EventType = "Sample Type",
+                    RecurrenceRules = JsonElement.Parse("{ \"frequency\": \"single\" }"),
                 });
             });
         }
