@@ -1,7 +1,13 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/UI/">
+    <Project Path="FamMan/FamMan.Client/FamMan.Client.csproj" />
+    <Project Path="FamMan/FamMan.Shared/FamMan.Shared.csproj" />
+    <Project Path="FamMan/FamMan/FamMan.csproj" />
+  </Folder>
   <Project Path="FamMan.Api.Events/FamMan.Api.Events.csproj" />
   <Project Path="FamMan.AppHost/FamMan.AppHost.csproj" />
   <Project Path="FamMan.ServiceDefaults/FamMan.ServiceDefaults.csproj" />
-  <Project Path="FamMan/FamMan.Client/FamMan.Client.csproj" />
-  <Project Path="FamMan/FamMan/FamMan.csproj" />
 </Solution>
