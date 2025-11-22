@@ -1,0 +1,21 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "events-route": {
+        "ClusterId": "events-cluster",
+        "Match": {
+          "Path": "/api/events/{**catch-all}"
+        }
+      }
+    },
+    "Clusters": {
+      "events-cluster": {
+        "Destinations": {
+          "events-destination": {
+            "Address": "https+http://famman-api-events"
+          }
+        }
+      }
+    }
+  }
+}

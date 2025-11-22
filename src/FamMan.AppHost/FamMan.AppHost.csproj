@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions" Version="13.0.0-beta.444" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FamMan.Api.Events\FamMan.Api.Events.csproj" />
     <ProjectReference Include="..\FamMan\FamMan\FamMan.csproj" />
   </ItemGroup>
