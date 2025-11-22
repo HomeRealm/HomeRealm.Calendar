@@ -1,4 +1,5 @@
 using FamMan.Api.Events;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,11 @@ builder.AddNpgsqlDbContext<EventsDbContext>("fanman-events");
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+
+// automatically apply migrations during startup
+// will be moved to background service in future
+app.Services.GetRequiredService<EventsDbContext>().Database.Migrate();
 
 app.MapDefaultEndpoints();
 
