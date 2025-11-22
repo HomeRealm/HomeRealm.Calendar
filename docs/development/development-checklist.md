@@ -9,6 +9,7 @@ make it easier to verify a consistent coding style.
 * UI components go into FamMan.Shared. This will allow for it to be added into a MAUI project in the future. 
 * Use DataAnnotations for basic validation, like required
 * Display validation errors returned from API
+* Do not use DTO from API for UI. Either use the componment itself or a separate view model. 
 
 ## API 
 * Use minimal APIs
