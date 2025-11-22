@@ -11,6 +11,7 @@
     <ProjectReference Include="..\..\FamMan.ServiceDefaults\FamMan.ServiceDefaults.csproj" />
     <ProjectReference Include="..\FamMan.Client\FamMan.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="10.0.0" />
   </ItemGroup>
 
 </Project>
