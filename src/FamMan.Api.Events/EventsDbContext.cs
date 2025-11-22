@@ -6,6 +6,7 @@ namespace FamMan.Api.Events
     public class EventsDbContext(DbContextOptions<EventsDbContext> options) : DbContext(options)
     {
         public DbSet<ActionableEvent> ActionableEvents { get; set; } = default!;
+        public DbSet<EventOccurrence> EventOccurrences { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
