@@ -98,8 +98,8 @@ private async Task HandleSelection(string item)
 ### Forms and Validation
 
 - **EditForm**: Always use `EditForm` with `EditContext` or model binding
-- **Data Annotations**: Use data annotations for basic validation
-- **Fluent Validation**: Use FluentValidation for complex validation scenarios (see Fluent Validation section)
+- **Data Annotations**: Use data annotations for basic validation in UI
+- **Fluent Validation**: Use FluentValidation for complex validation scenarios against the API (see Fluent Validation section)
 - **Validation Summary**: Include `ValidationSummary` or `ValidationMessage` components
 
 ## Minimal API Best Practices

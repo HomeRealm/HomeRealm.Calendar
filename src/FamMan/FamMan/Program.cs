@@ -1,4 +1,4 @@
-using FamMan.Client.Pages;
+using FamMan.Shared.Pages;
 using FamMan.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +37,8 @@ app.MapStaticAssets();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(FamMan.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(FamMan.Client._Imports).Assembly)
+    .AddAdditionalAssemblies(typeof(FamMan.Shared._Imports).Assembly);
 
 app.MapReverseProxy();
 
