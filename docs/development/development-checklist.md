@@ -16,5 +16,5 @@ make it easier to verify a consistent coding style.
 * Call fluent validation from endpoint
 * Do work in the service
 * Wrap DbContext in a DataStore for DB interactions
-* Unit Test FluentValidation
+* Unit Test FluentValidation Validators
 * Unit Test Service
