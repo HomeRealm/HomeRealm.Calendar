@@ -1,0 +1,27 @@
+{
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "cSpell.userWords": [],
+  "editor.autoIndent": "advanced",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.inlineSuggest.enabled": false,
+  "editor.insertSpaces": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "extensions.ignoreRecommendations": true,
+  "github.copilot.advanced": {
+    "inlineSuggest.enable": false,
+    "editor.enableAutoCompletions": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "terminal.integrated.stickyScroll.enabled": false,
+  "window.zoomLevel": 1,
+  "workbench.editor.empty.hint": "hidden",
+}
