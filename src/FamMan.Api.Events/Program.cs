@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.AddNpgsqlDbContext<EventsDbContext>("fanman-events");
+builder.AddNpgsqlDbContext<EventsDbContext>("famman-events");
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -14,7 +14,11 @@ var app = builder.Build();
 
 // automatically apply migrations during startup
 // will be moved to background service in future
-app.Services.GetRequiredService<EventsDbContext>().Database.Migrate();
+using (var scope = app.Services.CreateScope())
+{
+  var dbContext = scope.ServiceProvider.GetRequiredService<EventsDbContext>();
+  dbContext.Database.Migrate();
+}
 
 app.MapDefaultEndpoints();
 
