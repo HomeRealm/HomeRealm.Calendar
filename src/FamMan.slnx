@@ -2,6 +2,9 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="../tests/FamMan.Tests.Events.UnitTests/FamMan.Tests.Events.UnitTests.csproj" />
+  </Folder>
   <Folder Name="/UI/">
     <Project Path="FamMan/FamMan.Client/FamMan.Client.csproj" />
     <Project Path="FamMan/FamMan.Shared/FamMan.Shared.csproj" />
