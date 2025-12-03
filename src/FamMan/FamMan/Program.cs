@@ -1,5 +1,6 @@
-using FamMan.Shared.Pages;
+using FamMan.Client.Pages;
 using FamMan.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -10,6 +11,9 @@ builder.AddServiceDefaults();
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
     .AddServiceDiscoveryDestinationResolver();
+// Add MudBlazor services
+builder.Services.AddMudServices();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -17,7 +21,6 @@ builder.Services.AddRazorComponents()
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -32,14 +35,13 @@ else
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
 
-app.UseAntiforgery();
-app.MapStaticAssets();
 
+app.UseAntiforgery();
+
+app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(FamMan.Client._Imports).Assembly)
-    .AddAdditionalAssemblies(typeof(FamMan.Shared._Imports).Assembly);
-
+    .AddAdditionalAssemblies(typeof(FamMan.Client._Imports).Assembly);
 app.MapReverseProxy();
 
 app.Run();
