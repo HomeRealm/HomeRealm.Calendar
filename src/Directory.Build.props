@@ -1,0 +1,35 @@
+<Project>
+  <!-- 
+    Directory.Build.props - Shared MSBuild properties for all projects in the solution
+    See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build
+  -->
+  
+  <PropertyGroup Label="Language and Framework">
+    <!-- Use latest .NET version and C# language features -->
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Code Analysis and Quality">
+    <!-- Treat warnings as errors in Release builds only -->
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Performance">
+    <!-- Enable tiered compilation for better runtime performance -->
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+  </PropertyGroup>
+
+  <!-- Test project detection -->
+  <PropertyGroup Condition="$(MSBuildProjectName.Contains('Tests'))">
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+</Project>

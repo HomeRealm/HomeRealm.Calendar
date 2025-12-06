@@ -68,7 +68,10 @@ public static class ActionableEventsEndpoints
     CancellationToken ct
   )
   {
-    if (id != actionableEvent.Id) return TypedResults.BadRequest();
+    if (id != actionableEvent.Id)
+    {
+      return TypedResults.BadRequest();
+    }
 
     var (status, updatedEvent) = await eventService.UpdateEventAsync(actionableEvent, ct);
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(updatedEvent);
