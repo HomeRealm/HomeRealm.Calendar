@@ -11,30 +11,30 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FamMan.Api.Events.Migrations
 {
-    [DbContext(typeof(EventsDbContext))]
-    [Migration("20251122175707_initial")]
-    partial class initial
+  [DbContext(typeof(EventsDbContext))]
+  [Migration("20251122175707_Initial")]
+  partial class Initial
+  {
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "10.0.0")
+          .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+      NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FamMan.Api.Events.Entities.ActionableEvent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Events.Entities.ActionableEvent", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("ActionableEvents");
-                });
+            b.ToTable("ActionableEvents");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }
