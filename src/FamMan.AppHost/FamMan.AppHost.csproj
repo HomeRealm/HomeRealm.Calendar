@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamMan.Api.Chores\FamMan.Api.Chores.csproj" />
     <ProjectReference Include="..\FamMan.Api.Events\FamMan.Api.Events.csproj" />
     <ProjectReference Include="..\FamMan\FamMan\FamMan.csproj" />
   </ItemGroup>
