@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FamMan.Api.Events.Migrations
+namespace FamMan.Api.Events.Migrations;
+
+/// <inheritdoc />
+public partial class AddEvents : Migration
 {
-  /// <inheritdoc />
-  public partial class AddEvents : Migration
-  {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
     {
@@ -165,5 +165,4 @@ namespace FamMan.Api.Events.Migrations
           name: "UpdatedAt",
           table: "ActionableEvents");
     }
-  }
 }
