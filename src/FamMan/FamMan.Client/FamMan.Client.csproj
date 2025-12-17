@@ -14,4 +14,8 @@
     <PackageReference Include="Heron.MudCalendar" Version="3.3.1-gorrilla10101" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\FamMan.Clients.Events\FamMan.Clients.Events.csproj" />
+  </ItemGroup>
+
 </Project>
