@@ -1,0 +1,99 @@
+openapi: '3.0.2'
+info:
+  title: Chores
+servers:
+  - url: localhost:7038
+
+components:
+  schemas:
+    chore:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedAt:
+          type: string
+          format: date-time
+        DueDate:
+          type: string
+          format: date-time
+  parameters:
+    chore-id:
+      name: chore-id
+      in: path
+      description: 'key: id of chore'
+      required: true
+      style: simple
+      schema:
+        type: string
+        format: uuid
+
+paths:
+  /chores:
+    get:
+      description: Get all chores
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/chore'
+    post:
+      description: 'Create a chore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chore'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chore'
+  /chores/{chore-id}:
+    get:
+      description: 'Get chore by ID'
+      parameters:
+      - $ref: '#/components/parameters/chore-id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chore'
+    put:
+      description: 'Update chore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chore'
+      parameters:
+      - $ref: '#/components/parameters/chore-id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chore'
+    delete:
+      description: 'Delete chore'
+      parameters:
+      - $ref: '#/components/parameters/chore-id'
+      responses:
+        '200':
+          description: OK
