@@ -10,11 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0" />
-    <PackageReference Include="MudBlazor" Version="8.*" />
+    <PackageReference Include="MudBlazor" Version="9.0.0-preview.1" />
     <PackageReference Include="Heron.MudCalendar" Version="3.3.1-gorrilla10101" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FamMan.Clients.Chores\FamMan.Clients.Chores.csproj" />
     <ProjectReference Include="..\..\FamMan.Clients.Events\FamMan.Clients.Events.csproj" />
   </ItemGroup>
 

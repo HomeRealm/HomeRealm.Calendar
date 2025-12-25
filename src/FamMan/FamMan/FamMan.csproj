@@ -8,7 +8,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FamMan.Clients.Events\FamMan.Clients.Events.csproj" />
     <ProjectReference Include="..\..\FamMan.ServiceDefaults\FamMan.ServiceDefaults.csproj" />
     <ProjectReference Include="..\FamMan.Client\FamMan.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
