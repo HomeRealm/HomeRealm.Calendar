@@ -5,7 +5,7 @@
   "kiotaVersion": "1.29.0",
   "clientClassName": "EventsClient",
   "typeAccessModifier": "Public",
-  "clientNamespaceName": "Events.Client",
+  "clientNamespaceName": "FamMan.Clients",
   "language": "CSharp",
   "usesBackingStore": false,
   "excludeBackwardCompatible": false,
