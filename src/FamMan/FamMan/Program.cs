@@ -29,17 +29,17 @@ builder.Services.AddHttpClient("ChoresApiClient", client =>
   client.BaseAddress = new Uri("https+http://famman-api-chores");
 }).AddServiceDiscovery();
 
-// Register IRequestAdapter for EventsClient
-builder.Services.AddScoped<IRequestAdapter>(sp =>
-{
-  var authProvider = new AnonymousAuthenticationProvider();
-  var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("EventsApiClient");
-  return new HttpClientRequestAdapter(authProvider, httpClient: httpClient);
-});
 
 // Register API Clients
-builder.Services.AddScoped<EventsClient>();
-builder.Services.AddScoped<ChoresClient>(sp =>
+builder.Services.AddScoped(sp =>
+{
+  var authProvider = new AnonymousAuthenticationProvider();
+  var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("ChoresApiClient");
+  var requestAdapter = new HttpClientRequestAdapter(authProvider, httpClient: httpClient);
+  return new EventsClient(requestAdapter);
+});
+
+builder.Services.AddScoped(sp =>
 {
   var authProvider = new AnonymousAuthenticationProvider();
   var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("ChoresApiClient");
