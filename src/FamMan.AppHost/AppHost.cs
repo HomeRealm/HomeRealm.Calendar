@@ -20,4 +20,10 @@ builder.AddProject<Projects.FamMan>("famman")
     .WithReference(choresApi);
 
 
+
+// Add Docsify documentation container using AddDockerfile (corrected path)
+var docsify = builder.AddDockerfile("Documentation", "../../docsify", "Dockerfile")
+    .WithHttpEndpoint(port: 3000, targetPort: 3000, name: "http")
+    .WithExplicitStart();
+
 builder.Build().Run();
