@@ -16,7 +16,9 @@ This document outlines the coding standards and best practices for the FamMan ap
 
 - **Single Responsibility**: Each component should have one clear purpose
 - **Keep Components Small**: Break large components into smaller, reusable child components
-- **Component Parameters**: Use `[Parameter]` for component inputs and validate them in `OnParametersSet()`
+- **Component Parameters**: Use `[Parameter]` for component inputs and validate them in 
+`OnParametersSet()`
+
 ```csharp
 [Parameter, EditorRequired]
 public string Title { get; set; } = string.Empty;
@@ -32,6 +34,7 @@ protected override void OnParametersSet()
 - **Cascading Values**: Use `CascadingValue` and `CascadingParameter` for data that needs to flow down the component tree
 - **Component State**: Keep component state minimal and local when possible
 - **Event Callbacks**: Use `EventCallback<T>` for parent-child component communication
+
 ```csharp
 [Parameter]
 public EventCallback<string> OnItemSelected { get; set; }
@@ -49,6 +52,7 @@ private async Task HandleSelection(string item)
   - `OnParametersSet()/OnParametersSetAsync()` - React to parameter changes
   - `OnAfterRender()/OnAfterRenderAsync()` - DOM interactions (use `firstRender` parameter)
 - **Dispose Resources**: Implement `IDisposable` or `IAsyncDisposable` to clean up subscriptions, timers, and event handlers
+
 ```csharp
 @implements IAsyncDisposable
 
@@ -74,6 +78,7 @@ private async Task HandleSelection(string item)
 - **Streaming Rendering**: Leverage streaming rendering for async data loading
 - **Avoid Unnecessary Re-renders**: Use `ShouldRender()` to control when components update
 - **Use `@key`**: Always use `@key` directive in loops to help Blazor track elements
+
 ```razor
 @foreach (var item in Items)
 {
@@ -84,6 +89,7 @@ private async Task HandleSelection(string item)
 ### Error Handling
 
 - **Error Boundaries**: Use `ErrorBoundary` component to catch and handle component errors gracefully
+
 ```razor
 <ErrorBoundary>
 	<ChildContent>
@@ -107,6 +113,7 @@ private async Task HandleSelection(string item)
 ### Endpoint Organization
 
 - **Group Related Endpoints**: Use `MapGroup()` to organize related endpoints
+
 ```csharp
 var eventsGroup = app.MapGroup("/api/events")
 	.WithTags("Events")
@@ -121,6 +128,7 @@ eventsGroup.MapPost("/", CreateEvent);
 
 - **Keep Handlers Thin**: Extract business logic into services
 - **Use Dependency Injection**: Inject services directly into route handlers
+
 ```csharp
 app.MapGet("/api/events/{id}", async (
 	int id,
@@ -135,6 +143,7 @@ app.MapGet("/api/events/{id}", async (
 ### Request/Response Patterns
 
 - **Use Typed Results**: Leverage `TypedResults` for type-safe responses
+
 ```csharp
 app.MapGet("/api/events/{id}", async Task<Results<Ok<EventDto>, NotFound>> (
 	int id,
@@ -175,6 +184,7 @@ app.MapPost("/api/events", async (
 ```
 
 - **Extension Method Pattern**: For reducing repetition across endpoints, create extension methods on `IValidator<T>`
+
 ```csharp
 public static class ValidatorExtensions
 {
@@ -219,6 +229,7 @@ This approach is cleaner because:
 
 - **Global Exception Handler**: Use `IExceptionHandler` for centralized error handling
 - **Problem Details**: Return RFC 7807 Problem Details for errors
+
 ```csharp
 public class GlobalExceptionHandler : IExceptionHandler
 {
@@ -249,6 +260,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
 - **OpenAPI/Swagger**: Use `.WithOpenApi()` to document endpoints
 - **Descriptive Summaries**: Add descriptions and examples
+
 ```csharp
 .MapGet("/api/events/{id}", GetEventById)
 .WithName("GetEventById")
@@ -261,6 +273,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 ### Security
 
 - **Authorization**: Apply authorization policies to endpoints
+
 ```csharp
 app.MapGet("/api/events", GetEvents)
 	.RequireAuthorization("EventsRead");
@@ -275,6 +288,7 @@ app.MapGet("/api/events", GetEvents)
 
 - **One Validator Per Model**: Create a dedicated validator class for each model/DTO
 - **Naming Convention**: Use `{ModelName}Validator` naming pattern
+
 ```csharp
 public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 {
@@ -295,6 +309,7 @@ public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 
 - **Fluent Chains**: Chain validation rules for readability
 - **Custom Messages**: Provide clear, user-friendly error messages
+
 ```csharp
 RuleFor(x => x.Email)
 	.NotEmpty().WithMessage("Email is required")
@@ -303,6 +318,7 @@ RuleFor(x => x.Email)
 ```
 
 - **When Conditions**: Use `When()` for conditional validation
+
 ```csharp
 RuleFor(x => x.EndDate)
 	.GreaterThan(x => x.StartDate)
@@ -313,6 +329,7 @@ RuleFor(x => x.EndDate)
 ### Complex Validation
 
 - **Custom Rules**: Create custom validation rules for complex logic
+
 ```csharp
 RuleFor(x => x.PhoneNumber)
 	.Must(BeAValidPhoneNumber)
@@ -326,6 +343,7 @@ private bool BeAValidPhoneNumber(string? phoneNumber)
 ```
 
 - **Async Validation**: Use `MustAsync()` for async validation (e.g., database checks)
+
 ```csharp
 RuleFor(x => x.Email)
 	.MustAsync(BeUniqueEmail)
@@ -342,6 +360,7 @@ private async Task<bool> BeUniqueEmail(
 ### Validator Composition
 
 - **Include Nested Validators**: Validate child objects with `SetValidator()`
+
 ```csharp
 public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 {
@@ -359,11 +378,13 @@ public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 ### Dependency Injection
 
 - **Register Validators**: Register all validators in DI container
+
 ```csharp
 services.AddValidatorsFromAssemblyContaining<CreateEventRequestValidator>();
 ```
 
 - **Inject Dependencies**: Validators can have their own dependencies
+
 ```csharp
 public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 {
@@ -415,6 +436,7 @@ app.MapPost("/api/events", async (
 ### Testing
 
 - **Test Validators**: Write unit tests for your validators
+
 ```csharp
 [Fact]
 public async Task Should_Have_Error_When_Title_Is_Empty()
