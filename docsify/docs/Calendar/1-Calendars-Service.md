@@ -19,9 +19,14 @@ The Calendar API exists to centralize all calendar-related information for a fam
 
 Within FamMan, the Calendar API acts as the hub for all scheduling needs. Other services—like the Chores and Events APIs—rely on it to display and manage their scheduled items. This integration ensures that every family activity, from daily chores to special events, appears on a single, shared calendar.
 
-## Benefits
 
-- **Clarity:** Everyone in the family can see what’s happening and when.
-- **Convenience:** Automatic updates and compatibility with popular calendar tools reduce manual work.
-- **Coordination:** By bringing all events together, the Calendar API helps families stay organized and connected.
+## Technical Implementation
+
+The Calendar API is implemented using modern .NET Minimal APIs, following a vertical slice architecture for each resource (e.g., Calendar, Event, Attendee). Key technical patterns include:
+
+- **Request/Response DTOs:** Every API endpoint uses a Request DTO (for input, without primary key) and a Response DTO (for output, including primary key and all returned fields).
+- **Entity Validation:** FluentValidation is applied to the entity itself, not the DTO. The DTO is mapped to the entity in the endpoint and validated before being passed to the service.
+- **Vertical Slice Architecture:** Each resource is implemented as a self-contained slice, including its entity, DTOs, validation, and endpoints, ensuring maintainability and testability.
+
+For detailed development steps and user stories, see [calendar-service-user-stories.md](calendar-service-user-stories.md).
 
