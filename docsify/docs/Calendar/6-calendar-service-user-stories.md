@@ -143,17 +143,21 @@ This document provides a vertical slice for each core Calendar resource, includi
 
 ## 1. Occurrence Resources Vertical Slice
 **Entity:**
+
 - No Entity: resources are generated upon request.
 
 **DTOs:**
+
 - No Request DTO because it's a get only endpoint
 - Define a **Response DTO** (e.g., `CalendarResponse`) for output, which includes the relevant CalendarEventId and all returned fields.
 
 **Implementation Details**
+
 Use ical.net to generate occurrences and then project them to a response dto. **DO NOT** pass the ical.net occurrence directly. 
 You can use ical.net's `Calendar.GenerateOccurrences` method to generate a list of Occurrences. 
 
 **API:**
+
 - Map endpoints: Get All Occurrences (`/api/calendars/occurrences`).
 - Map endpoints: Get Occurrences for Calendar (`/api/calendars/{id}/occurrences`)
 - Map endpoints: Get Occurrences for Calendar Event (`/api/Events/{id}/occurences`)
@@ -164,6 +168,7 @@ You can use ical.net's `Calendar.GenerateOccurrences` method to generate a list 
 ---
 
 ## Common Steps for All Slices
+
 - Register all entities in DbContext.
 - Register all validators in DI.
 - Ensure every API endpoint uses both a **Request DTO** (without primary key) and a **Response DTO** (with primary key and output fields).
