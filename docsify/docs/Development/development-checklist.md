@@ -18,3 +18,5 @@ make it easier to verify a consistent coding style.
 * Wrap DbContext in a DataStore for DB interactions
 * Unit Test FluentValidation Validators
 * Unit Test Service
+* APIs must use both **Request DTOs** (for input) and **Response DTOs** (for output).
+* **Request DTOs must never include the primary key** (e.g., Id) of the resource. The primary key should only be present in the Response DTO or as a route parameter.
