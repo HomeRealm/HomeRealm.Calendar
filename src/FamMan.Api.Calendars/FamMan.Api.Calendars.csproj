@@ -23,4 +23,9 @@
     <ProjectReference Include="..\FamMan.ServiceDefaults\FamMan.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

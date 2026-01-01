@@ -1,4 +1,4 @@
-using FamMan.Api.Calendar;
+using FamMan.Api.Calendars;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

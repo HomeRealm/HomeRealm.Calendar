@@ -10,6 +10,7 @@
     <Project Path="FamMan/FamMan.Client/FamMan.Client.csproj" Id="184806a4-33c4-4d52-9db3-dce0c290c4bf" />
     <Project Path="FamMan/FamMan/FamMan.csproj" Id="e2b8aa09-0380-4181-aa09-6dc6f64a03ee" />
   </Folder>
+  <Project Path="FamMan.Api.Calendars/FamMan.Api.Calendars.csproj" />
   <Project Path="FamMan.Api.Chores/FamMan.Api.Chores.csproj" />
   <Project Path="FamMan.Api.Events/FamMan.Api.Events.csproj" />
   <Project Path="FamMan.AppHost/FamMan.AppHost.csproj" />
