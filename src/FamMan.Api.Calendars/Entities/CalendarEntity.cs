@@ -1,6 +1,6 @@
 namespace FamMan.Api.Calendars.Entities;
 
-public class Calendar
+public class CalendarEntity
 {
   public Guid Id { get; set; }
   public required string Name { get; set; }
