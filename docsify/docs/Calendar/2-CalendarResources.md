@@ -26,7 +26,7 @@ erDiagram
     CalendarEvent }o--|| Category : categorized_as
 
     Calendar {
-      string id PK
+      guid id PK
       string name
       string description
       string color
@@ -34,7 +34,7 @@ erDiagram
       string visibility
     }
     CalendarEvent {
-      string id PK
+      guid id PK
       string calendarId FK
       string title
       string description
@@ -47,33 +47,33 @@ erDiagram
       string linkedResource
     }
     RecurrenceRule {
-      string id PK
+      guid id PK
       string eventId FK
       string rule
       array occurrenceOverrides
       datetime endDate
     }
     OccurrenceOverride {
-      string id PK
+      guid id PK
       string recurrenceId FK
       datetime date
       object override
     }
     Attendee {
-      string id PK
+      guid id PK
       string eventId FK
       string userId
       string status
       string role
     }
     Reminder {
-      string id PK
+      guid id PK
       string eventId FK
       string method
       int timeBefore
     }
     Category {
-      string id PK
+      guid id PK
       string name
       string color
       string icon
@@ -100,7 +100,7 @@ Represents a logical calendar (e.g., Family, Chores, Birthdays).
 
 | Property      | Type     | Description                  |
 |--------------|----------|------------------------------|
-| id           | string   | Unique identifier            |
+| id           | guid     | Unique identifier            |
 | name         | string   | Calendar name                |
 | description  | string   | Calendar description         |
 | color        | string   | Display color                |
@@ -115,7 +115,7 @@ Represents a scheduled item (appointment, chore, birthday, etc.).
 
 | Property      | Type     | Description                  |
 |--------------|----------|------------------------------|
-| id           | string   | Unique identifier            |
+| id           | guid     | Unique identifier            |
 | calendarId   | string   | Parent calendar ID           |
 | title        | string   | Event title                  |
 | description  | string   | Event description            |
@@ -151,7 +151,7 @@ Handles overrides or skips for specific occurrences of recurring events.
 
 | Property      | Type     | Description                        |
 |--------------|----------|------------------------------------|
-| id           | string   | Unique identifier                  |
+| id           | guid     | Unique identifier                  |
 | recurrenceId | string   | RecurrenceRule ID                  |
 | date         | datetime | Date of the overridden occurrence  |
 | override     | object   | Override details (optional)        |
@@ -164,7 +164,7 @@ Represents a participant in an event.
 
 | Property      | Type     | Description                  |
 |--------------|----------|------------------------------|
-| id           | string   | Unique identifier            |
+| id           | guid     | Unique identifier            |
 | eventId      | string   | CalendarEvent ID             |
 | userId       | string   | User ID                      |
 | status       | string   | accepted/declined/tentative  |
@@ -178,7 +178,7 @@ Notification settings for events.
 
 | Property      | Type     | Description                  |
 |--------------|----------|------------------------------|
-| id           | string   | Unique identifier            |
+| id           | guid     | Unique identifier            |
 | eventId      | string   | CalendarEvent ID             |
 | method       | string   | email/push/SMS               |
 | timeBefore   | int      | Minutes before event         |
@@ -191,7 +191,7 @@ For filtering and organizing events.
 
 | Property      | Type     | Description                  |
 |--------------|----------|------------------------------|
-| id           | string   | Unique identifier            |
+| id           | guid     | Unique identifier            |
 | name         | string   | Category name                |
 | color        | string   | Display color                |
 | icon         | string   | Icon name                    |
@@ -202,8 +202,8 @@ Example: CalendarEvent JSON
 
 ```json
 {
-  "id": "evt-123",
-  "calendarId": "cal-1",
+  "id": "019b7b66-09cc-7365-b866-ac23d427f244",
+  "calendarId": "019b7b66-09cc-7250-93af-531649f28275",
   "title": "Doctor Appointment",
   "description": "Annual checkup",
   "start": "2026-01-10T09:00:00Z",
