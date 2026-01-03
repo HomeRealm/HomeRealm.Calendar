@@ -40,6 +40,10 @@ public class CalendarService : ICalendarService
 
     return ("found", MapToResponseDto(existingEntity));
   }
+  public async Task DeleteCalendarAsync(Guid id, CancellationToken ct)
+  {
+    await _dataStore.DeleteCalendarAsync(id, ct);
+  }
   private CalendarEntity MapToEntity(CalendarRequestDto dto, Guid? id = null)
   {
     return new CalendarEntity
