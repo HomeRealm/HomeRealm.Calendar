@@ -1,5 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamMan.Api.Calendars.Services;
 
@@ -25,5 +26,9 @@ public class CalendarDataStore : ICalendarDataStore
   public async Task<CalendarEntity?> GetCalendarAsync(Guid id, CancellationToken ct)
   {
     return await _db.Calendars.FindAsync(id, ct);
+  }
+  public async Task DeleteCalendarAsync(Guid id, CancellationToken ct)
+  {
+    await _db.Calendars.Where(c => c.Id == id).ExecuteDeleteAsync(ct);
   }
 }
