@@ -1,16 +1,12 @@
-using FamMan.Api.Calendars.Entities;
+using FamMan.Api.Calendars.Dtos;
 using FluentValidation;
 
 namespace FamMan.Api.Calendars.Validators;
 
-public class CalendarValidator : AbstractValidator<CalendarEntity>
+public class CalendarRequestDtoValidator : AbstractValidator<CalendarRequestDto>
 {
-  public CalendarValidator()
+  public CalendarRequestDtoValidator()
   {
-    RuleFor(x => x.Id)
-      .NotEmpty().WithMessage("An ID is required for this operation")
-      .NotEqual(Guid.Empty).WithMessage("ID cannot be the default GUID");
-
     RuleFor(x => x.Name)
       .NotEmpty().WithMessage("Name cannot be empty.")
       .MaximumLength(200).WithMessage("Name must be shorter than 200 characters.");
