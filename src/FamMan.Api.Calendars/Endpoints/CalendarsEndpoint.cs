@@ -20,6 +20,14 @@ public static class CalendarsEndpoints
       .WithDescription("Creates a new calendar")
       .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
       .Produces<ValidationProblemDetails>(StatusCodes.Status400BadRequest);
+    group
+      .MapPut("/{id}", UpdateCalendar)
+      .WithName("UpdateCalendar")
+      .WithSummary("Updates a calendar")
+      .WithDescription("Updates the calendar with the matching ID")
+      .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
+      .Produces<ValidationProblemDetails>(StatusCodes.Status400BadRequest)
+      .Produces(StatusCodes.Status404NotFound);
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
     [FromBody] CalendarRequestDto dto,
@@ -38,3 +46,49 @@ public static class CalendarsEndpoints
     var createdCalendar = await calendarService.CreateCalendarAsync(dto, ct);
     return TypedResults.Created($"/api/calendars/{createdCalendar.Id}", createdCalendar);
   }
+  private async static Task<Results<Ok<CalendarResponseDto>, NotFound, ValidationProblem>> UpdateCalendar(
+    [FromRoute] Guid id,
+    [FromBody] CalendarRequestDto dto,
+    [FromServices] ICalendarService calendarService,
+    [FromServices] IValidator<CalendarRequestDto> validator,
+    CancellationToken ct
+  )
+  {
+    var validationResult = await validator.ValidateAsync(dto, ct);
+
+    if (!validationResult.IsValid)
+    {
+      return TypedResults.ValidationProblem(validationResult.ToDictionary());
+    }
+
+    var (status, updatedCalendar) = await calendarService.UpdateCalendarAsync(dto, id, ct);
+    return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(updatedCalendar);
+  }
+  // private async static Task<Ok<List<CalendarEventDto>>> GetAllEvents(
+  //   [FromServices] IEventService eventService,
+  //   CancellationToken ct
+  // )
+  // {
+  //   var result = await eventService.GetAllEventsAsync(ct);
+  //   return TypedResults.Ok(result);
+  // }
+  // private async static Task<Results<Ok<CalendarEventDto>, NotFound>> GetEventById(
+  //   [FromRoute] Guid id,
+  //   [FromServices] IEventService eventService,
+  //   CancellationToken ct
+  // )
+  // {
+  //   var (status, calendarEvent) = await eventService.GetEventByIdAsync(id, ct);
+
+  //   return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendarEvent);
+  // }
+  // private async static Task<NoContent> DeleteEvent(
+  //   [FromRoute] Guid id,
+  //   [FromServices] IEventService eventService,
+  //   CancellationToken ct
+  // )
+  // {
+  //   await eventService.DeleteEventAsync(id, ct);
+  //   return TypedResults.NoContent();
+  // }
+}
