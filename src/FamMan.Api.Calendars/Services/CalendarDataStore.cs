@@ -1,0 +1,19 @@
+using FamMan.Api.Calendars.Entities;
+using FamMan.Api.Calendars.Interfaces;
+
+namespace FamMan.Api.Calendars.Services;
+
+public class CalendarDataStore : ICalendarDataStore
+{
+  private readonly CalendarDbContext _db;
+  public CalendarDataStore(CalendarDbContext db)
+  {
+    _db = db;
+  }
+  public async Task<CalendarEntity> CreateCalendarAsync(CalendarEntity entity, CancellationToken ct)
+  {
+    await _db.Calendars.AddAsync(entity, ct);
+    await _db.SaveChangesAsync(ct);
+    return entity;
+  }
+}
