@@ -35,6 +35,12 @@ public static class CalendarsEndpoints
       .WithDescription("Gets the calendar with the matching ID")
       .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
       .Produces(StatusCodes.Status404NotFound);
+    group
+      .MapDelete("/{id}", DeleteCalendar)
+      .WithName("DeleteCalendar")
+      .WithSummary("Deletes a calendar")
+      .WithDescription("Deletes the calendar with the matching ID")
+      .Produces<CalendarResponseDto>(StatusCodes.Status204NoContent);
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
     [FromBody] CalendarRequestDto dto,
@@ -81,13 +87,13 @@ public static class CalendarsEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendar);
   }
-  // private async static Task<NoContent> DeleteEvent(
-  //   [FromRoute] Guid id,
-  //   [FromServices] IEventService eventService,
-  //   CancellationToken ct
-  // )
-  // {
-  //   await eventService.DeleteEventAsync(id, ct);
-  //   return TypedResults.NoContent();
-  // }
+  private async static Task<NoContent> DeleteCalendar(
+    [FromRoute] Guid id,
+    [FromServices] ICalendarService calendarService,
+    CancellationToken ct
+  )
+  {
+    await calendarService.DeleteCalendarAsync(id, ct);
+    return TypedResults.NoContent();
+  }
 }
