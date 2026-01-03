@@ -1,4 +1,3 @@
-using System;
 using FamMan.Api.Calendars.Dtos;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces;
@@ -17,6 +16,19 @@ public class CalendarService : ICalendarService
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateCalendarAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
+  }
+  public async Task<(string status, CalendarResponseDto? updatedCalendar)> UpdateCalendarAsync(CalendarRequestDto dto, Guid id, CancellationToken ct)
+  {
+    var existingEntity = await _dataStore.GetCalendarAsync(id, ct);
+    if (existingEntity is null)
+    {
+      return ("notfound", null);
+    }
+
+    var mappedEntity = MapToEntity(dto, id);
+    var updatedEntity = await _dataStore.UpdateCalendarAsync(existingEntity, mappedEntity, ct);
+
+    return ("updated", MapToResponseDto(updatedEntity));
   }
   private CalendarEntity MapToEntity(CalendarRequestDto dto, Guid? id = null)
   {
