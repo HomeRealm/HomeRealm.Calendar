@@ -22,4 +22,8 @@ public class CalendarDataStore : ICalendarDataStore
     await _db.SaveChangesAsync(ct);
     return existingEntity;
   }
+  public async Task<CalendarEntity?> GetCalendarAsync(Guid id, CancellationToken ct)
+  {
+    return await _db.Calendars.FindAsync(id, ct);
+  }
 }
