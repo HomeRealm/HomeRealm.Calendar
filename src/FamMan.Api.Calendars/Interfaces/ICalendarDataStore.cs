@@ -4,5 +4,5 @@ namespace FamMan.Api.Calendars.Interfaces;
 
 public interface ICalendarDataStore
 {
-  public Task<CalendarEntity> CreateEventAsync(CalendarEntity entity, CancellationToken ct);
+  public Task<CalendarEntity> CreateCalendarAsync(CalendarEntity entity, CancellationToken ct);
 }
