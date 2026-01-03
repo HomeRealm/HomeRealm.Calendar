@@ -28,6 +28,13 @@ public static class CalendarsEndpoints
       .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
       .Produces<ValidationProblemDetails>(StatusCodes.Status400BadRequest)
       .Produces(StatusCodes.Status404NotFound);
+    group
+      .MapGet("/{id}", GetCalendar)
+      .WithName("GetCalendar")
+      .WithSummary("Gets a calendar")
+      .WithDescription("Gets the calendar with the matching ID")
+      .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
+      .Produces(StatusCodes.Status404NotFound);
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
     [FromBody] CalendarRequestDto dto,
@@ -64,24 +71,16 @@ public static class CalendarsEndpoints
     var (status, updatedCalendar) = await calendarService.UpdateCalendarAsync(dto, id, ct);
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(updatedCalendar);
   }
-  // private async static Task<Ok<List<CalendarEventDto>>> GetAllEvents(
-  //   [FromServices] IEventService eventService,
-  //   CancellationToken ct
-  // )
-  // {
-  //   var result = await eventService.GetAllEventsAsync(ct);
-  //   return TypedResults.Ok(result);
-  // }
-  // private async static Task<Results<Ok<CalendarEventDto>, NotFound>> GetEventById(
-  //   [FromRoute] Guid id,
-  //   [FromServices] IEventService eventService,
-  //   CancellationToken ct
-  // )
-  // {
-  //   var (status, calendarEvent) = await eventService.GetEventByIdAsync(id, ct);
+  private async static Task<Results<Ok<CalendarResponseDto>, NotFound>> GetCalendar(
+    [FromRoute] Guid id,
+    [FromServices] ICalendarService calendarService,
+    CancellationToken ct
+  )
+  {
+    var (status, calendar) = await calendarService.GetCalendarAsync(id, ct);
 
-  //   return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendarEvent);
-  // }
+    return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendar);
+  }
   // private async static Task<NoContent> DeleteEvent(
   //   [FromRoute] Guid id,
   //   [FromServices] IEventService eventService,
