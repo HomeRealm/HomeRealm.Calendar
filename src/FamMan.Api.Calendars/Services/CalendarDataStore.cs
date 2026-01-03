@@ -16,4 +16,10 @@ public class CalendarDataStore : ICalendarDataStore
     await _db.SaveChangesAsync(ct);
     return entity;
   }
+  public async Task<CalendarEntity> UpdateCalendarAsync(CalendarEntity existingEntity, CalendarEntity updatedEntity, CancellationToken ct)
+  {
+    _db.Entry(existingEntity).CurrentValues.SetValues(updatedEntity);
+    await _db.SaveChangesAsync(ct);
+    return existingEntity;
+  }
 }
