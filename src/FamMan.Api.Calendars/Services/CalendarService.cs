@@ -30,6 +30,16 @@ public class CalendarService : ICalendarService
 
     return ("updated", MapToResponseDto(updatedEntity));
   }
+  public async Task<(string status, CalendarResponseDto? calendar)> GetCalendarAsync(Guid id, CancellationToken ct)
+  {
+    var existingEntity = await _dataStore.GetCalendarAsync(id, ct);
+    if (existingEntity is null)
+    {
+      return ("notfound", null);
+    }
+
+    return ("found", MapToResponseDto(existingEntity));
+  }
   private CalendarEntity MapToEntity(CalendarRequestDto dto, Guid? id = null)
   {
     return new CalendarEntity
