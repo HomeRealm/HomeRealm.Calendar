@@ -4,6 +4,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="../tests/FamMan.Tests.Calendars.UnitTests/FamMan.Tests.Calendars.UnitTests.csproj" />
     <Project Path="../tests/FamMan.Tests.Chores.UnitTests/FamMan.Tests.Chores.UnitTests.csproj" Id="c98d8282-3aea-4d93-bed3-c083d2ff4c91" />
   </Folder>
   <Folder Name="/UI/">
