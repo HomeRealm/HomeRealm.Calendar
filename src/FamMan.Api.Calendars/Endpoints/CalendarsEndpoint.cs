@@ -17,30 +17,25 @@ public static class CalendarsEndpoints
       .MapPost("/", CreateCalendar)
       .WithName("CreateCalendar")
       .WithSummary("Creates a new calendar")
-      .WithDescription("Creates a new calendar")
-      .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
-      .Produces<ValidationProblemDetails>(StatusCodes.Status400BadRequest);
+      .WithDescription("Creates a new calendar");
+
     group
       .MapPut("/{id}", UpdateCalendar)
       .WithName("UpdateCalendar")
       .WithSummary("Updates a calendar")
-      .WithDescription("Updates the calendar with the matching ID")
-      .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
-      .Produces<ValidationProblemDetails>(StatusCodes.Status400BadRequest)
-      .Produces(StatusCodes.Status404NotFound);
+      .WithDescription("Updates the calendar with the matching ID");
+
     group
       .MapGet("/{id}", GetCalendar)
       .WithName("GetCalendar")
       .WithSummary("Gets a calendar")
-      .WithDescription("Gets the calendar with the matching ID")
-      .Produces<CalendarResponseDto>(StatusCodes.Status200OK)
-      .Produces(StatusCodes.Status404NotFound);
+      .WithDescription("Gets the calendar with the matching ID");
+
     group
       .MapDelete("/{id}", DeleteCalendar)
       .WithName("DeleteCalendar")
       .WithSummary("Deletes a calendar")
-      .WithDescription("Deletes the calendar with the matching ID")
-      .Produces<CalendarResponseDto>(StatusCodes.Status204NoContent);
+      .WithDescription("Deletes the calendar with the matching ID");
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
     [FromBody] CalendarRequestDto dto,
