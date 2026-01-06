@@ -1,5 +1,5 @@
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces;
+using FamMan.Api.Calendars.Interfaces.Calendar;
 using Microsoft.EntityFrameworkCore;
 
 namespace FamMan.Api.Calendars.Services.Calendar;

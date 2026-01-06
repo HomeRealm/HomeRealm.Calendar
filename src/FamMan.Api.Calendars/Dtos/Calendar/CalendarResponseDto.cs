@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Interfaces;
+using FamMan.Api.Calendars.Interfaces.Calendar;
 
 namespace FamMan.Api.Calendars.Dtos.Calendar;
 

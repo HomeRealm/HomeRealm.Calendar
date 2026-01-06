@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Interfaces;
-using FamMan.Api.Calendars.Services;
+using FamMan.Api.Calendars.Interfaces.Calendar;
+using FamMan.Api.Calendars.Services.Calendar;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FamMan.Api.Calendars.Extensions;
