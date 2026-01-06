@@ -89,7 +89,7 @@ public class CalendarServiceTests
   }
 
   [Fact]
-  public async Task CreateChoreAsync_ShouldCreateAndReturnMappedChore()
+  public async Task CreateCalendarAsync_ShouldCreateAndReturnMappedCalendar()
   {
     // Arrange
     var calendarRequestDto = new CalendarRequestDto
