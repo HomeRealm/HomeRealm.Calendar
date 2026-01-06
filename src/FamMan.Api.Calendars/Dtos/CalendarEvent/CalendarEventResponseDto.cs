@@ -1,4 +1,3 @@
-using System;
 using FamMan.Api.Calendars.Interfaces;
 
 namespace FamMan.Api.Calendars.Dtos.CalendarEvent;
