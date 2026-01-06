@@ -2,6 +2,7 @@ using FamMan.Api.Calendars.Dtos;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces;
 using FamMan.Api.Calendars.Services;
+using MockQueryable;
 using NSubstitute;
 using Shouldly;
 
@@ -86,6 +87,44 @@ public class CalendarServiceTests
     // Assert
     status.ShouldBe("notfound");
     result.ShouldBeNull();
+  }
+
+  [Fact]
+  public async Task GetAllCalendars_ShouldReturnListOfMappedCalendars()
+  {
+    // Arrange
+    var calendars = new List<CalendarEntity>
+    {
+      new()
+      {
+        Id = Guid.NewGuid(),
+        Name = "Calendar 1",
+        Description = "Description",
+        Color = "Red",
+        Owner = "Me",
+        Visibility = "Public"
+      },
+      new()
+      {
+        Id = Guid.NewGuid(),
+        Name = "Calendar 2",
+        Description = "Description",
+        Color = "Blue",
+        Owner = "Me",
+        Visibility = "Public"
+      }
+    };
+
+    _dataStore.GetAllCalendarsAsync(TestContext.Current.CancellationToken).Returns(calendars.BuildMock());
+
+    // Act
+    var result = await _sut.GetAllCalendarsAsync(TestContext.Current.CancellationToken);
+
+    // Assert
+    result.ShouldNotBeNull();
+    result[0].ShouldBeOfType<CalendarResponseDto>();
+    result[0].Id.ShouldBe(calendars[0].Id);
+    result[1].Id.ShouldBe(calendars[1].Id);
   }
 
   [Fact]
@@ -176,6 +215,7 @@ public class CalendarServiceTests
     result.Description.ShouldBe(calendarRequestDto.Description);
     await _dataStore.Received(1).UpdateCalendarAsync(existingCalendar, Arg.Any<CalendarEntity>(), TestContext.Current.CancellationToken);
   }
+
   [Fact]
   public async Task UpdateCalendarAsync_WhenCalendarDoesNotExist_ShouldReturnNotFound()
   {
@@ -199,7 +239,6 @@ public class CalendarServiceTests
     result.ShouldBeNull();
     await _dataStore.DidNotReceive().UpdateCalendarAsync(Arg.Any<CalendarEntity>(), Arg.Any<CalendarEntity>(), TestContext.Current.CancellationToken);
   }
-
 
   [Fact]
   public async Task DeleteCalendar_ShouldCallDataStoreDelete()
