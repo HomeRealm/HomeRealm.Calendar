@@ -2,7 +2,7 @@ using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services;
+namespace FamMan.Api.Calendars.Services.Calendar;
 
 public class CalendarDataStore : ICalendarDataStore
 {
