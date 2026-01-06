@@ -1,6 +1,7 @@
 using FamMan.Api.Calendars.Dtos;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamMan.Api.Calendars.Services;
 
@@ -39,6 +40,13 @@ public class CalendarService : ICalendarService
     }
 
     return ("found", MapToResponseDto(existingEntity));
+  }
+  public async Task<List<CalendarResponseDto>> GetAllCalendarsAsync(CancellationToken ct)
+  {
+    var calendars = _dataStore.GetAllCalendarsAsync(ct);
+
+    var mappedCalendars = await calendars.Select(calendar => MapToResponseDto(calendar)).ToListAsync(ct);
+    return mappedCalendars;
   }
   public async Task DeleteCalendarAsync(Guid id, CancellationToken ct)
   {
