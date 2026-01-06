@@ -20,6 +20,12 @@ public static class CalendarsEndpoints
       .WithDescription("Creates a new calendar");
 
     group
+      .MapGet("/", GetAllCalendars)
+      .WithName("GetAllCalendars")
+      .WithSummary("Gets all calendars")
+      .WithDescription("Gets all calendars");
+
+    group
       .MapPut("/{id}", UpdateCalendar)
       .WithName("UpdateCalendar")
       .WithSummary("Updates a calendar")
@@ -81,6 +87,14 @@ public static class CalendarsEndpoints
     var (status, calendar) = await calendarService.GetCalendarAsync(id, ct);
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendar);
+  }
+  private async static Task<Ok<List<CalendarResponseDto>>> GetAllCalendars(
+    [FromServices] ICalendarService calendarService,
+    CancellationToken ct
+  )
+  {
+    var calendars = await calendarService.GetAllCalendarsAsync(ct);
+    return TypedResults.Ok(calendars);
   }
   private async static Task<NoContent> DeleteCalendar(
     [FromRoute] Guid id,
