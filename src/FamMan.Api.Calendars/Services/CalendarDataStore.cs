@@ -27,6 +27,11 @@ public class CalendarDataStore : ICalendarDataStore
   {
     return await _db.Calendars.FindAsync(id, ct);
   }
+  public IQueryable<CalendarEntity> GetAllCalendarsAsync(CancellationToken ct)
+  {
+    return _db.Calendars.AsNoTracking().AsQueryable();
+  }
+
   public async Task DeleteCalendarAsync(Guid id, CancellationToken ct)
   {
     await _db.Calendars.Where(c => c.Id == id).ExecuteDeleteAsync(ct);
