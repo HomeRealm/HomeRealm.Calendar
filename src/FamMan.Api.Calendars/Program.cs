@@ -5,6 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCalendarServices();
+builder.Services.AddAttendeeServices();
+builder.Services.AddCalendarEventServices();
+builder.Services.AddCategoryServices();
+builder.Services.AddOccurrenceOverrideServices();
+builder.Services.AddRecurrenceRuleServices();
+builder.Services.AddReminderServices();
 
 builder.AddServiceDefaults();
 builder.AddNpgsqlDbContext<CalendarDbContext>("famman-calendar");
@@ -25,6 +31,12 @@ using (var scope = app.Services.CreateScope())
 app.MapDefaultEndpoints();
 var api = app.MapGroup("/api");
 api.MapCalendarsEndpoints();
+api.MapAttendeesEndpoints();
+api.MapCalendarEventsEndpoints();
+api.MapCategoriesEndpoints();
+api.MapOccurrenceOverridesEndpoints();
+api.MapRecurrenceRulesEndpoints();
+api.MapRemindersEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
