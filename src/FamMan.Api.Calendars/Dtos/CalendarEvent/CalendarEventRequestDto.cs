@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Interfaces;
+using FamMan.Api.Calendars.Interfaces.CalendarEvent;
 
 namespace FamMan.Api.Calendars.Dtos.CalendarEvent;
 
@@ -10,8 +10,8 @@ public class CalendarEventRequestDto : ICalendarEventRequestDto
   public required DateTime Start { get; set; }
   public required DateTime End { get; set; }
   public required string Location { get; set; }
-  public bool AllDay { get; set; } = true;
+  public required bool AllDay { get; set; }
   public required Guid RecurrenceId { get; set; }
-  public required Guid CategoryId { get; set; }
-  public string LinkedResource { get; set; } = "";
+  public Guid? CategoryId { get; set; }
+  public string? LinkedResource { get; set; }
 }
