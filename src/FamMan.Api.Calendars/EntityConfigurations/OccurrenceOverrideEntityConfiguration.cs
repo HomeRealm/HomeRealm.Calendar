@@ -18,11 +18,5 @@ public class OccurrenceOverrideEntityConfiguration : IEntityTypeConfiguration<Oc
     // Required date field
     builder.Property(p => p.Date)
       .IsRequired();
-
-    // Relationship configuration
-    builder.HasOne(oo => oo.RecurrenceRule)
-      .WithMany(rr => rr.OccurrenceOverrideEntities)
-      .HasForeignKey(oo => oo.RecurrenceId)
-      .OnDelete(DeleteBehavior.Cascade); // Delete override when recurrence rule deleted
   }
 }

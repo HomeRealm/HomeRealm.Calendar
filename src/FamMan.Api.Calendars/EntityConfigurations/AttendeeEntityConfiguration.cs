@@ -26,11 +26,5 @@ public class AttendeeEntityConfiguration : IEntityTypeConfiguration<AttendeeEnti
     builder.Property(p => p.Role)
       .IsRequired()
       .HasMaxLength(200);
-
-    // Relationship configuration
-    builder.HasOne(a => a.CalendarEvent)
-      .WithMany(ce => ce.Attendees)
-      .HasForeignKey(a => a.EventId)
-      .OnDelete(DeleteBehavior.Cascade); // Delete attendee when event deleted
   }
 }

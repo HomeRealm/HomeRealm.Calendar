@@ -23,11 +23,5 @@ public class ReminderEntityConfiguration : IEntityTypeConfiguration<ReminderEnti
     // Required int field
     builder.Property(p => p.TimeBefore)
       .IsRequired();
-
-    // Relationship configuration
-    builder.HasOne(r => r.CalendarEvent)
-      .WithMany(ce => ce.Reminders)
-      .HasForeignKey(r => r.EventId)
-      .OnDelete(DeleteBehavior.Cascade); // Delete reminder when event deleted
   }
 }

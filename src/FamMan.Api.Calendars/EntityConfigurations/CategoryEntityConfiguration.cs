@@ -23,11 +23,5 @@ public class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEnti
     builder.Property(p => p.Icon)
       .IsRequired()
       .HasMaxLength(200);
-
-    // Relationship configuration
-    builder.HasMany(cat => cat.CalendarEvents)
-      .WithOne(ce => ce.Category)
-      .HasForeignKey(ce => ce.CategoryId)
-      .OnDelete(DeleteBehavior.Restrict); // Prevent category deletion if events reference it
   }
 }

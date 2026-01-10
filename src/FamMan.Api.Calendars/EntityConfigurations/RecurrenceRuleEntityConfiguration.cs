@@ -25,11 +25,6 @@ public class RecurrenceRuleEntityConfiguration : IEntityTypeConfiguration<Recurr
       .IsRequired();
 
     // Relationship configurations
-    builder.HasOne(rr => rr.CalendarEvent)
-      .WithOne(ce => ce.RecurrenceRule)
-      .HasForeignKey<RecurrenceRuleEntity>(rr => rr.EventId)
-      .OnDelete(DeleteBehavior.Cascade); // Delete rule when event deleted
-
     builder.HasMany(rr => rr.OccurrenceOverrideEntities)
       .WithOne(oo => oo.RecurrenceRule)
       .HasForeignKey(oo => oo.RecurrenceId)
