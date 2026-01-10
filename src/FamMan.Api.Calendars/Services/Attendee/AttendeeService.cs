@@ -1,4 +1,5 @@
 using FamMan.Api.Calendars.Dtos.Attendee;
+using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.Attendee;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,9 +52,9 @@ public class AttendeeService : IAttendeeService
   {
     await _dataStore.DeleteAttendeeAsync(id, ct);
   }
-  private Entities.AttendeeEntity MapToEntity(AttendeeRequestDto dto, Guid? id = null)
+  private AttendeeEntity MapToEntity(AttendeeRequestDto dto, Guid? id = null)
   {
-    return new Entities.AttendeeEntity
+    return new AttendeeEntity
     {
       Id = id ?? Guid.CreateVersion7(),
       EventId = dto.EventId,
@@ -62,7 +63,7 @@ public class AttendeeService : IAttendeeService
       Role = dto.Role
     };
   }
-  private AttendeeResponseDto MapToResponseDto(Entities.AttendeeEntity entity)
+  private AttendeeResponseDto MapToResponseDto(AttendeeEntity entity)
   {
     return new AttendeeResponseDto
     {
