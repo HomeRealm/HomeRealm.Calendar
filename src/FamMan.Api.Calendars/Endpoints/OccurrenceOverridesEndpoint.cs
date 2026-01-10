@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
+﻿using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class OccurrenceOverridesEndpoints
       .WithDescription("Deletes the occurrence override with the matching ID");
   }
   private async static Task<Results<Created<OccurrenceOverrideResponseDto>, ValidationProblem>> CreateOccurrenceOverride(
-    [FromBody] OccurrenceOverrideRequestDto dto,
+    [FromBody] OccurrenceOverrideDto dto,
     [FromServices] IOccurrenceOverrideService occurrenceOverrideService,
-    [FromServices] IValidator<OccurrenceOverrideRequestDto> validator,
+    [FromServices] IValidator<OccurrenceOverrideDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class OccurrenceOverridesEndpoints
   }
   private async static Task<Results<Ok<OccurrenceOverrideResponseDto>, NotFound, ValidationProblem>> UpdateOccurrenceOverride(
     [FromRoute] Guid id,
-    [FromBody] OccurrenceOverrideRequestDto dto,
+    [FromBody] OccurrenceOverrideDto dto,
     [FromServices] IOccurrenceOverrideService occurrenceOverrideService,
-    [FromServices] IValidator<OccurrenceOverrideRequestDto> validator,
+    [FromServices] IValidator<OccurrenceOverrideDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class OccurrenceOverridesEndpoints
     return TypedResults.NoContent();
   }
 }
+

@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
+﻿using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
   {
     _dataStore = dataStore;
   }
-  public async Task<OccurrenceOverrideResponseDto> CreateOccurrenceOverrideAsync(OccurrenceOverrideRequestDto dto, CancellationToken ct)
+  public async Task<OccurrenceOverrideResponseDto> CreateOccurrenceOverrideAsync(OccurrenceOverrideDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateOccurrenceOverrideAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, OccurrenceOverrideResponseDto? updatedOccurrenceOverride)> UpdateOccurrenceOverrideAsync(OccurrenceOverrideRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, OccurrenceOverrideResponseDto? updatedOccurrenceOverride)> UpdateOccurrenceOverrideAsync(OccurrenceOverrideDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetOccurrenceOverrideAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
   {
     await _dataStore.DeleteOccurrenceOverrideAsync(id, ct);
   }
-  private OccurrenceOverrideEntity MapToEntity(OccurrenceOverrideRequestDto dto, Guid? id = null)
+  private OccurrenceOverrideEntity MapToEntity(OccurrenceOverrideDto dto, Guid? id = null)
   {
     return new OccurrenceOverrideEntity
     {
@@ -71,3 +71,4 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
     };
   }
 }
+
