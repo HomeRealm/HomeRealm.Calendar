@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Attendees;
+﻿using FamMan.Api.Calendars.Dtos.Attendees;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.Attendees;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class AttendeeService : IAttendeeService
   {
     _dataStore = dataStore;
   }
-  public async Task<AttendeeResponseDto> CreateAttendeeAsync(AttendeeRequestDto dto, CancellationToken ct)
+  public async Task<AttendeeResponseDto> CreateAttendeeAsync(AttendeeDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateAttendeeAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, AttendeeResponseDto? updatedAttendee)> UpdateAttendeeAsync(AttendeeRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, AttendeeResponseDto? updatedAttendee)> UpdateAttendeeAsync(AttendeeDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetAttendeeAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class AttendeeService : IAttendeeService
   {
     await _dataStore.DeleteAttendeeAsync(id, ct);
   }
-  private AttendeeEntity MapToEntity(AttendeeRequestDto dto, Guid? id = null)
+  private AttendeeEntity MapToEntity(AttendeeDto dto, Guid? id = null)
   {
     return new AttendeeEntity
     {
@@ -75,3 +75,4 @@ public class AttendeeService : IAttendeeService
     };
   }
 }
+

@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Attendees;
+﻿using FamMan.Api.Calendars.Dtos.Attendees;
 using FamMan.Api.Calendars.Interfaces.Attendees;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class AttendeesEndpoints
       .WithDescription("Deletes the attendee with the matching ID");
   }
   private async static Task<Results<Created<AttendeeResponseDto>, ValidationProblem>> CreateAttendee(
-    [FromBody] AttendeeRequestDto dto,
+    [FromBody] AttendeeDto dto,
     [FromServices] IAttendeeService attendeeService,
-    [FromServices] IValidator<AttendeeRequestDto> validator,
+    [FromServices] IValidator<AttendeeDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class AttendeesEndpoints
   }
   private async static Task<Results<Ok<AttendeeResponseDto>, NotFound, ValidationProblem>> UpdateAttendee(
     [FromRoute] Guid id,
-    [FromBody] AttendeeRequestDto dto,
+    [FromBody] AttendeeDto dto,
     [FromServices] IAttendeeService attendeeService,
-    [FromServices] IValidator<AttendeeRequestDto> validator,
+    [FromServices] IValidator<AttendeeDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class AttendeesEndpoints
     return TypedResults.NoContent();
   }
 }
+
