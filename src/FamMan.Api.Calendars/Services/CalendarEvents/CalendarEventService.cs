@@ -1,9 +1,9 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.CalendarEvent;
+using FamMan.Api.Calendars.Interfaces.CalendarEvents;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.CalendarEvent;
+namespace FamMan.Api.Calendars.Services.CalendarEvents;
 
 public class CalendarEventService : ICalendarEventService
 {

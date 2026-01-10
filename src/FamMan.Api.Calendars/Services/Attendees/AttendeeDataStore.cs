@@ -1,8 +1,8 @@
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Attendee;
+using FamMan.Api.Calendars.Interfaces.Attendees;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.Attendee;
+namespace FamMan.Api.Calendars.Services.Attendees;
 
 public class AttendeeDataStore : IAttendeeDataStore
 {

@@ -1,8 +1,8 @@
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.RecurrenceRule;
+using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.RecurrenceRule;
+namespace FamMan.Api.Calendars.Services.RecurrenceRules;
 
 public class RecurrenceRuleDataStore : IRecurrenceRuleDataStore
 {

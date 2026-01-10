@@ -1,9 +1,9 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
+using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.OccurrenceOverride;
+namespace FamMan.Api.Calendars.Services.OccurrenceOverrides;
 
 public class OccurrenceOverrideService : IOccurrenceOverrideService
 {

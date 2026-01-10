@@ -1,8 +1,8 @@
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Calendar;
+using FamMan.Api.Calendars.Interfaces.Calendars;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.Calendar;
+namespace FamMan.Api.Calendars.Services.Calendars;
 
 public class CalendarDataStore : ICalendarDataStore
 {

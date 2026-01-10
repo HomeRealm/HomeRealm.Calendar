@@ -1,9 +1,9 @@
-using FamMan.Api.Calendars.Dtos.Category;
+using FamMan.Api.Calendars.Dtos.Categories;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Category;
+using FamMan.Api.Calendars.Interfaces.Categories;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.Category;
+namespace FamMan.Api.Calendars.Services.Categories;
 
 public class CategoryService : ICategoryService
 {

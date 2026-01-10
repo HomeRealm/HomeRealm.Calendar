@@ -1,8 +1,8 @@
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Reminder;
+using FamMan.Api.Calendars.Interfaces.Reminders;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamMan.Api.Calendars.Services.Reminder;
+namespace FamMan.Api.Calendars.Services.Reminders;
 
 public class ReminderDataStore : IReminderDataStore
 {
