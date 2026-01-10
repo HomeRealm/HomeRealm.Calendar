@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.RecurrenceRule;
+namespace FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 
 public interface IRecurrenceRuleDataStore
 {

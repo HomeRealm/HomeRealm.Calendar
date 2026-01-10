@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
 
-namespace FamMan.Api.Calendars.Interfaces.CalendarEvent;
+namespace FamMan.Api.Calendars.Interfaces.CalendarEvents;
 
 public interface ICalendarEventService
 {

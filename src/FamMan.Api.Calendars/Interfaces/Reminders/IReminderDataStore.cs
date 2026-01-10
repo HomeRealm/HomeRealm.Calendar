@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.Reminder;
+namespace FamMan.Api.Calendars.Interfaces.Reminders;
 
 public interface IReminderDataStore
 {

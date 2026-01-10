@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.Reminder;
+using FamMan.Api.Calendars.Dtos.Reminders;
 
-namespace FamMan.Api.Calendars.Interfaces.Reminder;
+namespace FamMan.Api.Calendars.Interfaces.Reminders;
 
 public interface IReminderService
 {

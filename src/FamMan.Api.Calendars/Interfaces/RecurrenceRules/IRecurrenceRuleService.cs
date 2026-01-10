@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRule;
+using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 
-namespace FamMan.Api.Calendars.Interfaces.RecurrenceRule;
+namespace FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 
 public interface IRecurrenceRuleService
 {

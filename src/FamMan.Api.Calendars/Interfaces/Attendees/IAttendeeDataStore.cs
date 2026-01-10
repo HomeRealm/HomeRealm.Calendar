@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.Attendee;
+namespace FamMan.Api.Calendars.Interfaces.Attendees;
 
 public interface IAttendeeDataStore
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.Attendee;
+namespace FamMan.Api.Calendars.Interfaces.Attendees;
 
 public interface IAttendeeRequestDto
 {

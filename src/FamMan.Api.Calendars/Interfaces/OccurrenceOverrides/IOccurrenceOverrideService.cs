@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 
-namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
+namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 
 public interface IOccurrenceOverrideService
 {

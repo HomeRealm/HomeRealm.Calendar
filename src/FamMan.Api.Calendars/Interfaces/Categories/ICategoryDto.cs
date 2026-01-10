@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.Category;
+namespace FamMan.Api.Calendars.Interfaces.Categories;
 
 public interface ICategoryRequestDto
 {

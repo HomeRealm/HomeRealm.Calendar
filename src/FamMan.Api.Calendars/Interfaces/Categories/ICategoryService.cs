@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.Category;
+using FamMan.Api.Calendars.Dtos.Categories;
 
-namespace FamMan.Api.Calendars.Interfaces.Category;
+namespace FamMan.Api.Calendars.Interfaces.Categories;
 
 public interface ICategoryService
 {

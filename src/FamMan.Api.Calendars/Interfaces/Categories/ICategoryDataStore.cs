@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.Category;
+namespace FamMan.Api.Calendars.Interfaces.Categories;
 
 public interface ICategoryDataStore
 {

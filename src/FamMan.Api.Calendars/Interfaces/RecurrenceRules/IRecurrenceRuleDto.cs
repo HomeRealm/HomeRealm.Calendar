@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.RecurrenceRule;
+namespace FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 
 public interface IRecurrenceRuleRequestDto
 {

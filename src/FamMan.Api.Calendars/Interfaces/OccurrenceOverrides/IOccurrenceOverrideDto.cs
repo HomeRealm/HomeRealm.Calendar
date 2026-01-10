@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
+namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 
 public interface IOccurrenceOverrideRequestDto
 {

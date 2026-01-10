@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.CalendarEvent;
+namespace FamMan.Api.Calendars.Interfaces.CalendarEvents;
 
 public interface ICalendarEventDataStore
 {

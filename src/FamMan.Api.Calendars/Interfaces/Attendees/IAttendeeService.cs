@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Dtos.Attendee;
+using FamMan.Api.Calendars.Dtos.Attendees;
 
-namespace FamMan.Api.Calendars.Interfaces.Attendee;
+namespace FamMan.Api.Calendars.Interfaces.Attendees;
 
 public interface IAttendeeService
 {

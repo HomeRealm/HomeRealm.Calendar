@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.Calendar;
+namespace FamMan.Api.Calendars.Interfaces.Calendars;
 
 public interface ICalendarRequestDto
 {

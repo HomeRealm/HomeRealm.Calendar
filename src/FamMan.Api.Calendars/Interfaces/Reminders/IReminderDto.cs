@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FamMan.Api.Calendars.Interfaces.Reminder;
+namespace FamMan.Api.Calendars.Interfaces.Reminders;
 
 public interface IReminderRequestDto
 {

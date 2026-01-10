@@ -1,6 +1,6 @@
 using FamMan.Api.Calendars.Entities;
 
-namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
+namespace FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 
 public interface IOccurrenceOverrideDataStore
 {
