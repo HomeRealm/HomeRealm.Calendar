@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Calendars;
+﻿using FamMan.Api.Calendars.Dtos.Calendars;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.Calendars;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class CalendarService : ICalendarService
   {
     _dataStore = dataStore;
   }
-  public async Task<CalendarResponseDto> CreateCalendarAsync(CalendarRequestDto dto, CancellationToken ct)
+  public async Task<CalendarResponseDto> CreateCalendarAsync(CalendarDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateCalendarAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, CalendarResponseDto? updatedCalendar)> UpdateCalendarAsync(CalendarRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, CalendarResponseDto? updatedCalendar)> UpdateCalendarAsync(CalendarDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetCalendarAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class CalendarService : ICalendarService
   {
     await _dataStore.DeleteCalendarAsync(id, ct);
   }
-  private CalendarEntity MapToEntity(CalendarRequestDto dto, Guid? id = null)
+  private CalendarEntity MapToEntity(CalendarDto dto, Guid? id = null)
   {
     return new CalendarEntity
     {
@@ -77,3 +77,4 @@ public class CalendarService : ICalendarService
     };
   }
 }
+

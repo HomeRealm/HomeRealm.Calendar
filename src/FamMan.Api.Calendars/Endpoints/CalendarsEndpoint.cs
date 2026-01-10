@@ -44,9 +44,9 @@ public static class CalendarsEndpoints
       .WithDescription("Deletes the calendar with the matching ID");
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
-    [FromBody] CalendarRequestDto dto,
+    [FromBody] CalendarDto dto,
     [FromServices] ICalendarService calendarService,
-    [FromServices] IValidator<CalendarRequestDto> validator,
+    [FromServices] IValidator<CalendarDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class CalendarsEndpoints
   }
   private async static Task<Results<Ok<CalendarResponseDto>, NotFound, ValidationProblem>> UpdateCalendar(
     [FromRoute] Guid id,
-    [FromBody] CalendarRequestDto dto,
+    [FromBody] CalendarDto dto,
     [FromServices] ICalendarService calendarService,
-    [FromServices] IValidator<CalendarRequestDto> validator,
+    [FromServices] IValidator<CalendarDto> validator,
     CancellationToken ct
   )
   {
