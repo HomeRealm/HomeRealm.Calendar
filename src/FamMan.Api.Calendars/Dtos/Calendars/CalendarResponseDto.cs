@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Interfaces.Calendar;
+using FamMan.Api.Calendars.Interfaces.Calendars;
 
-namespace FamMan.Api.Calendars.Dtos.Calendar;
+namespace FamMan.Api.Calendars.Dtos.Calendars;
 
 /// <inheritdoc/>
 public class CalendarResponseDto : ICalenderResponseDto

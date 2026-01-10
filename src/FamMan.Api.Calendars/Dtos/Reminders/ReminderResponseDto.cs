@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Interfaces.Reminder;
+using FamMan.Api.Calendars.Interfaces.Reminders;
 
-namespace FamMan.Api.Calendars.Dtos.Reminder;
+namespace FamMan.Api.Calendars.Dtos.Reminders;
 
 public class ReminderResponseDto : IReminderResponseDto
 {

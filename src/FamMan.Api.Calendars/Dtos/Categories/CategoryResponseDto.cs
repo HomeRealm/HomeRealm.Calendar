@@ -1,6 +1,6 @@
-using FamMan.Api.Calendars.Interfaces.Category;
+using FamMan.Api.Calendars.Interfaces.Categories;
 
-namespace FamMan.Api.Calendars.Dtos.Category;
+namespace FamMan.Api.Calendars.Dtos.Categories;
 
 public class CategoryResponseDto : ICategoryResponseDto
 {
