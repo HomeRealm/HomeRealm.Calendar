@@ -49,11 +49,6 @@ public class CalendarEventEntityConfiguration : IEntityTypeConfiguration<Calenda
       .IsRequired();
 
     // Relationship configurations
-    builder.HasOne(ce => ce.Calendar)
-      .WithMany(c => c.CalendarEvents)
-      .HasForeignKey(ce => ce.CalendarId)
-      .OnDelete(DeleteBehavior.Cascade); // Delete event when calendar deleted
-
     builder.HasOne(ce => ce.RecurrenceRule)
       .WithOne(rr => rr.CalendarEvent)
       .HasForeignKey<RecurrenceRuleEntity>(rr => rr.EventId)

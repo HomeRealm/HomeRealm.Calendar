@@ -31,5 +31,11 @@ public class CalendarEntityConfiguration : IEntityTypeConfiguration<CalendarEnti
     builder.Property(p => p.Visibility)
       .IsRequired()
       .HasMaxLength(10);
+
+    // Relationship configurations
+    builder.HasMany(c => c.CalendarEvents)
+      .WithOne(ce => ce.Calendar)
+      .HasForeignKey(ce => ce.CalendarId)
+      .OnDelete(DeleteBehavior.Cascade); // Delete event when calendar deleted
   }
 }
