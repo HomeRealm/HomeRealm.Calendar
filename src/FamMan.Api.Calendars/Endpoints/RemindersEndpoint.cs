@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Reminders;
+﻿using FamMan.Api.Calendars.Dtos.Reminders;
 using FamMan.Api.Calendars.Interfaces.Reminders;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class RemindersEndpoints
       .WithDescription("Deletes the reminder with the matching ID");
   }
   private async static Task<Results<Created<ReminderResponseDto>, ValidationProblem>> CreateReminder(
-    [FromBody] ReminderRequestDto dto,
+    [FromBody] ReminderDto dto,
     [FromServices] IReminderService reminderService,
-    [FromServices] IValidator<ReminderRequestDto> validator,
+    [FromServices] IValidator<ReminderDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class RemindersEndpoints
   }
   private async static Task<Results<Ok<ReminderResponseDto>, NotFound, ValidationProblem>> UpdateReminder(
     [FromRoute] Guid id,
-    [FromBody] ReminderRequestDto dto,
+    [FromBody] ReminderDto dto,
     [FromServices] IReminderService reminderService,
-    [FromServices] IValidator<ReminderRequestDto> validator,
+    [FromServices] IValidator<ReminderDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class RemindersEndpoints
     return TypedResults.NoContent();
   }
 }
+

@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Reminders;
+﻿using FamMan.Api.Calendars.Dtos.Reminders;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.Reminders;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class ReminderService : IReminderService
   {
     _dataStore = dataStore;
   }
-  public async Task<ReminderResponseDto> CreateReminderAsync(ReminderRequestDto dto, CancellationToken ct)
+  public async Task<ReminderResponseDto> CreateReminderAsync(ReminderDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateReminderAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, ReminderResponseDto? updatedReminder)> UpdateReminderAsync(ReminderRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, ReminderResponseDto? updatedReminder)> UpdateReminderAsync(ReminderDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetReminderAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class ReminderService : IReminderService
   {
     await _dataStore.DeleteReminderAsync(id, ct);
   }
-  private ReminderEntity MapToEntity(ReminderRequestDto dto, Guid? id = null)
+  private ReminderEntity MapToEntity(ReminderDto dto, Guid? id = null)
   {
     return new ReminderEntity
     {
@@ -73,3 +73,4 @@ public class ReminderService : IReminderService
     };
   }
 }
+
