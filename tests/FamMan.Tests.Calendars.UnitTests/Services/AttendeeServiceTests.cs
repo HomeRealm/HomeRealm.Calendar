@@ -23,7 +23,7 @@ public class AttendeeServiceTests
   public async Task GetAttendeeAsync_WhenAttendeeExists_ShouldReturnMappedAttendee()
   {
     // Arrange
-    var attendee = new Attendee
+    var attendee = new AttendeeEntity
     {
       Id = Guid.NewGuid(),
       EventId = Guid.NewGuid(),
@@ -49,7 +49,7 @@ public class AttendeeServiceTests
   {
     // Arrange
     var attendeeId = Guid.NewGuid();
-    _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns((Attendee?)null);
+    _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns((AttendeeEntity?)null);
 
     // Act
     var (status, result) = await _sut.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken);
@@ -63,7 +63,7 @@ public class AttendeeServiceTests
   public async Task GetAllAttendeesAsync_ShouldReturnListOfMappedAttendees()
   {
     // Arrange
-    var attendees = new List<Attendee>
+    var attendees = new List<AttendeeEntity>
     {
       new()
       {
@@ -108,7 +108,7 @@ public class AttendeeServiceTests
       Status = "Confirmed",
       Role = "Guest"
     };
-    var createdAttendee = new Attendee
+    var createdAttendee = new AttendeeEntity
     {
       Id = Guid.CreateVersion7(),
       EventId = eventId,
@@ -116,7 +116,7 @@ public class AttendeeServiceTests
       Status = "Confirmed",
       Role = "Guest"
     };
-    _dataStore.CreateAttendeeAsync(Arg.Any<Attendee>(), TestContext.Current.CancellationToken).Returns(createdAttendee);
+    _dataStore.CreateAttendeeAsync(Arg.Any<AttendeeEntity>(), TestContext.Current.CancellationToken).Returns(createdAttendee);
 
     // Act
     var result = await _sut.CreateAttendeeAsync(attendeeRequestDto, TestContext.Current.CancellationToken);
@@ -129,7 +129,7 @@ public class AttendeeServiceTests
     await _dataStore
       .Received(1)
       .CreateAttendeeAsync(
-        Arg.Is<Attendee>(a =>
+        Arg.Is<AttendeeEntity>(a =>
           a.EventId == attendeeRequestDto.EventId &&
           a.Status == attendeeRequestDto.Status
         ),
@@ -144,7 +144,7 @@ public class AttendeeServiceTests
     var attendeeId = Guid.CreateVersion7();
     var eventId = Guid.NewGuid();
     var userId = Guid.NewGuid();
-    var existingAttendee = new Attendee
+    var existingAttendee = new AttendeeEntity
     {
       Id = attendeeId,
       EventId = eventId,
@@ -159,7 +159,7 @@ public class AttendeeServiceTests
       Status = "Declined",
       Role = "Guest"
     };
-    var updatedAttendee = new Attendee
+    var updatedAttendee = new AttendeeEntity
     {
       Id = attendeeId,
       EventId = attendeeRequestDto.EventId,
@@ -168,7 +168,7 @@ public class AttendeeServiceTests
       Role = attendeeRequestDto.Role
     };
     _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns(existingAttendee);
-    _dataStore.UpdateAttendeeAsync(existingAttendee, Arg.Any<Attendee>(), TestContext.Current.CancellationToken).Returns(updatedAttendee);
+    _dataStore.UpdateAttendeeAsync(existingAttendee, Arg.Any<AttendeeEntity>(), TestContext.Current.CancellationToken).Returns(updatedAttendee);
 
     // Act
     var (status, result) = await _sut.UpdateAttendeeAsync(attendeeRequestDto, attendeeId, TestContext.Current.CancellationToken);
@@ -193,7 +193,7 @@ public class AttendeeServiceTests
       Status = "Confirmed",
       Role = "Guest"
     };
-    _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns((Attendee?)null);
+    _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns((AttendeeEntity?)null);
 
     // Act
     var (status, result) = await _sut.UpdateAttendeeAsync(attendeeRequestDto, attendeeId, TestContext.Current.CancellationToken);
@@ -201,7 +201,7 @@ public class AttendeeServiceTests
     // Assert
     status.ShouldBe("notfound");
     result.ShouldBeNull();
-    await _dataStore.DidNotReceive().UpdateAttendeeAsync(Arg.Any<Attendee>(), Arg.Any<Attendee>(), TestContext.Current.CancellationToken);
+    await _dataStore.DidNotReceive().UpdateAttendeeAsync(Arg.Any<AttendeeEntity>(), Arg.Any<AttendeeEntity>(), TestContext.Current.CancellationToken);
   }
 
   [Fact]

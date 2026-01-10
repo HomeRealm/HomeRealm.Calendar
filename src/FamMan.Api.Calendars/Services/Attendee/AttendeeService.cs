@@ -51,9 +51,9 @@ public class AttendeeService : IAttendeeService
   {
     await _dataStore.DeleteAttendeeAsync(id, ct);
   }
-  private Entities.Attendee MapToEntity(AttendeeRequestDto dto, Guid? id = null)
+  private Entities.AttendeeEntity MapToEntity(AttendeeRequestDto dto, Guid? id = null)
   {
-    return new Entities.Attendee
+    return new Entities.AttendeeEntity
     {
       Id = id ?? Guid.CreateVersion7(),
       EventId = dto.EventId,
@@ -62,7 +62,7 @@ public class AttendeeService : IAttendeeService
       Role = dto.Role
     };
   }
-  private AttendeeResponseDto MapToResponseDto(Entities.Attendee entity)
+  private AttendeeResponseDto MapToResponseDto(Entities.AttendeeEntity entity)
   {
     return new AttendeeResponseDto
     {

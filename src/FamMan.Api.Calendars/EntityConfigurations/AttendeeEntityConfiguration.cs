@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FamMan.Api.Calendars.EntityConfigurations;
 
-public class AttendeeEntityConfiguration : IEntityTypeConfiguration<Attendee>
+public class AttendeeEntityConfiguration : IEntityTypeConfiguration<AttendeeEntity>
 {
-  public void Configure(EntityTypeBuilder<Attendee> builder)
+  public void Configure(EntityTypeBuilder<AttendeeEntity> builder)
   {
     builder.HasKey(a => a.Id);
     builder.Property(p => p.Id).ValueGeneratedNever();

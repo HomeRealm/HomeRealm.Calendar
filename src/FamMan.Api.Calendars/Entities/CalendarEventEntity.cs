@@ -18,6 +18,6 @@ public class CalendarEventEntity
   public CalendarEntity Calendar { get; set; } = null!;
   public RecurrenceRuleEntity RecurrenceRule { get; set; } = null!;
   public CategoryEntity? Category { get; set; }
-  public ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+  public ICollection<AttendeeEntity> Attendees { get; set; } = new List<AttendeeEntity>();
   public ICollection<ReminderEntity> Reminders { get; set; } = new List<ReminderEntity>();
 }

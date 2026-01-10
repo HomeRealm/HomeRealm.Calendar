@@ -1,6 +1,6 @@
 namespace FamMan.Api.Calendars.Entities;
 
-public class Attendee
+public class AttendeeEntity
 {
   public Guid Id { get; set; } // Primary Key
   public required Guid EventId { get; set; } // Foreign Key

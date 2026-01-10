@@ -10,23 +10,23 @@ public class AttendeeDataStore : IAttendeeDataStore
   {
     _db = db;
   }
-  public async Task<Entities.Attendee> CreateAttendeeAsync(Entities.Attendee entity, CancellationToken ct)
+  public async Task<Entities.AttendeeEntity> CreateAttendeeAsync(Entities.AttendeeEntity entity, CancellationToken ct)
   {
     await _db.Attendees.AddAsync(entity, ct);
     await _db.SaveChangesAsync(ct);
     return entity;
   }
-  public async Task<Entities.Attendee> UpdateAttendeeAsync(Entities.Attendee existingEntity, Entities.Attendee updatedEntity, CancellationToken ct)
+  public async Task<Entities.AttendeeEntity> UpdateAttendeeAsync(Entities.AttendeeEntity existingEntity, Entities.AttendeeEntity updatedEntity, CancellationToken ct)
   {
     _db.Entry(existingEntity).CurrentValues.SetValues(updatedEntity);
     await _db.SaveChangesAsync(ct);
     return existingEntity;
   }
-  public async Task<Entities.Attendee?> GetAttendeeAsync(Guid id, CancellationToken ct)
+  public async Task<Entities.AttendeeEntity?> GetAttendeeAsync(Guid id, CancellationToken ct)
   {
     return await _db.Attendees.FindAsync(id, ct);
   }
-  public IQueryable<Entities.Attendee> GetAllAttendeesAsync(CancellationToken ct)
+  public IQueryable<Entities.AttendeeEntity> GetAllAttendeesAsync(CancellationToken ct)
   {
     return _db.Attendees.AsNoTracking().AsQueryable();
   }

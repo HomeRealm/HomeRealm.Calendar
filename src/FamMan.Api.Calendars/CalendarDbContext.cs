@@ -6,7 +6,7 @@ namespace FamMan.Api.Calendars;
 public class CalendarDbContext(DbContextOptions<CalendarDbContext> options) : DbContext(options)
 {
   public DbSet<CalendarEntity> Calendars { get; set; } = default!;
-  public DbSet<Attendee> Attendees { get; set; } = default!;
+  public DbSet<AttendeeEntity> Attendees { get; set; } = default!;
   public DbSet<CalendarEventEntity> CalendarEvents { get; set; } = default!;
   public DbSet<CategoryEntity> Categories { get; set; } = default!;
   public DbSet<OccurrenceOverrideEntity> OccurrenceOverrides { get; set; } = default!;
