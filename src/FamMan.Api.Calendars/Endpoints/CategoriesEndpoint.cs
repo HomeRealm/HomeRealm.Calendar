@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Categories;
+﻿using FamMan.Api.Calendars.Dtos.Categories;
 using FamMan.Api.Calendars.Interfaces.Categories;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class CategoriesEndpoints
       .WithDescription("Deletes the category with the matching ID");
   }
   private async static Task<Results<Created<CategoryResponseDto>, ValidationProblem>> CreateCategory(
-    [FromBody] CategoryRequestDto dto,
+    [FromBody] CategoryDto dto,
     [FromServices] ICategoryService categoryService,
-    [FromServices] IValidator<CategoryRequestDto> validator,
+    [FromServices] IValidator<CategoryDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class CategoriesEndpoints
   }
   private async static Task<Results<Ok<CategoryResponseDto>, NotFound, ValidationProblem>> UpdateCategory(
     [FromRoute] Guid id,
-    [FromBody] CategoryRequestDto dto,
+    [FromBody] CategoryDto dto,
     [FromServices] ICategoryService categoryService,
-    [FromServices] IValidator<CategoryRequestDto> validator,
+    [FromServices] IValidator<CategoryDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class CategoriesEndpoints
     return TypedResults.NoContent();
   }
 }
+

@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Categories;
+﻿using FamMan.Api.Calendars.Dtos.Categories;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.Categories;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class CategoryService : ICategoryService
   {
     _dataStore = dataStore;
   }
-  public async Task<CategoryResponseDto> CreateCategoryAsync(CategoryRequestDto dto, CancellationToken ct)
+  public async Task<CategoryResponseDto> CreateCategoryAsync(CategoryDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateCategoryAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, CategoryResponseDto? updatedCategory)> UpdateCategoryAsync(CategoryRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, CategoryResponseDto? updatedCategory)> UpdateCategoryAsync(CategoryDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetCategoryAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class CategoryService : ICategoryService
   {
     await _dataStore.DeleteCategoryAsync(id, ct);
   }
-  private CategoryEntity MapToEntity(CategoryRequestDto dto, Guid? id = null)
+  private CategoryEntity MapToEntity(CategoryDto dto, Guid? id = null)
   {
     return new CategoryEntity
     {
@@ -73,3 +73,4 @@ public class CategoryService : ICategoryService
     };
   }
 }
+
