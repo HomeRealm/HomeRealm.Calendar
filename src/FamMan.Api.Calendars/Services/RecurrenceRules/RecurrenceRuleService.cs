@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRules;
+﻿using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 using FamMan.Api.Calendars.Entities;
 using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class RecurrenceRuleService : IRecurrenceRuleService
   {
     _dataStore = dataStore;
   }
-  public async Task<RecurrenceRuleResponseDto> CreateRecurrenceRuleAsync(RecurrenceRuleRequestDto dto, CancellationToken ct)
+  public async Task<RecurrenceRuleResponseDto> CreateRecurrenceRuleAsync(RecurrenceRuleDto dto, CancellationToken ct)
   {
     var mappedEntity = MapToEntity(dto);
     var savedEntity = await _dataStore.CreateRecurrenceRuleAsync(mappedEntity, ct);
     return MapToResponseDto(savedEntity);
   }
-  public async Task<(string status, RecurrenceRuleResponseDto? updatedRecurrenceRule)> UpdateRecurrenceRuleAsync(RecurrenceRuleRequestDto dto, Guid id, CancellationToken ct)
+  public async Task<(string status, RecurrenceRuleResponseDto? updatedRecurrenceRule)> UpdateRecurrenceRuleAsync(RecurrenceRuleDto dto, Guid id, CancellationToken ct)
   {
     var existingEntity = await _dataStore.GetRecurrenceRuleAsync(id, ct);
     if (existingEntity is null)
@@ -52,7 +52,7 @@ public class RecurrenceRuleService : IRecurrenceRuleService
   {
     await _dataStore.DeleteRecurrenceRuleAsync(id, ct);
   }
-  private RecurrenceRuleEntity MapToEntity(RecurrenceRuleRequestDto dto, Guid? id = null)
+  private RecurrenceRuleEntity MapToEntity(RecurrenceRuleDto dto, Guid? id = null)
   {
     return new RecurrenceRuleEntity
     {
@@ -75,3 +75,4 @@ public class RecurrenceRuleService : IRecurrenceRuleService
     };
   }
 }
+

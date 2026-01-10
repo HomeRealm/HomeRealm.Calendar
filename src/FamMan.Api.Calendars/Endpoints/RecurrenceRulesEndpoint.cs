@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRules;
+﻿using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class RecurrenceRulesEndpoints
       .WithDescription("Deletes the recurrence rule with the matching ID");
   }
   private async static Task<Results<Created<RecurrenceRuleResponseDto>, ValidationProblem>> CreateRecurrenceRule(
-    [FromBody] RecurrenceRuleRequestDto dto,
+    [FromBody] RecurrenceRuleDto dto,
     [FromServices] IRecurrenceRuleService recurrenceRuleService,
-    [FromServices] IValidator<RecurrenceRuleRequestDto> validator,
+    [FromServices] IValidator<RecurrenceRuleDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class RecurrenceRulesEndpoints
   }
   private async static Task<Results<Ok<RecurrenceRuleResponseDto>, NotFound, ValidationProblem>> UpdateRecurrenceRule(
     [FromRoute] Guid id,
-    [FromBody] RecurrenceRuleRequestDto dto,
+    [FromBody] RecurrenceRuleDto dto,
     [FromServices] IRecurrenceRuleService recurrenceRuleService,
-    [FromServices] IValidator<RecurrenceRuleRequestDto> validator,
+    [FromServices] IValidator<RecurrenceRuleDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class RecurrenceRulesEndpoints
     return TypedResults.NoContent();
   }
 }
+
