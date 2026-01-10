@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
-using FamMan.Api.Calendars.Services.OccurrenceOverride;
+using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
+using FamMan.Api.Calendars.Services.OccurrenceOverrides;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FamMan.Api.Calendars.Extensions;

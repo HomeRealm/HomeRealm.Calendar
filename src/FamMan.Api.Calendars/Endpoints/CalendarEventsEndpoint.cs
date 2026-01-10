@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
-using FamMan.Api.Calendars.Interfaces.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
+using FamMan.Api.Calendars.Interfaces.CalendarEvents;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

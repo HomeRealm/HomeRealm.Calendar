@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Dtos.Reminder;
-using FamMan.Api.Calendars.Interfaces.Reminder;
+using FamMan.Api.Calendars.Dtos.Reminders;
+using FamMan.Api.Calendars.Interfaces.Reminders;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

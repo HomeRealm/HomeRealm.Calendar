@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
 using FluentValidation;
 
 namespace FamMan.Api.Calendars.Validators;

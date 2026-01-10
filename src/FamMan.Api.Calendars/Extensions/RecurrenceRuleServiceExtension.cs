@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Interfaces.RecurrenceRule;
-using FamMan.Api.Calendars.Services.RecurrenceRule;
+using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
+using FamMan.Api.Calendars.Services.RecurrenceRules;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FamMan.Api.Calendars.Extensions;

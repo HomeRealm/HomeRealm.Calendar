@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FluentValidation;
 
 namespace FamMan.Api.Calendars.Validators;

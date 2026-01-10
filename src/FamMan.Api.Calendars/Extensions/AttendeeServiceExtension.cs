@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Interfaces.Attendee;
-using FamMan.Api.Calendars.Services.Attendee;
+using FamMan.Api.Calendars.Interfaces.Attendees;
+using FamMan.Api.Calendars.Services.Attendees;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FamMan.Api.Calendars.Extensions;

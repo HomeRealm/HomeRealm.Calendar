@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
-using FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
+using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

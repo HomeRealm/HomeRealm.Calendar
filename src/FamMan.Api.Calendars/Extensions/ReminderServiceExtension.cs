@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Interfaces.Reminder;
-using FamMan.Api.Calendars.Services.Reminder;
+using FamMan.Api.Calendars.Interfaces.Reminders;
+using FamMan.Api.Calendars.Services.Reminders;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FamMan.Api.Calendars.Extensions;

@@ -1,5 +1,5 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRule;
-using FamMan.Api.Calendars.Interfaces.RecurrenceRule;
+using FamMan.Api.Calendars.Dtos.RecurrenceRules;
+using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

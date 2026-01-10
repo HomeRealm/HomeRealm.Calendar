@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRule;
+using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 using FluentValidation;
 
 namespace FamMan.Api.Calendars.Validators;
