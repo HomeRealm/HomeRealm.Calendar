@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvents;
+﻿using FamMan.Api.Calendars.Dtos.CalendarEvents;
 using FamMan.Api.Calendars.Interfaces.CalendarEvents;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -44,9 +44,9 @@ public static class CalendarEventsEndpoints
       .WithDescription("Deletes the calendar event with the matching ID");
   }
   private async static Task<Results<Created<CalendarEventResponseDto>, ValidationProblem>> CreateCalendarEvent(
-    [FromBody] CalendarEventRequestDto dto,
+    [FromBody] CalendarEventDto dto,
     [FromServices] ICalendarEventService calendarEventService,
-    [FromServices] IValidator<CalendarEventRequestDto> validator,
+    [FromServices] IValidator<CalendarEventDto> validator,
     CancellationToken ct
   )
   {
@@ -62,9 +62,9 @@ public static class CalendarEventsEndpoints
   }
   private async static Task<Results<Ok<CalendarEventResponseDto>, NotFound, ValidationProblem>> UpdateCalendarEvent(
     [FromRoute] Guid id,
-    [FromBody] CalendarEventRequestDto dto,
+    [FromBody] CalendarEventDto dto,
     [FromServices] ICalendarEventService calendarEventService,
-    [FromServices] IValidator<CalendarEventRequestDto> validator,
+    [FromServices] IValidator<CalendarEventDto> validator,
     CancellationToken ct
   )
   {
@@ -106,3 +106,4 @@ public static class CalendarEventsEndpoints
     return TypedResults.NoContent();
   }
 }
+
