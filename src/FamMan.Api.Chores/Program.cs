@@ -1,3 +1,4 @@
+
 using FamMan.Api.Chores;
 using FamMan.Api.Events;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,8 @@ var app = builder.Build();
 // will be moved to background service in future
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ChoresDbContext>();
-    dbContext.Database.Migrate();
+  var dbContext = scope.ServiceProvider.GetRequiredService<ChoresDbContext>();
+  dbContext.Database.Migrate();
 }
 
 app.MapDefaultEndpoints();
@@ -27,7 +28,7 @@ app.MapDefaultEndpoints();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+  app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
@@ -38,5 +39,5 @@ app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+  public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }

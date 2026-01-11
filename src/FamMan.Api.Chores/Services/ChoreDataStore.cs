@@ -18,6 +18,7 @@ public class ChoreDataStore(ChoresDbContext db) : IChoreDataStore
   /// <inheritdoc/>
   public async Task<Chore> CreateChoreAsync(Chore chore, CancellationToken ct)
   {
+    chore.Id = Guid.CreateVersion7();
     db.Chores.Add(chore);
     await db.SaveChangesAsync(ct);
     return chore;
