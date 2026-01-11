@@ -30,13 +30,7 @@ using (var scope = app.Services.CreateScope())
 
 app.MapDefaultEndpoints();
 var api = app.MapGroup("/api");
-api.MapCalendarsEndpoints();
-api.MapAttendeesEndpoints();
-api.MapCalendarEventsEndpoints();
-api.MapCategoriesEndpoints();
-api.MapOccurrenceOverridesEndpoints();
-api.MapRecurrenceRulesEndpoints();
-api.MapRemindersEndpoints();
+api.MapAllEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

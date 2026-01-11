@@ -8,7 +8,7 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class CalendarsEndpoints
 {
-  public static void MapCalendarsEndpoints(this IEndpointRouteBuilder endpoints)
+  public static RouteGroupBuilder MapCalendarsEndpoints(this IEndpointRouteBuilder endpoints)
   {
     var group = endpoints.MapGroup("/calendars")
         .WithTags("Calendars");
@@ -42,6 +42,8 @@ public static class CalendarsEndpoints
       .WithName("DeleteCalendar")
       .WithSummary("Deletes a calendar")
       .WithDescription("Deletes the calendar with the matching ID");
+
+    return group;
   }
   private async static Task<Results<Created<CalendarResponseDto>, ValidationProblem>> CreateCalendar(
     [FromBody] CalendarDto dto,
