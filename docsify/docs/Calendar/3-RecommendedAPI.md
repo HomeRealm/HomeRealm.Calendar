@@ -18,7 +18,8 @@ This section outlines the recommended RESTful API endpoints and usage for the Fa
 ### CalendarEvents
 
 - `GET /calendars/{id}/events` — List events in a calendar
-- `POST /calendars/{id}/events` — Create event
+- `GET /events` — List events in a calendar
+- `POST /events` — Create event
 - `GET /events/{id}` — Get event details
 - `PUT /events/{id}` — Update event
 - `DELETE /events/{id}` — Delete event
@@ -27,24 +28,35 @@ This section outlines the recommended RESTful API endpoints and usage for the Fa
 ### RecurrenceRules
 
 - `GET /events/{id}/recurrence` — Get recurrence rule
-- `POST /events/{id}/recurrence` — Add recurrence rule
+- `GET /recurrence` — Get recurrence rule
+- `POST /recurrence` — Add recurrence rule
 - `PUT /recurrence/{id}` — Update recurrence rule
 - `DELETE /recurrence/{id}` — Delete recurrence rule
 
 ### OccurrenceOverrides
 
-- `POST /recurrence/{id}/occurrence-overrides` — Add occurrence override
 - `GET /recurrence/{id}/occurrence-overrides` — List occurrence overrides
+- `POST /occurrence-overrides` — Add occurrence override
+- `GET /occurrence-overrides` — Get occurrence overrides
+- `PUT /occurrence-overrides/{id}` — Update occurrences override
+- `DELETE /occurrence-overrides/{id}` — Delete occurrences override
 
 ### Attendees
 
-- `POST /events/{id}/attendees` — Add attendee
 - `GET /events/{id}/attendees` — List attendees
+- `POST /attendees` — Add attendees
+- `GET /attendees` — Get attendees
+- `PUT /attendees/{id}` — Update attendees
+- `DELETE /attendees/{id}` — Delete attendees 
 
 ### Reminders
 
-- `POST /events/{id}/reminders` — Add reminder
 - `GET /events/{id}/reminders` — List reminders
+- `POST /reminders` — Add attendees
+- `GET /reminders` — Get attendees
+- `PUT /reminders/{id}` — Update attendees
+- `DELETE /reminders/{id}` — Delete attendees 
+
 
 ### Categories
 
