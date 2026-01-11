@@ -60,12 +60,16 @@ This section outlines the recommended RESTful API endpoints and usage for the Fa
 
 ### Categories
 
-- `GET /categories` — List categories
-- `POST /categories` — Create category
+- `POST /categories` — Add Categories
+- `GET /categories` — Get Categories
+- `PUT /categories/{id}` — Update Categories
+- `DELETE /categories/{id}` — Delete Categories 
+
 
 ### Occurrences
 
-- `GET /events/{id}/occurrences?start=...&end=...` — List event occurrences (expands RRULE)
+- `GET /events/{eventId}/occurrences?start=...&end=...` — List event occurrences (expands RRULE)
+- `GET /calendars/{calendarId}/occurrences?start=...&end=...` — List calendar occurrences (expands RRULE)
 
 ---
 
