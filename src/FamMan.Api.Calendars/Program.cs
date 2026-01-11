@@ -13,7 +13,7 @@ builder.Services.AddRecurrenceRuleServices();
 builder.Services.AddReminderServices();
 
 builder.AddServiceDefaults();
-builder.AddNpgsqlDbContext<CalendarDbContext>("famman-calendar");
+builder.AddNpgsqlDbContext<CalendarDbContext>("famman-calendars");
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
