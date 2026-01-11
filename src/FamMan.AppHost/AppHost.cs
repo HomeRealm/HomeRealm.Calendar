@@ -6,7 +6,7 @@ var postgresServer = builder.AddPostgres("postgres-famman")
                             .WithLifetime(ContainerLifetime.Persistent);
 var eventsDb = postgresServer.AddDatabase("famman-events", "famman_events");
 var choresDb = postgresServer.AddDatabase("famman-chores", "famman_chores");
-
+var calendarsDb = postgresServer.AddDatabase("famman-calendars", "famman_calendars");
 
 var eventsApi = builder.AddProject<Projects.FamMan_Api_Events>("famman-api-events")
     .WithReference(eventsDb)
@@ -16,9 +16,14 @@ var choresApi = builder.AddProject<Projects.FamMan_Api_Chores>("famman-api-chore
     .WaitFor(choresDb)
     .WithReference(choresDb);
 
+var calendarsApi = builder.AddProject<Projects.FamMan_Api_Calendars>("famman-api-calendars")
+    .WaitFor(calendarsDb)
+    .WithReference(calendarsDb);
+
 builder.AddProject<Projects.FamMan>("famman")
     .WithReference(eventsApi)
-    .WithReference(choresApi);
+    .WithReference(choresApi)
+    .WithReference(calendarsApi);
 
 
 
