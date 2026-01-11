@@ -2,6 +2,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgresServer = builder.AddPostgres("postgres-famman")
                             .WithDataVolume("postgres-famman")
+                            .WithDbGate()
                             .WithLifetime(ContainerLifetime.Persistent);
 var eventsDb = postgresServer.AddDatabase("famman-events", "famman_events");
 var choresDb = postgresServer.AddDatabase("famman-chores", "famman_chores");

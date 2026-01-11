@@ -56,9 +56,21 @@ public static class ChoreEndpoints
   }
   private static async Task<Results<Created<ChoreDto>, BadRequest<ValidationProblemDetails>>> CreateChore(
     [FromServices] IChoreService choreService,
+    [FromServices] FluentValidation.IValidator<ChoreDto> validator,
     [FromBody] ChoreDto chore,
     CancellationToken ct)
   {
+    var validationResult = await validator.ValidateAsync(chore, ct);
+    if (!validationResult.IsValid)
+    {
+      var errors = validationResult.ToDictionary();
+      var problemDetails = new ValidationProblemDetails(errors)
+      {
+        Status = StatusCodes.Status400BadRequest,
+        Title = "Validation Failed"
+      };
+      return TypedResults.BadRequest(problemDetails);
+    }
     var savedChore = await choreService.CreateChoreAsync(chore, ct);
     return TypedResults.Created($"/api/chores/{savedChore.Id}", savedChore);
   }
@@ -83,4 +95,23 @@ public static class ChoreEndpoints
     await choreService.DeleteChoreAsync(id, ct);
     return TypedResults.NoContent();
   }
+}
+
+/// <summary>
+/// Defines a marker interface for identifying chore endpoint implementations.
+/// </summary>
+/// <remarks>Implement this interface to indicate that a type represents a chore endpoint within the system. The
+/// interface provides a unique identifier for each endpoint via the Id property.</remarks>
+public interface IChoreEndpointsMarker
+{
+	/// <summary>
+	/// Gets the unique identifier for this instance.
+	/// </summary>
+	string Id { get; }
+}
+
+/// <inheritdoc/>
+public class ChoreEndpointsMarker : IChoreEndpointsMarker
+{
+	public string Id { get; } = Guid.NewGuid().ToString();
 }
