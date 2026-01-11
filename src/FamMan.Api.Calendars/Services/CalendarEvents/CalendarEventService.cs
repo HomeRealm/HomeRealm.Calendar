@@ -41,6 +41,13 @@ public class CalendarEventService : ICalendarEventService
 
     return ("found", MapToResponseDto(existingEntity));
   }
+  public async Task<List<CalendarEventResponseDto>> GetCalendarEventsForCalendarAsync(Guid calendarId, CancellationToken ct)
+  {
+    var calendarEvents = _dataStore.GetCalendarEventsForCalendarAsync(calendarId, ct);
+
+    var mappedCalendarEvents = await calendarEvents.Select(calendarEvent => MapToResponseDto(calendarEvent)).ToListAsync(ct);
+    return mappedCalendarEvents;
+  }
   public async Task<List<CalendarEventResponseDto>> GetAllCalendarEventsAsync(CancellationToken ct)
   {
     var calendarEvents = _dataStore.GetAllCalendarEventsAsync(ct);

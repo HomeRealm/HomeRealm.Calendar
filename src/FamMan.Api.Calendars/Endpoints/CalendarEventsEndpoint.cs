@@ -8,10 +8,18 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class CalendarEventsEndpoints
 {
-  public static void MapCalendarEventsEndpoints(this IEndpointRouteBuilder endpoints)
+  public static RouteGroupBuilder MapCalendarEventsEndpoints(this IEndpointRouteBuilder endpoints, IEndpointRouteBuilder calendarRoute)
   {
-    var group = endpoints.MapGroup("/calendarevents")
-        .WithTags("CalendarEvents");
+    // api/calendars/{calendarId}/events
+    calendarRoute
+      .MapGet("/events", GetCalendarEventsForCalendar)
+      .WithName("GetCalendarEventsForCalendar")
+      .WithSummary("Gets all events for a specific calendar")
+      .WithDescription("Gets all events for a specific calendar");
+
+    // api/events
+    var group = endpoints.MapGroup("/events")
+      .WithTags("CalendarEvents");
 
     group
       .MapPost("/", CreateCalendarEvent)
@@ -42,6 +50,8 @@ public static class CalendarEventsEndpoints
       .WithName("DeleteCalendarEvent")
       .WithSummary("Deletes a calendar event")
       .WithDescription("Deletes the calendar event with the matching ID");
+
+    return group;
   }
   private async static Task<Results<Created<CalendarEventResponseDto>, ValidationProblem>> CreateCalendarEvent(
     [FromBody] CalendarEventDto dto,
@@ -87,6 +97,15 @@ public static class CalendarEventsEndpoints
     var (status, calendarEvent) = await calendarEventService.GetCalendarEventAsync(id, ct);
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(calendarEvent);
+  }
+  private async static Task<Ok<List<CalendarEventResponseDto>>> GetCalendarEventsForCalendar(
+  [FromRoute] Guid calendarId,
+  [FromServices] ICalendarEventService calendarEventService,
+  CancellationToken ct
+)
+  {
+    var calendarEvents = await calendarEventService.GetCalendarEventsForCalendarAsync(calendarId, ct);
+    return TypedResults.Ok(calendarEvents);
   }
   private async static Task<Ok<List<CalendarEventResponseDto>>> GetAllCalendarEvents(
     [FromServices] ICalendarEventService calendarEventService,
