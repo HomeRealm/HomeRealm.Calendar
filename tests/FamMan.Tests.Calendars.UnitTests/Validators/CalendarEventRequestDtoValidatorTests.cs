@@ -1,16 +1,16 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
 using FamMan.Api.Calendars.Validators;
 using FluentValidation.TestHelper;
 
 namespace FamMan.Tests.Calendars.UnitTests.Validators;
 
-public class CalendarEventRequestDtoValidatorTests
+public class CalendarEventDtoValidatorTests
 {
-  private readonly CalendarEventRequestDtoValidator _validator;
+  private readonly CalendarEventDtoValidator _validator;
 
-  public CalendarEventRequestDtoValidatorTests()
+  public CalendarEventDtoValidatorTests()
   {
-    _validator = new CalendarEventRequestDtoValidator();
+    _validator = new CalendarEventDtoValidator();
   }
 
   [Fact]
@@ -18,7 +18,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
@@ -41,7 +41,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "",
@@ -64,7 +64,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = new string('a', 201),
@@ -87,7 +87,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
@@ -110,7 +110,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
@@ -133,7 +133,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
@@ -156,7 +156,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.Empty,
       Title = "Meeting",
@@ -179,7 +179,7 @@ public class CalendarEventRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new CalendarEventRequestDto
+    var dto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",

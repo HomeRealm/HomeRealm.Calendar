@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.CalendarEvent;
+using FamMan.Api.Calendars.Dtos.CalendarEvents;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.CalendarEvent;
-using FamMan.Api.Calendars.Services.CalendarEvent;
+using FamMan.Api.Calendars.Interfaces.CalendarEvents;
+using FamMan.Api.Calendars.Services.CalendarEvents;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -103,7 +103,7 @@ public class CalendarEventServiceTests
       }
     };
 
-    _dataStore.GetAllCalendarEventsAsync(TestContext.Current.CancellationToken).Returns(calendarEvents.BuildMock());
+    _dataStore.GetAllCalendarEvents().Returns(calendarEvents.BuildMock());
 
     // Act
     var result = await _sut.GetAllCalendarEventsAsync(TestContext.Current.CancellationToken);
@@ -123,7 +123,7 @@ public class CalendarEventServiceTests
     var calendarId = Guid.NewGuid();
     var recurrenceId = Guid.NewGuid();
     var categoryId = Guid.NewGuid();
-    var calendarEventRequestDto = new CalendarEventRequestDto
+    var CalendarEventDto = new CalendarEventDto
     {
       CalendarId = calendarId,
       Title = "Meeting",
@@ -153,19 +153,19 @@ public class CalendarEventServiceTests
     _dataStore.CreateCalendarEventAsync(Arg.Any<CalendarEventEntity>(), TestContext.Current.CancellationToken).Returns(createdCalendarEvent);
 
     // Act
-    var result = await _sut.CreateCalendarEventAsync(calendarEventRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateCalendarEventAsync(CalendarEventDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CalendarEventResponseDto>();
     result.Id.ShouldBe(createdCalendarEvent.Id);
-    result.Title.ShouldBe(calendarEventRequestDto.Title);
+    result.Title.ShouldBe(CalendarEventDto.Title);
     await _dataStore
       .Received(1)
       .CreateCalendarEventAsync(
         Arg.Is<CalendarEventEntity>(ce =>
-          ce.CalendarId == calendarEventRequestDto.CalendarId &&
-          ce.Title == calendarEventRequestDto.Title
+          ce.CalendarId == CalendarEventDto.CalendarId &&
+          ce.Title == CalendarEventDto.Title
         ),
         TestContext.Current.CancellationToken
       );
@@ -193,7 +193,7 @@ public class CalendarEventServiceTests
       CategoryId = Guid.NewGuid(),
       LinkedResource = ""
     };
-    var calendarEventRequestDto = new CalendarEventRequestDto
+    var CalendarEventDto = new CalendarEventDto
     {
       CalendarId = calendarId,
       Title = "Updated Meeting",
@@ -209,28 +209,28 @@ public class CalendarEventServiceTests
     var updatedCalendarEvent = new CalendarEventEntity
     {
       Id = calendarEventId,
-      CalendarId = calendarEventRequestDto.CalendarId,
-      Title = calendarEventRequestDto.Title,
-      Description = calendarEventRequestDto.Description,
-      Start = calendarEventRequestDto.Start,
-      End = calendarEventRequestDto.End,
-      Location = calendarEventRequestDto.Location,
-      AllDay = calendarEventRequestDto.AllDay,
-      RecurrenceId = calendarEventRequestDto.RecurrenceId,
-      CategoryId = calendarEventRequestDto.CategoryId,
-      LinkedResource = calendarEventRequestDto.LinkedResource
+      CalendarId = CalendarEventDto.CalendarId,
+      Title = CalendarEventDto.Title,
+      Description = CalendarEventDto.Description,
+      Start = CalendarEventDto.Start,
+      End = CalendarEventDto.End,
+      Location = CalendarEventDto.Location,
+      AllDay = CalendarEventDto.AllDay,
+      RecurrenceId = CalendarEventDto.RecurrenceId,
+      CategoryId = CalendarEventDto.CategoryId,
+      LinkedResource = CalendarEventDto.LinkedResource
     };
     _dataStore.GetCalendarEventAsync(calendarEventId, TestContext.Current.CancellationToken).Returns(existingCalendarEvent);
     _dataStore.UpdateCalendarEventAsync(existingCalendarEvent, Arg.Any<CalendarEventEntity>(), TestContext.Current.CancellationToken).Returns(updatedCalendarEvent);
 
     // Act
-    var (status, result) = await _sut.UpdateCalendarEventAsync(calendarEventRequestDto, calendarEventId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCalendarEventAsync(CalendarEventDto, calendarEventId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CalendarEventResponseDto>();
-    result.Title.ShouldBe(calendarEventRequestDto.Title);
+    result.Title.ShouldBe(CalendarEventDto.Title);
     await _dataStore.Received(1).GetCalendarEventAsync(calendarEventId, TestContext.Current.CancellationToken);
   }
 
@@ -240,7 +240,7 @@ public class CalendarEventServiceTests
     // Arrange
     var now = new DateTime(2026, 1, 7);
     var calendarEventId = Guid.NewGuid();
-    var calendarEventRequestDto = new CalendarEventRequestDto
+    var CalendarEventDto = new CalendarEventDto
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
@@ -256,7 +256,7 @@ public class CalendarEventServiceTests
     _dataStore.GetCalendarEventAsync(calendarEventId, TestContext.Current.CancellationToken).Returns((CalendarEventEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateCalendarEventAsync(calendarEventRequestDto, calendarEventId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCalendarEventAsync(CalendarEventDto, calendarEventId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

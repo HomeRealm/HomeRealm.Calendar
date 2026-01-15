@@ -1,23 +1,23 @@
-using FamMan.Api.Calendars.Dtos.Category;
+using FamMan.Api.Calendars.Dtos.Categories;
 using FamMan.Api.Calendars.Validators;
 using FluentValidation.TestHelper;
 
 namespace FamMan.Tests.Calendars.UnitTests.Validators;
 
-public class CategoryRequestDtoValidatorTests
+public class CategoryDtoValidatorTests
 {
-  private readonly CategoryRequestDtoValidator _validator;
+  private readonly CategoryDtoValidator _validator;
 
-  public CategoryRequestDtoValidatorTests()
+  public CategoryDtoValidatorTests()
   {
-    _validator = new CategoryRequestDtoValidator();
+    _validator = new CategoryDtoValidator();
   }
 
   [Fact]
   public void Validate_WithValidDto_ShouldNotHaveErrors()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "Work",
       Color = "Blue",
@@ -32,7 +32,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithEmptyName_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "",
       Color = "Blue",
@@ -47,7 +47,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithNameExceedingMaxLength_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = new string('a', 201),
       Color = "Blue",
@@ -62,7 +62,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithEmptyColor_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "Work",
       Color = "",
@@ -77,7 +77,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithColorExceedingMaxLength_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "Work",
       Color = new string('a', 201),
@@ -92,7 +92,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithEmptyIcon_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "Work",
       Color = "Blue",
@@ -107,7 +107,7 @@ public class CategoryRequestDtoValidatorTests
   public void Validate_WithIconExceedingMaxLength_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new CategoryRequestDto
+    var dto = new CategoryDto
     {
       Name = "Work",
       Color = "Blue",

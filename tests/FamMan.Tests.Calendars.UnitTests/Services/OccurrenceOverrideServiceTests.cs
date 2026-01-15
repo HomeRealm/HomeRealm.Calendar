@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.OccurrenceOverride;
-using FamMan.Api.Calendars.Services.OccurrenceOverride;
+using FamMan.Api.Calendars.Interfaces.OccurrenceOverrides;
+using FamMan.Api.Calendars.Services.OccurrenceOverrides;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -79,7 +79,7 @@ public class OccurrenceOverrideServiceTests
       }
     };
 
-    _dataStore.GetAllOccurrenceOverridesAsync(TestContext.Current.CancellationToken).Returns(occurrenceOverrides.BuildMock());
+    _dataStore.GetAllOccurrenceOverrides().Returns(occurrenceOverrides.BuildMock());
 
     // Act
     var result = await _sut.GetAllOccurrenceOverridesAsync(TestContext.Current.CancellationToken);
@@ -97,7 +97,7 @@ public class OccurrenceOverrideServiceTests
     // Arrange
     var now = new DateTime(2026, 1, 7);
     var recurrenceId = Guid.NewGuid();
-    var occurrenceOverrideRequestDto = new OccurrenceOverrideRequestDto
+    var OccurrenceOverrideDto = new OccurrenceOverrideDto
     {
       RecurrenceId = recurrenceId,
       Date = now
@@ -111,19 +111,19 @@ public class OccurrenceOverrideServiceTests
     _dataStore.CreateOccurrenceOverrideAsync(Arg.Any<OccurrenceOverrideEntity>(), TestContext.Current.CancellationToken).Returns(createdOccurrenceOverride);
 
     // Act
-    var result = await _sut.CreateOccurrenceOverrideAsync(occurrenceOverrideRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateOccurrenceOverrideAsync(OccurrenceOverrideDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<OccurrenceOverrideResponseDto>();
     result.Id.ShouldBe(createdOccurrenceOverride.Id);
-    result.Date.ShouldBe(occurrenceOverrideRequestDto.Date);
+    result.Date.ShouldBe(OccurrenceOverrideDto.Date);
     await _dataStore
       .Received(1)
       .CreateOccurrenceOverrideAsync(
         Arg.Is<OccurrenceOverrideEntity>(oo =>
-          oo.RecurrenceId == occurrenceOverrideRequestDto.RecurrenceId &&
-          oo.Date == occurrenceOverrideRequestDto.Date
+          oo.RecurrenceId == OccurrenceOverrideDto.RecurrenceId &&
+          oo.Date == OccurrenceOverrideDto.Date
         ),
         TestContext.Current.CancellationToken
       );
@@ -142,7 +142,7 @@ public class OccurrenceOverrideServiceTests
       RecurrenceId = recurrenceId,
       Date = now
     };
-    var occurrenceOverrideRequestDto = new OccurrenceOverrideRequestDto
+    var OccurrenceOverrideDto = new OccurrenceOverrideDto
     {
       RecurrenceId = recurrenceId,
       Date = now.AddDays(1)
@@ -150,20 +150,20 @@ public class OccurrenceOverrideServiceTests
     var updatedOccurrenceOverride = new OccurrenceOverrideEntity
     {
       Id = occurrenceOverrideId,
-      RecurrenceId = occurrenceOverrideRequestDto.RecurrenceId,
-      Date = occurrenceOverrideRequestDto.Date
+      RecurrenceId = OccurrenceOverrideDto.RecurrenceId,
+      Date = OccurrenceOverrideDto.Date
     };
     _dataStore.GetOccurrenceOverrideAsync(occurrenceOverrideId, TestContext.Current.CancellationToken).Returns(existingOccurrenceOverride);
     _dataStore.UpdateOccurrenceOverrideAsync(existingOccurrenceOverride, Arg.Any<OccurrenceOverrideEntity>(), TestContext.Current.CancellationToken).Returns(updatedOccurrenceOverride);
 
     // Act
-    var (status, result) = await _sut.UpdateOccurrenceOverrideAsync(occurrenceOverrideRequestDto, occurrenceOverrideId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateOccurrenceOverrideAsync(OccurrenceOverrideDto, occurrenceOverrideId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<OccurrenceOverrideResponseDto>();
-    result.Date.ShouldBe(occurrenceOverrideRequestDto.Date);
+    result.Date.ShouldBe(OccurrenceOverrideDto.Date);
     await _dataStore.Received(1).GetOccurrenceOverrideAsync(occurrenceOverrideId, TestContext.Current.CancellationToken);
   }
 
@@ -173,7 +173,7 @@ public class OccurrenceOverrideServiceTests
     // Arrange
     var occurrenceOverrideId = Guid.NewGuid();
     var now = new DateTime(2026, 1, 7);
-    var occurrenceOverrideRequestDto = new OccurrenceOverrideRequestDto
+    var OccurrenceOverrideDto = new OccurrenceOverrideDto
     {
       RecurrenceId = Guid.NewGuid(),
       Date = now
@@ -181,7 +181,7 @@ public class OccurrenceOverrideServiceTests
     _dataStore.GetOccurrenceOverrideAsync(occurrenceOverrideId, TestContext.Current.CancellationToken).Returns((OccurrenceOverrideEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateOccurrenceOverrideAsync(occurrenceOverrideRequestDto, occurrenceOverrideId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateOccurrenceOverrideAsync(OccurrenceOverrideDto, occurrenceOverrideId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

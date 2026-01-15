@@ -1,16 +1,16 @@
-using FamMan.Api.Calendars.Dtos.OccurrenceOverride;
+using FamMan.Api.Calendars.Dtos.OccurrenceOverrides;
 using FamMan.Api.Calendars.Validators;
 using FluentValidation.TestHelper;
 
 namespace FamMan.Tests.Calendars.UnitTests.Validators;
 
-public class OccurrenceOverrideRequestDtoValidatorTests
+public class OccurrenceOverrideDtoValidatorTests
 {
-  private readonly OccurrenceOverrideRequestDtoValidator _validator;
+  private readonly OccurrenceOverrideDtoValidator _validator;
 
-  public OccurrenceOverrideRequestDtoValidatorTests()
+  public OccurrenceOverrideDtoValidatorTests()
   {
-    _validator = new OccurrenceOverrideRequestDtoValidator();
+    _validator = new OccurrenceOverrideDtoValidator();
   }
 
   [Fact]
@@ -18,7 +18,7 @@ public class OccurrenceOverrideRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new OccurrenceOverrideRequestDto
+    var dto = new OccurrenceOverrideDto
     {
       RecurrenceId = Guid.NewGuid(),
       Date = now
@@ -33,7 +33,7 @@ public class OccurrenceOverrideRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new OccurrenceOverrideRequestDto
+    var dto = new OccurrenceOverrideDto
     {
       RecurrenceId = Guid.Empty,
       Date = now
@@ -47,7 +47,7 @@ public class OccurrenceOverrideRequestDtoValidatorTests
   public void Validate_WithMinValueDate_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new OccurrenceOverrideRequestDto
+    var dto = new OccurrenceOverrideDto
     {
       RecurrenceId = Guid.NewGuid(),
       Date = DateTime.MinValue

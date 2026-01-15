@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.Attendee;
+using FamMan.Api.Calendars.Dtos.Attendees;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Attendee;
-using FamMan.Api.Calendars.Services.Attendee;
+using FamMan.Api.Calendars.Interfaces.Attendees;
+using FamMan.Api.Calendars.Services.Attendees;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -83,7 +83,7 @@ public class AttendeeServiceTests
       }
     };
 
-    _dataStore.GetAllAttendeesAsync(TestContext.Current.CancellationToken).Returns(attendees.BuildMock());
+    _dataStore.GetAllAttendees().Returns(attendees.BuildMock());
 
     // Act
     var result = await _sut.GetAllAttendeesAsync(TestContext.Current.CancellationToken);
@@ -101,7 +101,7 @@ public class AttendeeServiceTests
     // Arrange
     var eventId = Guid.NewGuid();
     var userId = Guid.NewGuid();
-    var attendeeRequestDto = new AttendeeRequestDto
+    var AttendeeDto = new AttendeeDto
     {
       EventId = eventId,
       UserId = userId,
@@ -119,19 +119,19 @@ public class AttendeeServiceTests
     _dataStore.CreateAttendeeAsync(Arg.Any<AttendeeEntity>(), TestContext.Current.CancellationToken).Returns(createdAttendee);
 
     // Act
-    var result = await _sut.CreateAttendeeAsync(attendeeRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateAttendeeAsync(AttendeeDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<AttendeeResponseDto>();
     result.Id.ShouldBe(createdAttendee.Id);
-    result.Status.ShouldBe(attendeeRequestDto.Status);
+    result.Status.ShouldBe(AttendeeDto.Status);
     await _dataStore
       .Received(1)
       .CreateAttendeeAsync(
         Arg.Is<AttendeeEntity>(a =>
-          a.EventId == attendeeRequestDto.EventId &&
-          a.Status == attendeeRequestDto.Status
+          a.EventId == AttendeeDto.EventId &&
+          a.Status == AttendeeDto.Status
         ),
         TestContext.Current.CancellationToken
       );
@@ -152,7 +152,7 @@ public class AttendeeServiceTests
       Status = "Confirmed",
       Role = "Guest"
     };
-    var attendeeRequestDto = new AttendeeRequestDto
+    var AttendeeDto = new AttendeeDto
     {
       EventId = eventId,
       UserId = userId,
@@ -162,22 +162,22 @@ public class AttendeeServiceTests
     var updatedAttendee = new AttendeeEntity
     {
       Id = attendeeId,
-      EventId = attendeeRequestDto.EventId,
-      UserId = attendeeRequestDto.UserId,
-      Status = attendeeRequestDto.Status,
-      Role = attendeeRequestDto.Role
+      EventId = AttendeeDto.EventId,
+      UserId = AttendeeDto.UserId,
+      Status = AttendeeDto.Status,
+      Role = AttendeeDto.Role
     };
     _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns(existingAttendee);
     _dataStore.UpdateAttendeeAsync(existingAttendee, Arg.Any<AttendeeEntity>(), TestContext.Current.CancellationToken).Returns(updatedAttendee);
 
     // Act
-    var (status, result) = await _sut.UpdateAttendeeAsync(attendeeRequestDto, attendeeId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateAttendeeAsync(AttendeeDto, attendeeId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<AttendeeResponseDto>();
-    result.Status.ShouldBe(attendeeRequestDto.Status);
+    result.Status.ShouldBe(AttendeeDto.Status);
     await _dataStore.Received(1).GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken);
   }
 
@@ -186,7 +186,7 @@ public class AttendeeServiceTests
   {
     // Arrange
     var attendeeId = Guid.NewGuid();
-    var attendeeRequestDto = new AttendeeRequestDto
+    var AttendeeDto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -196,7 +196,7 @@ public class AttendeeServiceTests
     _dataStore.GetAttendeeAsync(attendeeId, TestContext.Current.CancellationToken).Returns((AttendeeEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateAttendeeAsync(attendeeRequestDto, attendeeId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateAttendeeAsync(AttendeeDto, attendeeId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

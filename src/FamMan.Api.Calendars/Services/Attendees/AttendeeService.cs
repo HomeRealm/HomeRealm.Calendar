@@ -50,7 +50,7 @@ public class AttendeeService : IAttendeeService
   }
   public async Task<List<AttendeeResponseDto>> GetAllAttendeesAsync(CancellationToken ct)
   {
-    var attendees = _dataStore.GetAllAttendeesAsync(ct);
+    var attendees = _dataStore.GetAllAttendees();
 
     var mappedAttendees = await attendees.Select(attendee => MapToResponseDto(attendee)).ToListAsync(ct);
     return mappedAttendees;

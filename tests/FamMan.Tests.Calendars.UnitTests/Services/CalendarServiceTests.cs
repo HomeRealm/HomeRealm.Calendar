@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.Calendar;
+using FamMan.Api.Calendars.Dtos.Calendars;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Calendar;
-using FamMan.Api.Calendars.Services.Calendar;
+using FamMan.Api.Calendars.Interfaces.Calendars;
+using FamMan.Api.Calendars.Services.Calendars;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -115,7 +115,7 @@ public class CalendarServiceTests
       }
     };
 
-    _dataStore.GetAllCalendarsAsync(TestContext.Current.CancellationToken).Returns(calendars.BuildMock());
+    _dataStore.GetAllCalendars().Returns(calendars.BuildMock());
 
     // Act
     var result = await _sut.GetAllCalendarsAsync(TestContext.Current.CancellationToken);
@@ -131,7 +131,7 @@ public class CalendarServiceTests
   public async Task CreateCalendarAsync_ShouldCreateAndReturnMappedCalendar()
   {
     // Arrange
-    var calendarRequestDto = new CalendarRequestDto
+    var CalendarDto = new CalendarDto
     {
       Name = "Calendar",
       Description = "Description",
@@ -151,20 +151,20 @@ public class CalendarServiceTests
     _dataStore.CreateCalendarAsync(Arg.Any<CalendarEntity>(), TestContext.Current.CancellationToken).Returns(createdCalendar);
 
     // Act
-    var result = await _sut.CreateCalendarAsync(calendarRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateCalendarAsync(CalendarDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CalendarResponseDto>();
     result.Id.ShouldBe(createdCalendar.Id);
-    result.Name.ShouldBe(calendarRequestDto.Name);
-    result.Description.ShouldBe(calendarRequestDto.Description);
+    result.Name.ShouldBe(CalendarDto.Name);
+    result.Description.ShouldBe(CalendarDto.Description);
     await _dataStore
       .Received(1)
       .CreateCalendarAsync(
         Arg.Is<CalendarEntity>(c =>
-          c.Name == calendarRequestDto.Name &&
-          c.Description == calendarRequestDto.Description
+          c.Name == CalendarDto.Name &&
+          c.Description == CalendarDto.Description
         ),
         TestContext.Current.CancellationToken
       );
@@ -184,7 +184,7 @@ public class CalendarServiceTests
       Owner = "Me",
       Visibility = "Public"
     };
-    var calendarRequestDto = new CalendarRequestDto
+    var CalendarDto = new CalendarDto
     {
       Name = "Calendar",
       Description = "Description",
@@ -195,24 +195,24 @@ public class CalendarServiceTests
     var updatedCalendar = new CalendarEntity
     {
       Id = calendarId,
-      Name = calendarRequestDto.Name,
-      Description = calendarRequestDto.Description,
-      Color = calendarRequestDto.Color,
-      Owner = calendarRequestDto.Owner,
-      Visibility = calendarRequestDto.Visibility
+      Name = CalendarDto.Name,
+      Description = CalendarDto.Description,
+      Color = CalendarDto.Color,
+      Owner = CalendarDto.Owner,
+      Visibility = CalendarDto.Visibility
     };
     _dataStore.GetCalendarAsync(calendarId, TestContext.Current.CancellationToken).Returns(existingCalendar);
     _dataStore.UpdateCalendarAsync(existingCalendar, Arg.Any<CalendarEntity>(), TestContext.Current.CancellationToken).Returns(updatedCalendar);
 
     // Act
-    var (status, result) = await _sut.UpdateCalendarAsync(calendarRequestDto, calendarId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCalendarAsync(CalendarDto, calendarId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CalendarResponseDto>();
-    result.Name.ShouldBe(calendarRequestDto.Name);
-    result.Description.ShouldBe(calendarRequestDto.Description);
+    result.Name.ShouldBe(CalendarDto.Name);
+    result.Description.ShouldBe(CalendarDto.Description);
     await _dataStore.Received(1).UpdateCalendarAsync(existingCalendar, Arg.Any<CalendarEntity>(), TestContext.Current.CancellationToken);
   }
 
@@ -221,7 +221,7 @@ public class CalendarServiceTests
   {
     // Arrange
     var calendarId = Guid.CreateVersion7();
-    var calendarRequestDto = new CalendarRequestDto
+    var CalendarDto = new CalendarDto
     {
       Name = "Calendar",
       Description = "Description",
@@ -232,7 +232,7 @@ public class CalendarServiceTests
     _dataStore.GetCalendarAsync(calendarId, TestContext.Current.CancellationToken).Returns((CalendarEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateCalendarAsync(calendarRequestDto, calendarId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCalendarAsync(CalendarDto, calendarId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

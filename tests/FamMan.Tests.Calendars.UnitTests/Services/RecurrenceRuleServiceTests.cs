@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRule;
+using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.RecurrenceRule;
-using FamMan.Api.Calendars.Services.RecurrenceRule;
+using FamMan.Api.Calendars.Interfaces.RecurrenceRules;
+using FamMan.Api.Calendars.Services.RecurrenceRules;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -85,7 +85,7 @@ public class RecurrenceRuleServiceTests
       }
     };
 
-    _dataStore.GetAllRecurrenceRulesAsync(TestContext.Current.CancellationToken).Returns(recurrenceRules.BuildMock());
+    _dataStore.GetAllRecurrenceRules().Returns(recurrenceRules.BuildMock());
 
     // Act
     var result = await _sut.GetAllRecurrenceRulesAsync(TestContext.Current.CancellationToken);
@@ -103,7 +103,7 @@ public class RecurrenceRuleServiceTests
     // Arrange
     var now = new DateTime(2026, 1, 7);
     var eventId = Guid.NewGuid();
-    var recurrenceRuleRequestDto = new RecurrenceRuleRequestDto
+    var RecurrenceRuleDto = new RecurrenceRuleDto
     {
       EventId = eventId,
       Rule = "FREQ=DAILY",
@@ -121,19 +121,19 @@ public class RecurrenceRuleServiceTests
     _dataStore.CreateRecurrenceRuleAsync(Arg.Any<RecurrenceRuleEntity>(), TestContext.Current.CancellationToken).Returns(createdRecurrenceRule);
 
     // Act
-    var result = await _sut.CreateRecurrenceRuleAsync(recurrenceRuleRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateRecurrenceRuleAsync(RecurrenceRuleDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<RecurrenceRuleResponseDto>();
     result.Id.ShouldBe(createdRecurrenceRule.Id);
-    result.Rule.ShouldBe(recurrenceRuleRequestDto.Rule);
+    result.Rule.ShouldBe(RecurrenceRuleDto.Rule);
     await _dataStore
       .Received(1)
       .CreateRecurrenceRuleAsync(
         Arg.Is<RecurrenceRuleEntity>(rr =>
-          rr.EventId == recurrenceRuleRequestDto.EventId &&
-          rr.Rule == recurrenceRuleRequestDto.Rule
+          rr.EventId == RecurrenceRuleDto.EventId &&
+          rr.Rule == RecurrenceRuleDto.Rule
         ),
         TestContext.Current.CancellationToken
       );
@@ -154,7 +154,7 @@ public class RecurrenceRuleServiceTests
       OccurrenceOverrides = new List<Guid>(),
       EndDate = now.AddDays(30)
     };
-    var recurrenceRuleRequestDto = new RecurrenceRuleRequestDto
+    var RecurrenceRuleDto = new RecurrenceRuleDto
     {
       EventId = eventId,
       Rule = "FREQ=WEEKLY",
@@ -164,22 +164,22 @@ public class RecurrenceRuleServiceTests
     var updatedRecurrenceRule = new RecurrenceRuleEntity
     {
       Id = recurrenceRuleId,
-      EventId = recurrenceRuleRequestDto.EventId,
-      Rule = recurrenceRuleRequestDto.Rule,
-      OccurrenceOverrides = recurrenceRuleRequestDto.OccurrenceOverrides,
-      EndDate = recurrenceRuleRequestDto.EndDate
+      EventId = RecurrenceRuleDto.EventId,
+      Rule = RecurrenceRuleDto.Rule,
+      OccurrenceOverrides = RecurrenceRuleDto.OccurrenceOverrides,
+      EndDate = RecurrenceRuleDto.EndDate
     };
     _dataStore.GetRecurrenceRuleAsync(recurrenceRuleId, TestContext.Current.CancellationToken).Returns(existingRecurrenceRule);
     _dataStore.UpdateRecurrenceRuleAsync(existingRecurrenceRule, Arg.Any<RecurrenceRuleEntity>(), TestContext.Current.CancellationToken).Returns(updatedRecurrenceRule);
 
     // Act
-    var (status, result) = await _sut.UpdateRecurrenceRuleAsync(recurrenceRuleRequestDto, recurrenceRuleId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateRecurrenceRuleAsync(RecurrenceRuleDto, recurrenceRuleId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<RecurrenceRuleResponseDto>();
-    result.Rule.ShouldBe(recurrenceRuleRequestDto.Rule);
+    result.Rule.ShouldBe(RecurrenceRuleDto.Rule);
     await _dataStore.Received(1).GetRecurrenceRuleAsync(recurrenceRuleId, TestContext.Current.CancellationToken);
   }
 
@@ -189,7 +189,7 @@ public class RecurrenceRuleServiceTests
     // Arrange
     var recurrenceRuleId = Guid.NewGuid();
     var now = new DateTime(2026, 1, 7);
-    var recurrenceRuleRequestDto = new RecurrenceRuleRequestDto
+    var RecurrenceRuleDto = new RecurrenceRuleDto
     {
       EventId = Guid.NewGuid(),
       Rule = "FREQ=DAILY",
@@ -199,7 +199,7 @@ public class RecurrenceRuleServiceTests
     _dataStore.GetRecurrenceRuleAsync(recurrenceRuleId, TestContext.Current.CancellationToken).Returns((RecurrenceRuleEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateRecurrenceRuleAsync(recurrenceRuleRequestDto, recurrenceRuleId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateRecurrenceRuleAsync(RecurrenceRuleDto, recurrenceRuleId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

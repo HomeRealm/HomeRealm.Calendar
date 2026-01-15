@@ -1,16 +1,16 @@
-using FamMan.Api.Calendars.Dtos.RecurrenceRule;
+using FamMan.Api.Calendars.Dtos.RecurrenceRules;
 using FamMan.Api.Calendars.Validators;
 using FluentValidation.TestHelper;
 
 namespace FamMan.Tests.Calendars.UnitTests.Validators;
 
-public class RecurrenceRuleRequestDtoValidatorTests
+public class RecurrenceRuleDtoValidatorTests
 {
-  private readonly RecurrenceRuleRequestDtoValidator _validator;
+  private readonly RecurrenceRuleDtoValidator _validator;
 
-  public RecurrenceRuleRequestDtoValidatorTests()
+  public RecurrenceRuleDtoValidatorTests()
   {
-    _validator = new RecurrenceRuleRequestDtoValidator();
+    _validator = new RecurrenceRuleDtoValidator();
   }
 
   [Fact]
@@ -18,7 +18,7 @@ public class RecurrenceRuleRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new RecurrenceRuleRequestDto
+    var dto = new RecurrenceRuleDto
     {
       EventId = Guid.NewGuid(),
       Rule = "FREQ=DAILY",
@@ -35,7 +35,7 @@ public class RecurrenceRuleRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new RecurrenceRuleRequestDto
+    var dto = new RecurrenceRuleDto
     {
       EventId = Guid.NewGuid(),
       Rule = "",
@@ -52,7 +52,7 @@ public class RecurrenceRuleRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new RecurrenceRuleRequestDto
+    var dto = new RecurrenceRuleDto
     {
       EventId = Guid.NewGuid(),
       Rule = new string('a', 201),
@@ -69,7 +69,7 @@ public class RecurrenceRuleRequestDtoValidatorTests
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
-    var dto = new RecurrenceRuleRequestDto
+    var dto = new RecurrenceRuleDto
     {
       EventId = Guid.Empty,
       Rule = "FREQ=DAILY",
@@ -85,7 +85,7 @@ public class RecurrenceRuleRequestDtoValidatorTests
   public void Validate_WithMinValueEndDate_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new RecurrenceRuleRequestDto
+    var dto = new RecurrenceRuleDto
     {
       EventId = Guid.NewGuid(),
       Rule = "FREQ=DAILY",

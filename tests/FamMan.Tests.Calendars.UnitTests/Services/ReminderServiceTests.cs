@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.Reminder;
+using FamMan.Api.Calendars.Dtos.Reminders;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Reminder;
-using FamMan.Api.Calendars.Services.Reminder;
+using FamMan.Api.Calendars.Interfaces.Reminders;
+using FamMan.Api.Calendars.Services.Reminders;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -80,7 +80,7 @@ public class ReminderServiceTests
       }
     };
 
-    _dataStore.GetAllRemindersAsync(TestContext.Current.CancellationToken).Returns(reminders.BuildMock());
+    _dataStore.GetAllReminders().Returns(reminders.BuildMock());
 
     // Act
     var result = await _sut.GetAllRemindersAsync(TestContext.Current.CancellationToken);
@@ -97,7 +97,7 @@ public class ReminderServiceTests
   {
     // Arrange
     var eventId = Guid.NewGuid();
-    var reminderRequestDto = new ReminderRequestDto
+    var ReminderDto = new ReminderDto
     {
       EventId = eventId,
       Method = "Email",
@@ -113,19 +113,19 @@ public class ReminderServiceTests
     _dataStore.CreateReminderAsync(Arg.Any<ReminderEntity>(), TestContext.Current.CancellationToken).Returns(createdReminder);
 
     // Act
-    var result = await _sut.CreateReminderAsync(reminderRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateReminderAsync(ReminderDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<ReminderResponseDto>();
     result.Id.ShouldBe(createdReminder.Id);
-    result.Method.ShouldBe(reminderRequestDto.Method);
+    result.Method.ShouldBe(ReminderDto.Method);
     await _dataStore
       .Received(1)
       .CreateReminderAsync(
         Arg.Is<ReminderEntity>(r =>
-          r.EventId == reminderRequestDto.EventId &&
-          r.Method == reminderRequestDto.Method
+          r.EventId == ReminderDto.EventId &&
+          r.Method == ReminderDto.Method
         ),
         TestContext.Current.CancellationToken
       );
@@ -144,7 +144,7 @@ public class ReminderServiceTests
       Method = "Email",
       TimeBefore = 15
     };
-    var reminderRequestDto = new ReminderRequestDto
+    var ReminderDto = new ReminderDto
     {
       EventId = eventId,
       Method = "SMS",
@@ -153,21 +153,21 @@ public class ReminderServiceTests
     var updatedReminder = new ReminderEntity
     {
       Id = reminderId,
-      EventId = reminderRequestDto.EventId,
-      Method = reminderRequestDto.Method,
-      TimeBefore = reminderRequestDto.TimeBefore
+      EventId = ReminderDto.EventId,
+      Method = ReminderDto.Method,
+      TimeBefore = ReminderDto.TimeBefore
     };
     _dataStore.GetReminderAsync(reminderId, TestContext.Current.CancellationToken).Returns(existingReminder);
     _dataStore.UpdateReminderAsync(existingReminder, Arg.Any<ReminderEntity>(), TestContext.Current.CancellationToken).Returns(updatedReminder);
 
     // Act
-    var (status, result) = await _sut.UpdateReminderAsync(reminderRequestDto, reminderId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateReminderAsync(ReminderDto, reminderId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<ReminderResponseDto>();
-    result.Method.ShouldBe(reminderRequestDto.Method);
+    result.Method.ShouldBe(ReminderDto.Method);
     await _dataStore.Received(1).GetReminderAsync(reminderId, TestContext.Current.CancellationToken);
   }
 
@@ -176,7 +176,7 @@ public class ReminderServiceTests
   {
     // Arrange
     var reminderId = Guid.NewGuid();
-    var reminderRequestDto = new ReminderRequestDto
+    var ReminderDto = new ReminderDto
     {
       EventId = Guid.NewGuid(),
       Method = "Email",
@@ -185,7 +185,7 @@ public class ReminderServiceTests
     _dataStore.GetReminderAsync(reminderId, TestContext.Current.CancellationToken).Returns((ReminderEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateReminderAsync(reminderRequestDto, reminderId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateReminderAsync(ReminderDto, reminderId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

@@ -1,7 +1,7 @@
-using FamMan.Api.Calendars.Dtos.Category;
+using FamMan.Api.Calendars.Dtos.Categories;
 using FamMan.Api.Calendars.Entities;
-using FamMan.Api.Calendars.Interfaces.Category;
-using FamMan.Api.Calendars.Services.Category;
+using FamMan.Api.Calendars.Interfaces.Categories;
+using FamMan.Api.Calendars.Services.Categories;
 using MockQueryable;
 using NSubstitute;
 using Shouldly;
@@ -80,7 +80,7 @@ public class CategoryServiceTests
       }
     };
 
-    _dataStore.GetAllCategoriesAsync(TestContext.Current.CancellationToken).Returns(categories.BuildMock());
+    _dataStore.GetAllCategories().Returns(categories.BuildMock());
 
     // Act
     var result = await _sut.GetAllCategoriesAsync(TestContext.Current.CancellationToken);
@@ -96,7 +96,7 @@ public class CategoryServiceTests
   public async Task CreateCategoryAsync_ShouldCreateAndReturnMappedCategory()
   {
     // Arrange
-    var categoryRequestDto = new CategoryRequestDto
+    var CategoryDto = new CategoryDto
     {
       Name = "Work",
       Color = "Blue",
@@ -112,19 +112,19 @@ public class CategoryServiceTests
     _dataStore.CreateCategoryAsync(Arg.Any<CategoryEntity>(), TestContext.Current.CancellationToken).Returns(createdCategory);
 
     // Act
-    var result = await _sut.CreateCategoryAsync(categoryRequestDto, TestContext.Current.CancellationToken);
+    var result = await _sut.CreateCategoryAsync(CategoryDto, TestContext.Current.CancellationToken);
 
     // Assert
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CategoryResponseDto>();
     result.Id.ShouldBe(createdCategory.Id);
-    result.Name.ShouldBe(categoryRequestDto.Name);
+    result.Name.ShouldBe(CategoryDto.Name);
     await _dataStore
       .Received(1)
       .CreateCategoryAsync(
         Arg.Is<CategoryEntity>(c =>
-          c.Name == categoryRequestDto.Name &&
-          c.Color == categoryRequestDto.Color
+          c.Name == CategoryDto.Name &&
+          c.Color == CategoryDto.Color
         ),
         TestContext.Current.CancellationToken
       );
@@ -142,7 +142,7 @@ public class CategoryServiceTests
       Color = "Blue",
       Icon = "briefcase"
     };
-    var categoryRequestDto = new CategoryRequestDto
+    var CategoryDto = new CategoryDto
     {
       Name = "Work Updated",
       Color = "Red",
@@ -151,21 +151,21 @@ public class CategoryServiceTests
     var updatedCategory = new CategoryEntity
     {
       Id = categoryId,
-      Name = categoryRequestDto.Name,
-      Color = categoryRequestDto.Color,
-      Icon = categoryRequestDto.Icon
+      Name = CategoryDto.Name,
+      Color = CategoryDto.Color,
+      Icon = CategoryDto.Icon
     };
     _dataStore.GetCategoryAsync(categoryId, TestContext.Current.CancellationToken).Returns(existingCategory);
     _dataStore.UpdateCategoryAsync(existingCategory, Arg.Any<CategoryEntity>(), TestContext.Current.CancellationToken).Returns(updatedCategory);
 
     // Act
-    var (status, result) = await _sut.UpdateCategoryAsync(categoryRequestDto, categoryId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCategoryAsync(CategoryDto, categoryId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("updated");
     result.ShouldNotBeNull();
     result.ShouldBeOfType<CategoryResponseDto>();
-    result.Name.ShouldBe(categoryRequestDto.Name);
+    result.Name.ShouldBe(CategoryDto.Name);
     await _dataStore.Received(1).GetCategoryAsync(categoryId, TestContext.Current.CancellationToken);
   }
 
@@ -174,7 +174,7 @@ public class CategoryServiceTests
   {
     // Arrange
     var categoryId = Guid.NewGuid();
-    var categoryRequestDto = new CategoryRequestDto
+    var CategoryDto = new CategoryDto
     {
       Name = "Work",
       Color = "Blue",
@@ -183,7 +183,7 @@ public class CategoryServiceTests
     _dataStore.GetCategoryAsync(categoryId, TestContext.Current.CancellationToken).Returns((CategoryEntity?)null);
 
     // Act
-    var (status, result) = await _sut.UpdateCategoryAsync(categoryRequestDto, categoryId, TestContext.Current.CancellationToken);
+    var (status, result) = await _sut.UpdateCategoryAsync(CategoryDto, categoryId, TestContext.Current.CancellationToken);
 
     // Assert
     status.ShouldBe("notfound");

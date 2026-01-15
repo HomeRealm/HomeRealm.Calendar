@@ -1,4 +1,4 @@
-using FamMan.Api.Calendars.Dtos.Attendee;
+using FamMan.Api.Calendars.Dtos.Attendees;
 using FamMan.Api.Calendars.Validators;
 using FluentValidation.TestHelper;
 
@@ -6,18 +6,18 @@ namespace FamMan.Tests.Calendars.UnitTests.Validators;
 
 public class AttendeeRequestDtoValidatorTests
 {
-  private readonly AttendeeRequestDtoValidator _validator;
+  private readonly AttendeeDtoValidator _validator;
 
   public AttendeeRequestDtoValidatorTests()
   {
-    _validator = new AttendeeRequestDtoValidator();
+    _validator = new AttendeeDtoValidator();
   }
 
   [Fact]
   public void Validate_WithValidDto_ShouldNotHaveErrors()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -33,7 +33,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithEmptyStatus_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -49,7 +49,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithStatusExceedingMaxLength_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -65,7 +65,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithEmptyRole_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -81,7 +81,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithRoleExceedingMaxLength_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.NewGuid(),
@@ -97,7 +97,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithEmptyEventId_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.Empty,
       UserId = Guid.NewGuid(),
@@ -113,7 +113,7 @@ public class AttendeeRequestDtoValidatorTests
   public void Validate_WithEmptyUserId_ShouldHaveValidationError()
   {
     // Arrange
-    var dto = new AttendeeRequestDto
+    var dto = new AttendeeDto
     {
       EventId = Guid.NewGuid(),
       UserId = Guid.Empty,
