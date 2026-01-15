@@ -41,6 +41,13 @@ public class ReminderService : IReminderService
 
     return ("found", MapToResponseDto(existingEntity));
   }
+  public async Task<List<ReminderResponseDto>> GetRemindersForCalendarEventAsync(Guid id, CancellationToken ct)
+  {
+    var reminders = _dataStore.GetRemindersForCalendarEvent(id);
+
+    var mappedReminders = await reminders.Select(reminder => MapToResponseDto(reminder)).ToListAsync(ct);
+    return mappedReminders;
+  }
   public async Task<List<ReminderResponseDto>> GetAllRemindersAsync(CancellationToken ct)
   {
     var reminders = _dataStore.GetAllRemindersAsync(ct);

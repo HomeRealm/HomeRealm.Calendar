@@ -88,6 +88,15 @@ public static class RemindersEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(reminder);
   }
+  private async static Task<Ok<List<ReminderResponseDto>>> GetRemindersForCalendarEvent(
+    [FromRoute] Guid eventId,
+    [FromServices] IReminderService reminderService,
+    CancellationToken ct
+  )
+  {
+    var reminders = await reminderService.GetAllRemindersAsync(ct);
+    return TypedResults.Ok(reminders);
+  }
   private async static Task<Ok<List<ReminderResponseDto>>> GetAllReminders(
     [FromServices] IReminderService reminderService,
     CancellationToken ct

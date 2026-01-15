@@ -27,11 +27,14 @@ public class ReminderDataStore : IReminderDataStore
   {
     return await _db.Reminders.FindAsync(id, ct);
   }
+  public IQueryable<ReminderEntity> GetRemindersForCalendarEvent(Guid id)
+  {
+    return _db.Reminders.Where(r => r.EventId == id).AsNoTracking().AsQueryable();
+  }
   public IQueryable<ReminderEntity> GetAllRemindersAsync(CancellationToken ct)
   {
     return _db.Reminders.AsNoTracking().AsQueryable();
   }
-
   public async Task DeleteReminderAsync(Guid id, CancellationToken ct)
   {
     await _db.Reminders.Where(r => r.Id == id).ExecuteDeleteAsync(ct);
