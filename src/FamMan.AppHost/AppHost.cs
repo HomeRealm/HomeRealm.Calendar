@@ -1,3 +1,5 @@
+const string defaultLaunchProfile = "https";
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgresServer = builder.AddPostgres("postgres-famman")
@@ -8,15 +10,15 @@ var eventsDb = postgresServer.AddDatabase("famman-events", "famman_events");
 var choresDb = postgresServer.AddDatabase("famman-chores", "famman_chores");
 var calendarsDb = postgresServer.AddDatabase("famman-calendars", "famman_calendars");
 
-var eventsApi = builder.AddProject<Projects.FamMan_Api_Events>("famman-api-events")
+var eventsApi = builder.AddProject<Projects.FamMan_Api_Events>("famman-api-events", launchProfileName: defaultLaunchProfile)
     .WithReference(eventsDb)
     .WaitFor(eventsDb);
 
-var choresApi = builder.AddProject<Projects.FamMan_Api_Chores>("famman-api-chores")
+var choresApi = builder.AddProject<Projects.FamMan_Api_Chores>("famman-api-chores", launchProfileName: defaultLaunchProfile)
     .WaitFor(choresDb)
     .WithReference(choresDb);
 
-var calendarsApi = builder.AddProject<Projects.FamMan_Api_Calendars>("famman-api-calendars")
+var calendarsApi = builder.AddProject<Projects.FamMan_Api_Calendars>("famman-api-calendars", launchProfileName: defaultLaunchProfile)
     .WaitFor(calendarsDb)
     .WithReference(calendarsDb);
 
