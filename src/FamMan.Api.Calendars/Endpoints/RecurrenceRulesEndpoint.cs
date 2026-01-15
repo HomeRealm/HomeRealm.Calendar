@@ -8,10 +8,18 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class RecurrenceRulesEndpoints
 {
-  public static void MapRecurrenceRulesEndpoints(this IEndpointRouteBuilder endpoints)
+  public static RouteGroupBuilder MapRecurrenceRulesEndpoints(this IEndpointRouteBuilder endpoints, RouteGroupBuilder eventsRoute)
   {
-    var group = endpoints.MapGroup("/recurrencerules")
-        .WithTags("RecurrenceRules");
+    // /api/events/{eventId}/recurrence
+    eventsRoute
+      .MapGet("/recurrence", GetRecurrenceRuleForCalendarEvent)
+      .WithName("GetRecurrenceRuleForCalendarEvent")
+      .WithSummary("Gets the recurrence rule for a specific event")
+      .WithDescription("Gets the recurrence rule for a specific event");
+
+    // /api/recurrence
+    var group = endpoints.MapGroup("/recurrence")
+      .WithTags("RecurrenceRules");
 
     group
       .MapPost("/", CreateRecurrenceRule)
@@ -42,6 +50,8 @@ public static class RecurrenceRulesEndpoints
       .WithName("DeleteRecurrenceRule")
       .WithSummary("Deletes a recurrence rule")
       .WithDescription("Deletes the recurrence rule with the matching ID");
+
+    return group;
   }
   private async static Task<Results<Created<RecurrenceRuleResponseDto>, ValidationProblem>> CreateRecurrenceRule(
     [FromBody] RecurrenceRuleDto dto,

@@ -14,6 +14,10 @@ public static class EndpointMappingExtension
 
     var eventsBaseEndpointGroup = endpoints.MapCalendarEventsEndpoints(calendarResourceGroup);
 
-    return eventsBaseEndpointGroup;
+    var eventsResourceGroup = eventsBaseEndpointGroup.MapGroup("/{eventId}");
+
+    var recurrenceBaseEndpointGroup = endpoints.MapRecurrenceRulesEndpoints(eventsResourceGroup);
+
+    return recurrenceBaseEndpointGroup;
   }
 }
