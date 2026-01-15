@@ -8,10 +8,18 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class RemindersEndpoints
 {
-  public static void MapRemindersEndpoints(this IEndpointRouteBuilder endpoints)
+  public static void MapRemindersEndpoints(this IEndpointRouteBuilder endpoints, RouteGroupBuilder eventsRoute)
   {
+    // /api/events/{eventId}/reminders
+    eventsRoute
+      .MapGet("/reminders", GetRemindersForCalendarEvent)
+      .WithName("GetRemindersForCalendarEvent")
+      .WithSummary("Gets all reminders for a specific event")
+      .WithDescription("Gets all reminders for a specific event");
+
+    // /api/reminders
     var group = endpoints.MapGroup("/reminders")
-        .WithTags("Reminders");
+      .WithTags("Reminders");
 
     group
       .MapPost("/", CreateReminder)
