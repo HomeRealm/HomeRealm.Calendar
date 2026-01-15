@@ -31,7 +31,7 @@ public class AttendeeDataStore : IAttendeeDataStore
   {
     return _db.Attendees.Where(a => a.EventId == id).AsNoTracking().AsQueryable();
   }
-  public IQueryable<AttendeeEntity> GetAllAttendeesAsync(CancellationToken ct)
+  public IQueryable<AttendeeEntity> GetAllAttendees()
   {
     return _db.Attendees.AsNoTracking().AsQueryable();
   }
