@@ -8,10 +8,18 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class OccurrenceOverridesEndpoints
 {
-  public static void MapOccurrenceOverridesEndpoints(this IEndpointRouteBuilder endpoints)
+  public static void MapOccurrenceOverridesEndpoints(this IEndpointRouteBuilder endpoints, RouteGroupBuilder recurrenceRoute)
   {
+    // /api/recurrence/{recurrenceId}/occurrence-overrides
+    recurrenceRoute
+      .MapGet("/occurrence-overrides", GetOccurrenceOverridesForRecurrenceRule)
+      .WithName("GetOccurrenceOverridesForRecurrenceRule")
+      .WithSummary("Gets the occurrence overrides for a specific recurrence rule")
+      .WithDescription("Gets the occurrence overrides for a specific recurrence rule");
+
+    // /api/occurrence-overrides
     var group = endpoints.MapGroup("/occurrence-overrides")
-        .WithTags("OccurrenceOverrides");
+      .WithTags("OccurrenceOverrides");
 
     group
       .MapPost("/", CreateOccurrenceOverride)
