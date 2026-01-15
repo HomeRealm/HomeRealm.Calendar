@@ -21,6 +21,7 @@ public static class EndpointMappingExtension
     var recurrenceResourceGroup = recurrenceBaseEndpointGroup.MapGroup("/{recurrenceId}");
 
     endpoints.MapOccurrenceOverridesEndpoints(recurrenceResourceGroup);
+    endpoints.MapAttendeesEndpoints(eventsResourceGroup);
 
     return recurrenceBaseEndpointGroup;
   }

@@ -8,10 +8,18 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class AttendeesEndpoints
 {
-  public static void MapAttendeesEndpoints(this IEndpointRouteBuilder endpoints)
+  public static void MapAttendeesEndpoints(this IEndpointRouteBuilder endpoints, RouteGroupBuilder eventsRoute)
   {
+    // api/events/{eventId}/attendees
+    eventsRoute
+      .MapGet("/attendees", GetAttendeesForCalendarEvent)
+      .WithName("GetAttendeesForCalendarEvent")
+      .WithSummary("Gets all attendees for a specific event")
+      .WithDescription("Gets all attendees for a specific event");
+
+    // api/attendees
     var group = endpoints.MapGroup("/attendees")
-        .WithTags("Attendees");
+      .WithTags("Attendees");
 
     group
       .MapPost("/", CreateAttendee)
