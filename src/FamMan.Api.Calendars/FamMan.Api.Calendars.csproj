@@ -24,9 +24,4 @@
     <ProjectReference Include="..\FamMan.ServiceDefaults\FamMan.ServiceDefaults.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
 </Project>
