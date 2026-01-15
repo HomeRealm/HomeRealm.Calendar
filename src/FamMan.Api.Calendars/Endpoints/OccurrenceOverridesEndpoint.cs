@@ -88,6 +88,15 @@ public static class OccurrenceOverridesEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(occurrenceOverride);
   }
+  private async static Task<Ok<List<OccurrenceOverrideResponseDto>>> GetOccurrenceOverridesForRecurrenceRule(
+    [FromRoute] Guid recurrenceId,
+    [FromServices] IOccurrenceOverrideService occurrenceOverrideService,
+    CancellationToken ct
+  )
+  {
+    var occurrenceOverrides = await occurrenceOverrideService.GetAllOccurrenceOverridesAsync(ct);
+    return TypedResults.Ok(occurrenceOverrides);
+  }
   private async static Task<Ok<List<OccurrenceOverrideResponseDto>>> GetAllOccurrenceOverrides(
     [FromServices] IOccurrenceOverrideService occurrenceOverrideService,
     CancellationToken ct

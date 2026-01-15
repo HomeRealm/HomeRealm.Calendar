@@ -41,6 +41,13 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
 
     return ("found", MapToResponseDto(existingEntity));
   }
+  public async Task<List<OccurrenceOverrideResponseDto>> GetOccurrenceOverridesForRecurrenceRuleAsync(Guid id, CancellationToken ct)
+  {
+    var occurrenceOverrides = _dataStore.GetOccurrenceOverridesForRecurrenceRuleAsync(id, ct);
+
+    var mappedOccurrenceOverrides = await occurrenceOverrides.Select(occurrenceOverride => MapToResponseDto(occurrenceOverride)).ToListAsync(ct);
+    return mappedOccurrenceOverrides;
+  }
   public async Task<List<OccurrenceOverrideResponseDto>> GetAllOccurrenceOverridesAsync(CancellationToken ct)
   {
     var occurrenceOverrides = _dataStore.GetAllOccurrenceOverridesAsync(ct);
