@@ -88,6 +88,15 @@ public static class RecurrenceRulesEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(recurrenceRule);
   }
+  private async static Task<Results<Ok<RecurrenceRuleResponseDto>, NotFound>> GetRecurrenceRuleForCalendarEvent(
+    [FromRoute] Guid eventId,
+    [FromServices] IRecurrenceRuleService recurrenceRuleService,
+   CancellationToken ct
+  )
+  {
+    var (status, recurrenceRule) = await recurrenceRuleService.GetRecurrenceRuleForCalendarEventAsync(eventId, ct);
+    return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(recurrenceRule);
+  }
   private async static Task<Ok<List<RecurrenceRuleResponseDto>>> GetAllRecurrenceRules(
     [FromServices] IRecurrenceRuleService recurrenceRuleService,
     CancellationToken ct
