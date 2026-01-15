@@ -27,6 +27,10 @@ public class AttendeeDataStore : IAttendeeDataStore
   {
     return await _db.Attendees.FindAsync(id, ct);
   }
+  public IQueryable<AttendeeEntity> GetAttendeesForCalendarEvent(Guid id)
+  {
+    return _db.Attendees.Where(a => a.EventId == id).AsNoTracking().AsQueryable();
+  }
   public IQueryable<AttendeeEntity> GetAllAttendeesAsync(CancellationToken ct)
   {
     return _db.Attendees.AsNoTracking().AsQueryable();

@@ -88,6 +88,15 @@ public static class AttendeesEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(attendee);
   }
+  private async static Task<Ok<List<AttendeeResponseDto>>> GetAttendeesForCalendarEvent(
+    [FromRoute] Guid eventId,
+    [FromServices] IAttendeeService attendeeService,
+    CancellationToken ct
+  )
+  {
+    var attendees = await attendeeService.GetAllAttendeesAsync(ct);
+    return TypedResults.Ok(attendees);
+  }
   private async static Task<Ok<List<AttendeeResponseDto>>> GetAllAttendees(
     [FromServices] IAttendeeService attendeeService,
     CancellationToken ct

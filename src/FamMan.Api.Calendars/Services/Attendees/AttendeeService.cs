@@ -41,6 +41,13 @@ public class AttendeeService : IAttendeeService
 
     return ("found", MapToResponseDto(existingEntity));
   }
+  public async Task<List<AttendeeResponseDto>> GetAttendeesForCalendarEventAsync(Guid id, CancellationToken ct)
+  {
+    var attendees = _dataStore.GetAttendeesForCalendarEvent(id);
+
+    var mappedAttendees = await attendees.Select(attendee => MapToResponseDto(attendee)).ToListAsync(ct);
+    return mappedAttendees;
+  }
   public async Task<List<AttendeeResponseDto>> GetAllAttendeesAsync(CancellationToken ct)
   {
     var attendees = _dataStore.GetAllAttendeesAsync(ct);
