@@ -10,7 +10,7 @@ public static class OccurrenceOverridesEndpoints
 {
   public static void MapOccurrenceOverridesEndpoints(this IEndpointRouteBuilder endpoints)
   {
-    var group = endpoints.MapGroup("/occurrenceoverrides")
+    var group = endpoints.MapGroup("/occurrence-overrides")
         .WithTags("OccurrenceOverrides");
 
     group
