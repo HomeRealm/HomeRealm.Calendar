@@ -59,7 +59,7 @@ public class AttendeeService : IAttendeeService
   {
     await _dataStore.DeleteAttendeeAsync(id, ct);
   }
-  private AttendeeEntity MapToEntity(AttendeeDto dto, Guid? id = null)
+  private static AttendeeEntity MapToEntity(AttendeeDto dto, Guid? id = null)
   {
     return new AttendeeEntity
     {
@@ -70,7 +70,7 @@ public class AttendeeService : IAttendeeService
       Role = dto.Role
     };
   }
-  private AttendeeResponseDto MapToResponseDto(AttendeeEntity entity)
+  private static AttendeeResponseDto MapToResponseDto(AttendeeEntity entity)
   {
     return new AttendeeResponseDto
     {

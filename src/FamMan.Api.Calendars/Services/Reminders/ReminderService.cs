@@ -59,7 +59,7 @@ public class ReminderService : IReminderService
   {
     await _dataStore.DeleteReminderAsync(id, ct);
   }
-  private ReminderEntity MapToEntity(ReminderDto dto, Guid? id = null)
+  private static ReminderEntity MapToEntity(ReminderDto dto, Guid? id = null)
   {
     return new ReminderEntity
     {
@@ -69,7 +69,7 @@ public class ReminderService : IReminderService
       TimeBefore = dto.TimeBefore
     };
   }
-  private ReminderResponseDto MapToResponseDto(ReminderEntity entity)
+  private static ReminderResponseDto MapToResponseDto(ReminderEntity entity)
   {
     return new ReminderResponseDto
     {

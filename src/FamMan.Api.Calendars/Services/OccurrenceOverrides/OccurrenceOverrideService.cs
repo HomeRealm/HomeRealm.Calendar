@@ -59,7 +59,7 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
   {
     await _dataStore.DeleteOccurrenceOverrideAsync(id, ct);
   }
-  private OccurrenceOverrideEntity MapToEntity(OccurrenceOverrideDto dto, Guid? id = null)
+  private static OccurrenceOverrideEntity MapToEntity(OccurrenceOverrideDto dto, Guid? id = null)
   {
     return new OccurrenceOverrideEntity
     {
@@ -68,7 +68,7 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
       Date = dto.Date
     };
   }
-  private OccurrenceOverrideResponseDto MapToResponseDto(OccurrenceOverrideEntity entity)
+  private static OccurrenceOverrideResponseDto MapToResponseDto(OccurrenceOverrideEntity entity)
   {
     return new OccurrenceOverrideResponseDto
     {

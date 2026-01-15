@@ -52,7 +52,7 @@ public class CalendarService : ICalendarService
   {
     await _dataStore.DeleteCalendarAsync(id, ct);
   }
-  private CalendarEntity MapToEntity(CalendarDto dto, Guid? id = null)
+  private static CalendarEntity MapToEntity(CalendarDto dto, Guid? id = null)
   {
     return new CalendarEntity
     {
@@ -64,7 +64,7 @@ public class CalendarService : ICalendarService
       Visibility = dto.Visibility
     };
   }
-  private CalendarResponseDto MapToResponseDto(CalendarEntity entity)
+  private static CalendarResponseDto MapToResponseDto(CalendarEntity entity)
   {
     return new CalendarResponseDto
     {

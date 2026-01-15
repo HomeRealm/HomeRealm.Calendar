@@ -59,7 +59,7 @@ public class CalendarEventService : ICalendarEventService
   {
     await _dataStore.DeleteCalendarEventAsync(id, ct);
   }
-  private CalendarEventEntity MapToEntity(CalendarEventDto dto, Guid? id = null)
+  private static CalendarEventEntity MapToEntity(CalendarEventDto dto, Guid? id = null)
   {
     return new CalendarEventEntity
     {
@@ -76,7 +76,7 @@ public class CalendarEventService : ICalendarEventService
       LinkedResource = dto.LinkedResource
     };
   }
-  private CalendarEventResponseDto MapToResponseDto(CalendarEventEntity entity)
+  private static CalendarEventResponseDto MapToResponseDto(CalendarEventEntity entity)
   {
     return new CalendarEventResponseDto
     {

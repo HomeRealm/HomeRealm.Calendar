@@ -63,7 +63,7 @@ public class RecurrenceRuleService : IRecurrenceRuleService
   {
     await _dataStore.DeleteRecurrenceRuleAsync(id, ct);
   }
-  private RecurrenceRuleEntity MapToEntity(RecurrenceRuleDto dto, Guid? id = null)
+  private static RecurrenceRuleEntity MapToEntity(RecurrenceRuleDto dto, Guid? id = null)
   {
     return new RecurrenceRuleEntity
     {
@@ -74,7 +74,7 @@ public class RecurrenceRuleService : IRecurrenceRuleService
       EndDate = dto.EndDate
     };
   }
-  private RecurrenceRuleResponseDto MapToResponseDto(RecurrenceRuleEntity entity)
+  private static RecurrenceRuleResponseDto MapToResponseDto(RecurrenceRuleEntity entity)
   {
     return new RecurrenceRuleResponseDto
     {
