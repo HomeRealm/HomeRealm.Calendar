@@ -18,6 +18,7 @@ public static class EndpointMappingExtension
     endpoints.MapOccurrenceOverridesEndpoints(recurrenceResourceGroup);
     endpoints.MapAttendeesEndpoints(eventsResourceGroup);
     endpoints.MapRemindersEndpoints(eventsResourceGroup);
+    endpoints.MapCategoriesEndpoints();
 
     return recurrenceBaseEndpointGroup;
   }
