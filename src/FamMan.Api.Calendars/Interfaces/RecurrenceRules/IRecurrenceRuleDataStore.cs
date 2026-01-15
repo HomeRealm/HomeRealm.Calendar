@@ -8,6 +8,6 @@ public interface IRecurrenceRuleDataStore
   public Task<RecurrenceRuleEntity> UpdateRecurrenceRuleAsync(RecurrenceRuleEntity existingEntity, RecurrenceRuleEntity updatedEntity, CancellationToken ct);
   public Task<RecurrenceRuleEntity?> GetRecurrenceRuleAsync(Guid id, CancellationToken ct);
   public Task<RecurrenceRuleEntity?> GetRecurrenceRuleForCalendarEventAsync(Guid id, CancellationToken ct);
-  public IQueryable<RecurrenceRuleEntity> GetAllRecurrenceRulesAsync(CancellationToken ct);
+  public IQueryable<RecurrenceRuleEntity> GetAllRecurrenceRules();
   public Task DeleteRecurrenceRuleAsync(Guid id, CancellationToken ct);
 }

@@ -43,7 +43,7 @@ public class CalendarService : ICalendarService
   }
   public async Task<List<CalendarResponseDto>> GetAllCalendarsAsync(CancellationToken ct)
   {
-    var calendars = _dataStore.GetAllCalendarsAsync(ct);
+    var calendars = _dataStore.GetAllCalendars();
 
     var mappedCalendars = await calendars.Select(calendar => MapToResponseDto(calendar)).ToListAsync(ct);
     return mappedCalendars;

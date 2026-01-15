@@ -43,7 +43,7 @@ public class CategoryService : ICategoryService
   }
   public async Task<List<CategoryResponseDto>> GetAllCategoriesAsync(CancellationToken ct)
   {
-    var categories = _dataStore.GetAllCategoriesAsync(ct);
+    var categories = _dataStore.GetAllCategories();
 
     var mappedCategories = await categories.Select(category => MapToResponseDto(category)).ToListAsync(ct);
     return mappedCategories;
@@ -52,7 +52,7 @@ public class CategoryService : ICategoryService
   {
     await _dataStore.DeleteCategoryAsync(id, ct);
   }
-  private CategoryEntity MapToEntity(CategoryDto dto, Guid? id = null)
+  private static CategoryEntity MapToEntity(CategoryDto dto, Guid? id = null)
   {
     return new CategoryEntity
     {
@@ -62,7 +62,7 @@ public class CategoryService : ICategoryService
       Icon = dto.Icon
     };
   }
-  private CategoryResponseDto MapToResponseDto(CategoryEntity entity)
+  private static CategoryResponseDto MapToResponseDto(CategoryEntity entity)
   {
     return new CategoryResponseDto
     {

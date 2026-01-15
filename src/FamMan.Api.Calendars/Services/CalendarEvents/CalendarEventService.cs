@@ -43,14 +43,14 @@ public class CalendarEventService : ICalendarEventService
   }
   public async Task<List<CalendarEventResponseDto>> GetCalendarEventsForCalendarAsync(Guid calendarId, CancellationToken ct)
   {
-    var calendarEvents = _dataStore.GetCalendarEventsForCalendarAsync(calendarId, ct);
+    var calendarEvents = _dataStore.GetCalendarEventsForCalendar(calendarId);
 
     var mappedCalendarEvents = await calendarEvents.Select(calendarEvent => MapToResponseDto(calendarEvent)).ToListAsync(ct);
     return mappedCalendarEvents;
   }
   public async Task<List<CalendarEventResponseDto>> GetAllCalendarEventsAsync(CancellationToken ct)
   {
-    var calendarEvents = _dataStore.GetAllCalendarEventsAsync(ct);
+    var calendarEvents = _dataStore.GetAllCalendarEvents();
 
     var mappedCalendarEvents = await calendarEvents.Select(calendarEvent => MapToResponseDto(calendarEvent)).ToListAsync(ct);
     return mappedCalendarEvents;

@@ -31,7 +31,7 @@ public class ReminderDataStore : IReminderDataStore
   {
     return _db.Reminders.Where(r => r.EventId == id).AsNoTracking().AsQueryable();
   }
-  public IQueryable<ReminderEntity> GetAllRemindersAsync(CancellationToken ct)
+  public IQueryable<ReminderEntity> GetAllReminders()
   {
     return _db.Reminders.AsNoTracking().AsQueryable();
   }

@@ -54,7 +54,7 @@ public class RecurrenceRuleService : IRecurrenceRuleService
   }
   public async Task<List<RecurrenceRuleResponseDto>> GetAllRecurrenceRulesAsync(CancellationToken ct)
   {
-    var recurrenceRules = _dataStore.GetAllRecurrenceRulesAsync(ct);
+    var recurrenceRules = _dataStore.GetAllRecurrenceRules();
 
     var mappedRecurrenceRules = await recurrenceRules.Select(recurrenceRule => MapToResponseDto(recurrenceRule)).ToListAsync(ct);
     return mappedRecurrenceRules;

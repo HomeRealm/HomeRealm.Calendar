@@ -31,7 +31,7 @@ public class RecurrenceRuleDataStore : IRecurrenceRuleDataStore
   {
     return await _db.RecurrenceRules.FirstOrDefaultAsync(rr => rr.EventId == id, ct);
   }
-  public IQueryable<RecurrenceRuleEntity> GetAllRecurrenceRulesAsync(CancellationToken ct)
+  public IQueryable<RecurrenceRuleEntity> GetAllRecurrenceRules()
   {
     return _db.RecurrenceRules.AsNoTracking().AsQueryable();
   }

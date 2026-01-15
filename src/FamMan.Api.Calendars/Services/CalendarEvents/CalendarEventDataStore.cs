@@ -27,11 +27,11 @@ public class CalendarEventDataStore : ICalendarEventDataStore
   {
     return await _db.CalendarEvents.FindAsync(id, ct);
   }
-  public IQueryable<CalendarEventEntity> GetCalendarEventsForCalendarAsync(Guid calendarId, CancellationToken ct)
+  public IQueryable<CalendarEventEntity> GetCalendarEventsForCalendar(Guid calendarId)
   {
     return _db.CalendarEvents.Where(ce => ce.CalendarId == calendarId).AsNoTracking().AsQueryable();
   }
-  public IQueryable<CalendarEventEntity> GetAllCalendarEventsAsync(CancellationToken ct)
+  public IQueryable<CalendarEventEntity> GetAllCalendarEvents()
   {
     return _db.CalendarEvents.AsNoTracking().AsQueryable();
   }

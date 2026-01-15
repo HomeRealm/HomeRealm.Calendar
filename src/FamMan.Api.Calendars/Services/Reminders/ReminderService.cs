@@ -50,7 +50,7 @@ public class ReminderService : IReminderService
   }
   public async Task<List<ReminderResponseDto>> GetAllRemindersAsync(CancellationToken ct)
   {
-    var reminders = _dataStore.GetAllRemindersAsync(ct);
+    var reminders = _dataStore.GetAllReminders();
 
     var mappedReminders = await reminders.Select(reminder => MapToResponseDto(reminder)).ToListAsync(ct);
     return mappedReminders;

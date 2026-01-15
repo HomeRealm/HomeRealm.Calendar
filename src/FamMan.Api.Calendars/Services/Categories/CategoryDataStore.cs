@@ -27,7 +27,7 @@ public class CategoryDataStore : ICategoryDataStore
   {
     return await _db.Categories.FindAsync(id, ct);
   }
-  public IQueryable<CategoryEntity> GetAllCategoriesAsync(CancellationToken ct)
+  public IQueryable<CategoryEntity> GetAllCategories()
   {
     return _db.Categories.AsNoTracking().AsQueryable();
   }

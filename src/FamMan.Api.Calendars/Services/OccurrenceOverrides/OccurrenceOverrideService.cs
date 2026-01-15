@@ -43,14 +43,14 @@ public class OccurrenceOverrideService : IOccurrenceOverrideService
   }
   public async Task<List<OccurrenceOverrideResponseDto>> GetOccurrenceOverridesForRecurrenceRuleAsync(Guid id, CancellationToken ct)
   {
-    var occurrenceOverrides = _dataStore.GetOccurrenceOverridesForRecurrenceRuleAsync(id, ct);
+    var occurrenceOverrides = _dataStore.GetOccurrenceOverridesForRecurrenceRule(id);
 
     var mappedOccurrenceOverrides = await occurrenceOverrides.Select(occurrenceOverride => MapToResponseDto(occurrenceOverride)).ToListAsync(ct);
     return mappedOccurrenceOverrides;
   }
   public async Task<List<OccurrenceOverrideResponseDto>> GetAllOccurrenceOverridesAsync(CancellationToken ct)
   {
-    var occurrenceOverrides = _dataStore.GetAllOccurrenceOverridesAsync(ct);
+    var occurrenceOverrides = _dataStore.GetAllOccurrenceOverrides();
 
     var mappedOccurrenceOverrides = await occurrenceOverrides.Select(occurrenceOverride => MapToResponseDto(occurrenceOverride)).ToListAsync(ct);
     return mappedOccurrenceOverrides;

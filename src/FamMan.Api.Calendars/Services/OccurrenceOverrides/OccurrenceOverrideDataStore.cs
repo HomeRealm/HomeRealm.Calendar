@@ -27,11 +27,11 @@ public class OccurrenceOverrideDataStore : IOccurrenceOverrideDataStore
   {
     return await _db.OccurrenceOverrides.FindAsync(id, ct);
   }
-  public IQueryable<OccurrenceOverrideEntity> GetOccurrenceOverridesForRecurrenceRuleAsync(Guid id, CancellationToken ct)
+  public IQueryable<OccurrenceOverrideEntity> GetOccurrenceOverridesForRecurrenceRule(Guid id)
   {
     return _db.OccurrenceOverrides.Where(oo => oo.RecurrenceId == id).AsNoTracking().AsQueryable();
   }
-  public IQueryable<OccurrenceOverrideEntity> GetAllOccurrenceOverridesAsync(CancellationToken ct)
+  public IQueryable<OccurrenceOverrideEntity> GetAllOccurrenceOverrides()
   {
     return _db.OccurrenceOverrides.AsNoTracking().AsQueryable();
   }
