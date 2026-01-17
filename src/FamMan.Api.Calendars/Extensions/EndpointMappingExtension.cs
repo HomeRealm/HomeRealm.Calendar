@@ -4,7 +4,7 @@ namespace FamMan.Api.Calendars.Extensions;
 
 public static class EndpointMappingExtension
 {
-  public static RouteGroupBuilder MapAllEndpoints(this IEndpointRouteBuilder endpoints)
+  public static void MapAllEndpoints(this IEndpointRouteBuilder endpoints)
   {
     var calendarBaseEndpointGroup = endpoints.MapCalendarsEndpoints();
     var calendarResourceGroup = calendarBaseEndpointGroup.MapGroup("/{calendarId}");
@@ -19,7 +19,5 @@ public static class EndpointMappingExtension
     endpoints.MapAttendeesEndpoints(eventsResourceGroup);
     endpoints.MapRemindersEndpoints(eventsResourceGroup);
     endpoints.MapCategoriesEndpoints();
-
-    return recurrenceBaseEndpointGroup;
   }
 }

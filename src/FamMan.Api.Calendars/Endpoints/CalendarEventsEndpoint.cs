@@ -8,16 +8,23 @@ namespace FamMan.Api.Calendars.Endpoints;
 
 public static class CalendarEventsEndpoints
 {
-  public static RouteGroupBuilder MapCalendarEventsEndpoints(this IEndpointRouteBuilder endpoints, IEndpointRouteBuilder calendarRoute)
+  public static RouteGroupBuilder MapCalendarEventsEndpoints(this IEndpointRouteBuilder endpoints, IEndpointRouteBuilder calendarsRoute)
   {
-    // api/calendars/{calendarId}/events
-    calendarRoute
+    // /api/calendars/{calendarId}/events
+    calendarsRoute
       .MapGet("/events", GetCalendarEventsForCalendar)
       .WithName("GetCalendarEventsForCalendar")
       .WithSummary("Gets all events for a specific calendar")
       .WithDescription("Gets all events for a specific calendar");
 
-    // api/events
+    // /api/calendars/{calendarId}/occurrences
+    calendarsRoute
+      .MapGet("/occurrences", GetCalendarOccurrences)
+      .WithName("GetCalendarOccurrences")
+      .WithSummary("Gets all occurrences for a specific calendar")
+      .WithDescription("Gets all occurrences for a specific calendar");
+
+    // /api/events
     var group = endpoints.MapGroup("/events")
       .WithTags("CalendarEvents");
 
@@ -50,6 +57,13 @@ public static class CalendarEventsEndpoints
       .WithName("DeleteCalendarEvent")
       .WithSummary("Deletes a calendar event")
       .WithDescription("Deletes the calendar event with the matching ID");
+
+    // /api/events/{id}/occurrences
+    group
+      .MapGet("/{id}/occurrences", GetEventOccurrences)
+      .WithName("GetEventOccurrences")
+      .WithSummary("Gets all occurrences for a specific event")
+      .WithDescription("Gets all occurrences for a specific event");
 
     return group;
   }
@@ -123,6 +137,22 @@ public static class CalendarEventsEndpoints
   {
     await calendarEventService.DeleteCalendarEventAsync(id, ct);
     return TypedResults.NoContent();
+  }
+  private async static Task<Ok<List<DateTime>>> GetCalendarOccurrences(
+      [FromQuery] DateTime start,
+      [FromQuery] DateTime end,
+      CancellationToken ct
+    )
+  {
+    return TypedResults.Ok(new List<DateTime>() { start, end });
+  }
+  private async static Task<Ok<List<DateTime>>> GetEventOccurrences(
+      [FromQuery] DateTime start,
+      [FromQuery] DateTime end,
+      CancellationToken ct
+    )
+  {
+    return TypedResults.Ok(new List<DateTime>() { start, end });
   }
 }
 
