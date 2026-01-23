@@ -1,0 +1,33 @@
+@baseUrl = https://localhost:7038
+
+# Placeholders
+@eventId = 00000000-0000-0000-0000-000000000000
+
+### Create reminder
+POST {{baseUrl}}/api/reminders
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "method": "email",
+  "timeBefore": 15
+}
+
+### Get all reminders
+GET {{baseUrl}}/api/reminders
+
+### Get reminder by id (uses id from previous POST response)
+GET {{baseUrl}}/api/reminders/{{$response.body.id}}
+
+### Update reminder (uses id from previous POST response)
+PUT {{baseUrl}}/api/reminders/{{$response.body.id}}
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "method": "popup",
+  "timeBefore": 10
+}
+
+### Delete reminder (uses id from previous POST response)
+DELETE {{baseUrl}}/api/reminders/{{$response.body.id}}

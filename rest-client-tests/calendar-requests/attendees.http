@@ -1,0 +1,36 @@
+@baseUrl = https://localhost:7038
+
+# Placeholders (set values if you don't want to rely on dynamic response ids)
+@eventId = 00000000-0000-0000-0000-000000000000
+@userId = 00000000-0000-0000-0000-000000000000
+
+### Create attendee
+POST {{baseUrl}}/api/attendees
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "userId": "{{userId}}",
+  "status": "accepted",
+  "role": "participant"
+}
+
+### Get all attendees
+GET {{baseUrl}}/api/attendees
+
+### Get attendee by id (uses id from previous POST response)
+GET {{baseUrl}}/api/attendees/{{$response.body.id}}
+
+### Update attendee (uses id from previous POST response)
+PUT {{baseUrl}}/api/attendees/{{$response.body.id}}
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "userId": "{{userId}}",
+  "status": "declined",
+  "role": "participant"
+}
+
+### Delete attendee (uses id from previous POST response)
+DELETE {{baseUrl}}/api/attendees/{{$response.body.id}}

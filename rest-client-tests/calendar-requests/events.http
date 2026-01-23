@@ -1,0 +1,55 @@
+@baseUrl = https://localhost:7038
+
+# Placeholders
+@calendarId = 00000000-0000-0000-0000-000000000000
+
+### Create calendar event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendarId}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false,
+  "recurrenceId": "00000000-0000-0000-0000-000000000000"
+}
+
+### Get all calendar events
+GET {{baseUrl}}/api/events
+
+### Get calendar event by id (uses id from previous POST response)
+GET {{baseUrl}}/api/events/{{$response.body.id}}
+
+### Update calendar event (uses id from previous POST response)
+PUT {{baseUrl}}/api/events/{{$response.body.id}}
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendarId}}",
+  "title": "Updated Event",
+  "description": "Updated by .http test",
+  "start": "2026-02-10T12:00:00Z",
+  "end": "2026-02-10T13:00:00Z",
+  "location": "Online",
+  "allDay": false,
+  "recurrenceId": "00000000-0000-0000-0000-000000000000"
+}
+
+### Delete calendar event (uses id from previous POST response)
+DELETE {{baseUrl}}/api/events/{{$response.body.id}}
+
+### Get occurrences for an event (requires start and end query params)
+GET {{baseUrl}}/api/events/{{$response.body.id}}/occurrences?start=2026-02-01T00:00:00Z&end=2026-02-28T23:59:59Z
+
+### Get recurrence rule for an event
+GET {{baseUrl}}/api/events/{{$response.body.id}}/recurrence
+
+### Get attendees for an event
+GET {{baseUrl}}/api/events/{{$response.body.id}}/attendees
+
+### Get reminders for an event
+GET {{baseUrl}}/api/events/{{$response.body.id}}/reminders

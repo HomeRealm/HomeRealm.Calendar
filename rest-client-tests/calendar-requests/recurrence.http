@@ -1,0 +1,38 @@
+@baseUrl = https://localhost:7038
+
+# Placeholders
+@eventId = 00000000-0000-0000-0000-000000000000
+
+### Create recurrence rule
+POST {{baseUrl}}/api/recurrence
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "rule": "FREQ=DAILY;INTERVAL=1",
+  "occurrenceOverrides": [],
+  "endDate": "2026-12-31T00:00:00Z"
+}
+
+### Get all recurrence rules
+GET {{baseUrl}}/api/recurrence
+
+### Get recurrence rule by id (uses id from previous POST response)
+GET {{baseUrl}}/api/recurrence/{{$response.body.id}}
+
+### Update recurrence rule (uses id from previous POST response)
+PUT {{baseUrl}}/api/recurrence/{{$response.body.id}}
+Content-Type: application/json
+
+{
+  "eventId": "{{eventId}}",
+  "rule": "FREQ=WEEKLY;BYDAY=MO",
+  "occurrenceOverrides": [],
+  "endDate": "2026-12-31T00:00:00Z"
+}
+
+### Delete recurrence rule (uses id from previous POST response)
+DELETE {{baseUrl}}/api/recurrence/{{$response.body.id}}
+
+### Get occurrence overrides for recurrence rule (uses id from previous POST response)
+GET {{baseUrl}}/api/recurrence/{{$response.body.id}}/occurrence-overrides

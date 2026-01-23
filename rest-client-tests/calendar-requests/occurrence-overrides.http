@@ -1,0 +1,31 @@
+@baseUrl = https://localhost:7038
+
+# Placeholders
+@recurrenceId = 00000000-0000-0000-0000-000000000000
+
+### Create occurrence override
+POST {{baseUrl}}/api/occurrence-overrides
+Content-Type: application/json
+
+{
+  "recurrenceId": "{{recurrenceId}}",
+  "date": "2026-03-01T00:00:00Z"
+}
+
+### Get all occurrence overrides
+GET {{baseUrl}}/api/occurrence-overrides
+
+### Get occurrence override by id (uses id from previous POST response)
+GET {{baseUrl}}/api/occurrence-overrides/{{$response.body.id}}
+
+### Update occurrence override (uses id from previous POST response)
+PUT {{baseUrl}}/api/occurrence-overrides/{{$response.body.id}}
+Content-Type: application/json
+
+{
+  "recurrenceId": "{{recurrenceId}}",
+  "date": "2026-03-02T00:00:00Z"
+}
+
+### Delete occurrence override (uses id from previous POST response)
+DELETE {{baseUrl}}/api/occurrence-overrides/{{$response.body.id}}
