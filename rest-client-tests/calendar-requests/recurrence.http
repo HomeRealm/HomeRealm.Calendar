@@ -1,8 +1,5 @@
 @baseUrl = https://localhost:7038
 
-# Placeholders
-@eventId = 00000000-0000-0000-0000-000000000000
-
 ### Create calendar
 # @name calendar
 POST {{baseUrl}}/api/calendars
