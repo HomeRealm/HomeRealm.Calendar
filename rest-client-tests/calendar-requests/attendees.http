@@ -1,15 +1,43 @@
 @baseUrl = https://localhost:7038
 
 # Placeholders (set values if you don't want to rely on dynamic response ids)
-@eventId = 00000000-0000-0000-0000-000000000000
-@userId = 00000000-0000-0000-0000-000000000000
+@userId = 00000000-0000-0000-0000-000000000001
+
+### Create calendar
+# @name calendar
+POST {{baseUrl}}/api/calendars
+Content-Type: application/json
+
+{
+  "name": "Integration Calendar",
+  "description": "Created by REST Client chain",
+  "color": "#00FF00",
+  "owner": "integration-test",
+  "visibility": "private"
+}
+
+### Create calendar event
+# @name event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendar.response.body.id}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false
+}
 
 ### Create attendee
+# @name attendee
 POST {{baseUrl}}/api/attendees
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "userId": "{{userId}}",
   "status": "accepted",
   "role": "participant"
@@ -19,18 +47,18 @@ Content-Type: application/json
 GET {{baseUrl}}/api/attendees
 
 ### Get attendee by id (uses id from previous POST response)
-GET {{baseUrl}}/api/attendees/{{$response.body.id}}
+GET {{baseUrl}}/api/attendees/{{attendee.response.body.id}}
 
 ### Update attendee (uses id from previous POST response)
-PUT {{baseUrl}}/api/attendees/{{$response.body.id}}
+PUT {{baseUrl}}/api/attendees/{{attendee.response.body.id}}
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "userId": "{{userId}}",
   "status": "declined",
   "role": "participant"
 }
 
 ### Delete attendee (uses id from previous POST response)
-DELETE {{baseUrl}}/api/attendees/{{$response.body.id}}
+DELETE {{baseUrl}}/api/attendees/{{attendee.response.body.id}}
