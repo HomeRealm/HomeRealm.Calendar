@@ -8,6 +8,7 @@
 # @calendarId = 00000000-0000-0000-0000-000000000000
 
 ### Create calendar
+# @name calendarId
 POST {{baseUrl}}/api/calendars
 Content-Type: application/json
 
@@ -24,10 +25,10 @@ GET {{baseUrl}}/api/calendars
 
 ### Get created calendar by id
 # Uses the id from the most recent response body: {{$response.body.id}}
-GET {{baseUrl}}/api/calendars/{{$response.body.id}}
+GET {{baseUrl}}/api/calendars/{{calendarId.response.body.id}}
 
 ### Update calendar
-PUT {{baseUrl}}/api/calendars/{{$response.body.id}}
+PUT {{baseUrl}}/api/calendars/{{calendarId.response.body.id}}
 Content-Type: application/json
 
 {
@@ -39,15 +40,15 @@ Content-Type: application/json
 }
 
 ### Get updated calendar
-GET {{baseUrl}}/api/calendars/{{$response.body.id}}
+GET {{baseUrl}}/api/calendars/{{calendarId.response.body.id}}
 
 ### Get events for a calendar
 # Replace {{calendarId}} with a real GUID
-GET {{baseUrl}}/api/calendars/{{$response.body.id}}/events
+GET {{baseUrl}}/api/calendars/{{calendarId.response.body.id}}/events
 
 ### Get occurrences for a calendar (requires start and end query params)
 # Replace start/end with RFC3339 datetimes
 GET {{baseUrl}}/api/calendars/{{$response.body.id}}/occurrences?start=2026-02-01T00:00:00Z&end=2026-02-28T23:59:59Z
 
 ### Delete calendar
-DELETE {{baseUrl}}/api/calendars/{{$response.body.id}}
+DELETE {{baseUrl}}/api/calendars/{{calendarId.response.body.id}}
