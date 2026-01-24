@@ -31,29 +31,14 @@ Content-Type: application/json
   "allDay": false
 }
 
-### Create calendar event (non-recurring event without recurrence rule)
-# @name nonRecurringEvent
-POST {{baseUrl}}/api/events
-Content-Type: application/json
-
-{
-  "calendarId": "{{calendar.response.body.id}}",
-  "title": "One-Time Event",
-  "description": "Integration test non-recurring event",
-  "start": "2026-02-15T14:00:00Z",
-  "end": "2026-02-15T15:30:00Z",
-  "location": "Virtual",
-  "allDay": false
-}
-
 ### Get all calendar events
 GET {{baseUrl}}/api/events
 
 ### Get calendar event by id (uses id from previous POST response)
-GET {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}
+GET {{baseUrl}}/api/events/{{event.response.body.id}}
 
 ### Update calendar event (uses id from previous POST response)
-PUT {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}
+PUT {{baseUrl}}/api/events/{{event.response.body.id}}
 Content-Type: application/json
 
 {
@@ -67,16 +52,19 @@ Content-Type: application/json
 }
 
 ### Get occurrences for an event (requires start and end query params)
-GET {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}/occurrences?start=2026-02-01T00:00:00Z&end=2026-02-28T23:59:59Z
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/occurrences?start=2026-02-01T00:00:00Z&end=2026-02-28T23:59:59Z
 
 ### Get recurrence rule for an event
-GET {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}/recurrence
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/recurrence
 
 ### Get attendees for an event
-GET {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}/attendees
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/attendees
 
 ### Get reminders for an event
-GET {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}/reminders
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/reminders
 
-### Delete calendar event (uses id from previous POST response)
-DELETE {{baseUrl}}/api/events/{{nonRecurringEvent.response.body.id}}
+### Delete calendar
+DELETE {{baseUrl}}/api/events/{{calendar.response.body.id}}
+
+### Delete event
+DELETE {{baseUrl}}/api/events/{{event.response.body.id}}
