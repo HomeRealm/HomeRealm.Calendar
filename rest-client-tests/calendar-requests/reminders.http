@@ -1,14 +1,40 @@
 @baseUrl = https://localhost:7038
 
-# Placeholders
-@eventId = 00000000-0000-0000-0000-000000000000
+### Create calendar
+# @name calendar
+POST {{baseUrl}}/api/calendars
+Content-Type: application/json
+
+{
+  "name": "Integration Calendar",
+  "description": "Created by REST Client chain",
+  "color": "#00FF00",
+  "owner": "integration-test",
+  "visibility": "private"
+}
+
+### Create calendar event
+# @name event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendar.response.body.id}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false
+}
 
 ### Create reminder
+# @name reminder
 POST {{baseUrl}}/api/reminders
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "method": "email",
   "timeBefore": 15
 }
@@ -17,17 +43,17 @@ Content-Type: application/json
 GET {{baseUrl}}/api/reminders
 
 ### Get reminder by id (uses id from previous POST response)
-GET {{baseUrl}}/api/reminders/{{$response.body.id}}
+GET {{baseUrl}}/api/reminders/{{reminder.response.body.id}}
 
 ### Update reminder (uses id from previous POST response)
-PUT {{baseUrl}}/api/reminders/{{$response.body.id}}
+PUT {{baseUrl}}/api/reminders/{{reminder.response.body.id}}
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "method": "popup",
   "timeBefore": 10
 }
 
 ### Delete reminder (uses id from previous POST response)
-DELETE {{baseUrl}}/api/reminders/{{$response.body.id}}
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}
