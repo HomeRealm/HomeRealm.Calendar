@@ -63,8 +63,6 @@ GET {{baseUrl}}/api/events/{{event.response.body.id}}/attendees
 ### Get reminders for an event
 GET {{baseUrl}}/api/events/{{event.response.body.id}}/reminders
 
-### Delete calendar
-DELETE {{baseUrl}}/api/events/{{calendar.response.body.id}}
+### Deletes calendar and all associated resources (uses id from previous POST response)
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}
 
-### Delete event
-DELETE {{baseUrl}}/api/events/{{event.response.body.id}}
