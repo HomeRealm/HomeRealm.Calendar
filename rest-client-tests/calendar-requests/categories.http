@@ -1,30 +1,31 @@
 @baseUrl = https://localhost:7038
 
 ### Create category
+# @name category
 POST {{baseUrl}}/api/categories
 Content-Type: application/json
 
 {
   "name": "Integration Category",
   "color": "#123456",
-  "icon": null
+  "icon": "some-icon"
 }
 
 ### Get all categories
 GET {{baseUrl}}/api/categories
 
 ### Get category by id (uses id from previous POST response)
-GET {{baseUrl}}/api/categories/{{$response.body.id}}
+GET {{baseUrl}}/api/categories/{{category.response.body.id}}
 
 ### Update category (uses id from previous POST response)
-PUT {{baseUrl}}/api/categories/{{$response.body.id}}
+PUT {{baseUrl}}/api/categories/{{category.response.body.id}}
 Content-Type: application/json
 
 {
   "name": "Updated Category",
   "color": "#654321",
-  "icon": null
+  "icon": "another-icon"
 }
 
 ### Delete category (uses id from previous POST response)
-DELETE {{baseUrl}}/api/categories/{{$response.body.id}}
+DELETE {{baseUrl}}/api/categories/{{category.response.body.id}}
