@@ -91,7 +91,7 @@ public class CalendarEventDtoValidatorTests
     {
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
-      Description = new string('a', 201),
+      Description = new string('a', 501),
       Start = now,
       End = now.AddHours(1),
       Location = "Conference Room",
@@ -175,7 +175,30 @@ public class CalendarEventDtoValidatorTests
   }
 
   [Fact]
-  public void Validate_WithEmptyRecurrenceId_ShouldHaveValidationError()
+  public void Validate_WithNullRecurrenceId_ShouldNotHaveValidationError()
+  {
+    // Arrange - Non-recurring event without recurrence rule
+    var now = new DateTime(2026, 1, 7);
+    var dto = new CalendarEventDto
+    {
+      CalendarId = Guid.NewGuid(),
+      Title = "One-Time Meeting",
+      Description = "Team Meeting",
+      Start = now,
+      End = now.AddHours(1),
+      Location = "Conference Room",
+      AllDay = false,
+      RecurrenceId = null, // Non-recurring event
+      CategoryId = Guid.NewGuid(),
+      LinkedResource = ""
+    };
+
+    // Act & Assert
+    _validator.TestValidate(dto).ShouldNotHaveValidationErrorFor(x => x.RecurrenceId);
+  }
+
+  [Fact]
+  public void Validate_WithEndBeforeStart_ShouldHaveValidationError()
   {
     // Arrange
     var now = new DateTime(2026, 1, 7);
@@ -184,16 +207,16 @@ public class CalendarEventDtoValidatorTests
       CalendarId = Guid.NewGuid(),
       Title = "Meeting",
       Description = "Team Meeting",
-      Start = now,
-      End = now.AddHours(1),
+      Start = now.AddHours(1),
+      End = now, // End before Start
       Location = "Conference Room",
       AllDay = false,
-      RecurrenceId = Guid.Empty,
+      RecurrenceId = Guid.NewGuid(),
       CategoryId = Guid.NewGuid(),
       LinkedResource = ""
     };
 
     // Act & Assert
-    _validator.TestValidate(dto).ShouldHaveValidationErrorFor(x => x.RecurrenceId);
+    _validator.TestValidate(dto).ShouldHaveValidationErrorFor(x => x.End);
   }
 }

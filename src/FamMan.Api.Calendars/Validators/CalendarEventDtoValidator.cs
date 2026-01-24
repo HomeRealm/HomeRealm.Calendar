@@ -22,17 +22,17 @@ public class CalendarEventDtoValidator : AbstractValidator<CalendarEventDto>
       .NotEmpty().WithMessage("Start cannot be empty.");
 
     RuleFor(x => x.End)
-      .NotEmpty().WithMessage("End cannot be empty.");
+      .NotEmpty().WithMessage("End date cannot be empty.")
+      .GreaterThan(x => x.Start).WithMessage("End must be after Start.");
 
     RuleFor(x => x.Location)
       .NotEmpty().WithMessage("Location cannot be empty.")
       .MaximumLength(200).WithMessage("Location must be shorter than 200 characters.");
 
-    RuleFor(x => x.RecurrenceId)
-      .NotEmpty().WithMessage("RecurrenceId cannot be empty.");
 
     RuleFor(x => x.LinkedResource)
-      .MaximumLength(200).WithMessage("LinkedResource must be shorter than 200 characters.");
+      .MaximumLength(200).WithMessage("LinkedResource must be shorter than 200 characters.")
+      .When(x => !string.IsNullOrWhiteSpace(x.LinkedResource));
   }
 }
 

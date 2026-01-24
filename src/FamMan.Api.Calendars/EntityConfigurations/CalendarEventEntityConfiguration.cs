@@ -16,7 +16,7 @@ public class CalendarEventEntityConfiguration : IEntityTypeConfiguration<Calenda
       .IsRequired();
 
     builder.Property(p => p.RecurrenceId)
-      .IsRequired();
+      .IsRequired(false); // RecurrenceId is nullable for non-recurring events
 
     builder.Property(p => p.CategoryId)
       .IsRequired(false); // CategoryId is nullable
@@ -52,6 +52,7 @@ public class CalendarEventEntityConfiguration : IEntityTypeConfiguration<Calenda
     builder.HasOne(ce => ce.RecurrenceRule)
       .WithOne(rr => rr.CalendarEvent)
       .HasForeignKey<RecurrenceRuleEntity>(rr => rr.EventId)
+      .IsRequired(false) // RecurrenceRule is optional for non-recurring events
       .OnDelete(DeleteBehavior.Cascade); // Delete recurrence rule when event deleted
 
     builder.HasMany(ce => ce.Attendees)

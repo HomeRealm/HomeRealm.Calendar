@@ -41,9 +41,10 @@ public record CalendarEventDto
   public required bool AllDay { get; set; }
 
   /// <summary>
-  /// Identifier of the recurrence rules this event belongs to.
+  /// Optional identifier of the recurrence rules this event belongs to.
+  /// Null for non-recurring (one-time) events, non-null for recurring events.
   /// </summary>
-  public required Guid RecurrenceId { get; set; }
+  public Guid? RecurrenceId { get; set; }
 
   /// <summary>
   /// Optional category used to classify the event.
