@@ -3,12 +3,41 @@
 # Placeholders
 @eventId = 00000000-0000-0000-0000-000000000000
 
+### Create calendar
+# @name calendar
+POST {{baseUrl}}/api/calendars
+Content-Type: application/json
+
+{
+  "name": "Integration Calendar",
+  "description": "Created by REST Client chain",
+  "color": "#00FF00",
+  "owner": "integration-test",
+  "visibility": "private"
+}
+
+### Create calendar event
+# @name event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendar.response.body.id}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false
+}
+
 ### Create recurrence rule
+# @name recurrence
 POST {{baseUrl}}/api/recurrence
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "rule": "FREQ=DAILY;INTERVAL=1",
   "occurrenceOverrides": [],
   "endDate": "2026-12-31T00:00:00Z"
@@ -18,21 +47,18 @@ Content-Type: application/json
 GET {{baseUrl}}/api/recurrence
 
 ### Get recurrence rule by id (uses id from previous POST response)
-GET {{baseUrl}}/api/recurrence/{{$response.body.id}}
+GET {{baseUrl}}/api/recurrence/{{recurrence.response.body.id}}
 
 ### Update recurrence rule (uses id from previous POST response)
-PUT {{baseUrl}}/api/recurrence/{{$response.body.id}}
+PUT {{baseUrl}}/api/recurrence/{{recurrence.response.body.id}}
 Content-Type: application/json
 
 {
-  "eventId": "{{eventId}}",
+  "eventId": "{{event.response.body.id}}",
   "rule": "FREQ=WEEKLY;BYDAY=MO",
   "occurrenceOverrides": [],
   "endDate": "2026-12-31T00:00:00Z"
 }
 
-### Delete recurrence rule (uses id from previous POST response)
-DELETE {{baseUrl}}/api/recurrence/{{$response.body.id}}
-
-### Get occurrence overrides for recurrence rule (uses id from previous POST response)
-GET {{baseUrl}}/api/recurrence/{{$response.body.id}}/occurrence-overrides
+### Deletes calendar and all associated resources (uses id from previous POST response)
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}
