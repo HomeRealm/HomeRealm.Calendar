@@ -60,5 +60,5 @@ Content-Type: application/json
   "role": "participant"
 }
 
-### Delete attendee (uses id from previous POST response)
-DELETE {{baseUrl}}/api/attendees/{{attendee.response.body.id}}
+### Deletes calendar and all associated resources (uses id from previous POST response)
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}
