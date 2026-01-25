@@ -27,9 +27,11 @@ public class RecurrenceRuleDataStore : IRecurrenceRuleDataStore
   {
     return await _db.RecurrenceRules.FindAsync(id, ct);
   }
-  public async Task<RecurrenceRuleEntity?> GetRecurrenceRuleForCalendarEventAsync(Guid id, CancellationToken ct)
+  public IQueryable<RecurrenceRuleEntity> GetRecurrenceRulesForCalendarEventAsync(Guid id)
   {
-    return await _db.RecurrenceRules.FirstOrDefaultAsync(rr => rr.EventId == id, ct);
+    return _db.RecurrenceRules
+      .Where(rr => rr.EventId == id)
+      .AsNoTracking();
   }
   public IQueryable<RecurrenceRuleEntity> GetAllRecurrenceRules()
   {

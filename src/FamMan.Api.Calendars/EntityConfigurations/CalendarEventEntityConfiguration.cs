@@ -49,11 +49,11 @@ public class CalendarEventEntityConfiguration : IEntityTypeConfiguration<Calenda
       .IsRequired();
 
     // Relationship configurations
-    builder.HasOne(ce => ce.RecurrenceRule)
+    builder.HasMany(ce => ce.RecurrenceRules)
       .WithOne(rr => rr.CalendarEvent)
-      .HasForeignKey<RecurrenceRuleEntity>(rr => rr.EventId)
+      .HasForeignKey(rr => rr.EventId)
       .IsRequired(false) // RecurrenceRule is optional for non-recurring events
-      .OnDelete(DeleteBehavior.Cascade); // Delete recurrence rule when event deleted
+      .OnDelete(DeleteBehavior.Cascade); // Delete recurrence rules when event deleted
 
     builder.HasMany(ce => ce.Attendees)
       .WithOne(a => a.CalendarEvent)

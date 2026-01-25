@@ -45,7 +45,7 @@ public class CalendarEventEntity
 
   // Navigation properties
   public CalendarEntity Calendar { get; set; } = null!;
-  public RecurrenceRuleEntity? RecurrenceRule { get; set; }
+  public ICollection<RecurrenceRuleEntity> RecurrenceRules { get; set; } = new List<RecurrenceRuleEntity>();
   public CategoryEntity? Category { get; set; }
   public ICollection<AttendeeEntity> Attendees { get; set; } = new List<AttendeeEntity>();
   public ICollection<ReminderEntity> Reminders { get; set; } = new List<ReminderEntity>();

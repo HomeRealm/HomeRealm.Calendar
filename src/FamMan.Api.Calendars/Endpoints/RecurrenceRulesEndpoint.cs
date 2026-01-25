@@ -12,10 +12,10 @@ public static class RecurrenceRulesEndpoints
   {
     // /api/events/{eventId}/recurrence
     eventsRoute
-      .MapGet("/recurrence", GetRecurrenceRuleForCalendarEvent)
-      .WithName("GetRecurrenceRuleForCalendarEvent")
-      .WithSummary("Gets the recurrence rule for a specific event")
-      .WithDescription("Gets the recurrence rule for a specific event");
+      .MapGet("/recurrence", GetRecurrenceRulesForCalendarEvent)
+      .WithName("GetRecurrenceRulesForCalendarEvent")
+      .WithSummary("Gets the recurrence rules for a specific event")
+      .WithDescription("Gets the recurrence rules for a specific event");
 
     // /api/recurrence
     var group = endpoints.MapGroup("/recurrence")
@@ -98,14 +98,14 @@ public static class RecurrenceRulesEndpoints
 
     return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(recurrenceRule);
   }
-  private async static Task<Results<Ok<RecurrenceRuleResponseDto>, NotFound>> GetRecurrenceRuleForCalendarEvent(
+  private async static Task<Ok<List<RecurrenceRuleResponseDto>>> GetRecurrenceRulesForCalendarEvent(
     [FromRoute] Guid eventId,
     [FromServices] IRecurrenceRuleService recurrenceRuleService,
    CancellationToken ct
   )
   {
-    var (status, recurrenceRule) = await recurrenceRuleService.GetRecurrenceRuleForCalendarEventAsync(eventId, ct);
-    return status == "notfound" ? TypedResults.NotFound() : TypedResults.Ok(recurrenceRule);
+    var recurrenceRules = await recurrenceRuleService.GetRecurrenceRulesForCalendarEventAsync(eventId, ct);
+    return TypedResults.Ok(recurrenceRules);
   }
   private async static Task<Ok<List<RecurrenceRuleResponseDto>>> GetAllRecurrenceRules(
     [FromServices] IRecurrenceRuleService recurrenceRuleService,

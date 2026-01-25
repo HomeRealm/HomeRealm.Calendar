@@ -43,6 +43,9 @@ Content-Type: application/json
 ### Get all recurrence rules
 GET {{baseUrl}}/api/recurrence
 
+### Get all recurrence rules for the created event
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/recurrence
+
 ### Get recurrence rule by id (uses id from previous POST response)
 GET {{baseUrl}}/api/recurrence/{{recurrence.response.body.id}}
 

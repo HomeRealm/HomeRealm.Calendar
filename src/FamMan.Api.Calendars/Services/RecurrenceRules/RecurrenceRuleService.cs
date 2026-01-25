@@ -41,16 +41,12 @@ public class RecurrenceRuleService : IRecurrenceRuleService
 
     return ("found", MapToResponseDto(existingEntity));
   }
-  public async Task<(string status, RecurrenceRuleResponseDto? recurrenceRule)> GetRecurrenceRuleForCalendarEventAsync(Guid id, CancellationToken ct)
+  public async Task<List<RecurrenceRuleResponseDto>> GetRecurrenceRulesForCalendarEventAsync(Guid id, CancellationToken ct)
   {
-    var existingEntity = await _dataStore.GetRecurrenceRuleForCalendarEventAsync(id, ct);
+    var recurrenceRules = _dataStore.GetRecurrenceRulesForCalendarEventAsync(id);
 
-    if (existingEntity is null)
-    {
-      return ("notfound", null);
-    }
-
-    return ("found", MapToResponseDto(existingEntity));
+    var mappedRecurrenceRules = await recurrenceRules.Select(recurrenceRule => MapToResponseDto(recurrenceRule)).ToListAsync(ct);
+    return mappedRecurrenceRules;
   }
   public async Task<List<RecurrenceRuleResponseDto>> GetAllRecurrenceRulesAsync(CancellationToken ct)
   {
