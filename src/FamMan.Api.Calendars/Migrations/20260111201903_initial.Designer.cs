@@ -12,315 +12,315 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FamMan.Api.Calendars.Migrations
 {
-    [DbContext(typeof(CalendarDbContext))]
-    [Migration("20260111201903_initial")]
-    partial class initial
+  [DbContext(typeof(CalendarDbContext))]
+  [Migration("20260111201903_Initial")]
+  partial class Initial
+  {
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "10.0.1")
+          .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+      NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.AttendeeEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.AttendeeEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("EventId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Role")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Status")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("UserId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+            b.HasIndex("EventId");
 
-                    b.ToTable("Attendees");
-                });
+            b.ToTable("Attendees");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+            b.Property<string>("Color")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+            b.Property<string>("Description")
+                      .IsRequired()
+                      .HasMaxLength(1000)
+                      .HasColumnType("character varying(1000)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Owner")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+            b.Property<string>("Owner")
+                      .IsRequired()
+                      .HasMaxLength(100)
+                      .HasColumnType("character varying(100)");
 
-                    b.Property<string>("Visibility")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+            b.Property<string>("Visibility")
+                      .IsRequired()
+                      .HasMaxLength(10)
+                      .HasColumnType("character varying(10)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Calendars");
-                });
+            b.ToTable("Calendars");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<bool>("AllDay")
-                        .HasColumnType("boolean");
+            b.Property<bool>("AllDay")
+                      .HasColumnType("boolean");
 
-                    b.Property<Guid>("CalendarId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("CalendarId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("uuid");
+            b.Property<Guid?>("CategoryId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Description")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<DateTime>("End")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("End")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("LinkedResource")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("LinkedResource")
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Location")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<Guid>("RecurrenceId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("RecurrenceId")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Start")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Title")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CalendarId");
+            b.HasIndex("CalendarId");
 
-                    b.HasIndex("CategoryId");
+            b.HasIndex("CategoryId");
 
-                    b.ToTable("CalendarEvents");
-                });
+            b.ToTable("CalendarEvents");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CategoryEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CategoryEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Color")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Icon")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Categories");
-                });
+            b.ToTable("Categories");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.OccurrenceOverrideEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.OccurrenceOverrideEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Date")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("RecurrenceId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("RecurrenceId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("RecurrenceId");
+            b.HasIndex("RecurrenceId");
 
-                    b.ToTable("OccurrenceOverrides");
-                });
+            b.ToTable("OccurrenceOverrides");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("EndDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("EventId")
+                      .HasColumnType("uuid");
 
-                    b.PrimitiveCollection<List<Guid>>("OccurrenceOverrides")
-                        .IsRequired()
-                        .HasColumnType("uuid[]");
+            b.PrimitiveCollection<List<Guid>>("OccurrenceOverrides")
+                      .IsRequired()
+                      .HasColumnType("uuid[]");
 
-                    b.Property<string>("Rule")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Rule")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("EventId")
-                        .IsUnique();
+            b.HasIndex("EventId")
+                      .IsUnique();
 
-                    b.ToTable("RecurrenceRules");
-                });
+            b.ToTable("RecurrenceRules");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.ReminderEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.ReminderEntity", b =>
+          {
+            b.Property<Guid>("Id")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("EventId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Method")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+            b.Property<string>("Method")
+                      .IsRequired()
+                      .HasMaxLength(200)
+                      .HasColumnType("character varying(200)");
 
-                    b.Property<int>("TimeBefore")
-                        .HasColumnType("integer");
+            b.Property<int>("TimeBefore")
+                      .HasColumnType("integer");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+            b.HasIndex("EventId");
 
-                    b.ToTable("Reminders");
-                });
+            b.ToTable("Reminders");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.AttendeeEntity", b =>
-                {
-                    b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
-                        .WithMany("Attendees")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.AttendeeEntity", b =>
+          {
+            b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
+                      .WithMany("Attendees")
+                      .HasForeignKey("EventId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("CalendarEvent");
-                });
+            b.Navigation("CalendarEvent");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
-                {
-                    b.HasOne("FamMan.Api.Calendars.Entities.CalendarEntity", "Calendar")
-                        .WithMany("CalendarEvents")
-                        .HasForeignKey("CalendarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
+          {
+            b.HasOne("FamMan.Api.Calendars.Entities.CalendarEntity", "Calendar")
+                      .WithMany("CalendarEvents")
+                      .HasForeignKey("CalendarId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("FamMan.Api.Calendars.Entities.CategoryEntity", "Category")
-                        .WithMany("CalendarEvents")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+            b.HasOne("FamMan.Api.Calendars.Entities.CategoryEntity", "Category")
+                      .WithMany("CalendarEvents")
+                      .HasForeignKey("CategoryId")
+                      .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Calendar");
+            b.Navigation("Calendar");
 
-                    b.Navigation("Category");
-                });
+            b.Navigation("Category");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.OccurrenceOverrideEntity", b =>
-                {
-                    b.HasOne("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", "RecurrenceRule")
-                        .WithMany("OccurrenceOverrideEntities")
-                        .HasForeignKey("RecurrenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.OccurrenceOverrideEntity", b =>
+          {
+            b.HasOne("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", "RecurrenceRule")
+                      .WithMany("OccurrenceOverrideEntities")
+                      .HasForeignKey("RecurrenceId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("RecurrenceRule");
-                });
+            b.Navigation("RecurrenceRule");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
-                {
-                    b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
-                        .WithOne("RecurrenceRule")
-                        .HasForeignKey("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", "EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
+          {
+            b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
+                      .WithOne("RecurrenceRule")
+                      .HasForeignKey("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", "EventId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("CalendarEvent");
-                });
+            b.Navigation("CalendarEvent");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.ReminderEntity", b =>
-                {
-                    b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
-                        .WithMany("Reminders")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.ReminderEntity", b =>
+          {
+            b.HasOne("FamMan.Api.Calendars.Entities.CalendarEventEntity", "CalendarEvent")
+                      .WithMany("Reminders")
+                      .HasForeignKey("EventId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("CalendarEvent");
-                });
+            b.Navigation("CalendarEvent");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEntity", b =>
-                {
-                    b.Navigation("CalendarEvents");
-                });
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEntity", b =>
+          {
+            b.Navigation("CalendarEvents");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
-                {
-                    b.Navigation("Attendees");
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CalendarEventEntity", b =>
+          {
+            b.Navigation("Attendees");
 
-                    b.Navigation("RecurrenceRule")
-                        .IsRequired();
+            b.Navigation("RecurrenceRule")
+                      .IsRequired();
 
-                    b.Navigation("Reminders");
-                });
+            b.Navigation("Reminders");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.CategoryEntity", b =>
-                {
-                    b.Navigation("CalendarEvents");
-                });
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.CategoryEntity", b =>
+          {
+            b.Navigation("CalendarEvents");
+          });
 
-            modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
-                {
-                    b.Navigation("OccurrenceOverrideEntities");
-                });
+      modelBuilder.Entity("FamMan.Api.Calendars.Entities.RecurrenceRuleEntity", b =>
+          {
+            b.Navigation("OccurrenceOverrideEntities");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }
