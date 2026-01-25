@@ -68,7 +68,7 @@ public static class RecurrenceRulesEndpoints
     }
 
     var createdRecurrenceRule = await recurrenceRuleService.CreateRecurrenceRuleAsync(dto, ct);
-    return TypedResults.Created($"/api/recurrencerules/{createdRecurrenceRule.Id}", createdRecurrenceRule);
+    return TypedResults.Created($"/api/recurrence/{createdRecurrenceRule.Id}", createdRecurrenceRule);
   }
   private async static Task<Results<Ok<RecurrenceRuleResponseDto>, NotFound, ValidationProblem>> UpdateRecurrenceRule(
     [FromRoute] Guid id,
