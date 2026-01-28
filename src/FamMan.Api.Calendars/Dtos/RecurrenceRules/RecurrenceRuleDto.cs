@@ -8,20 +8,20 @@ public record RecurrenceRuleDto
   /// <summary>
   /// Identifier of the event this recurrence rule belongs to.
   /// </summary>
-  public required Guid EventId { get; set; }
+  public required Guid EventId { get; init; }
 
   /// <summary>
   /// Recurrence rule expression describing the repetition pattern.
   /// </summary>
-  public required string Rule { get; set; }
+  public required string Rule { get; init; }
 
   /// <summary>
   /// Collection of occurrence overrides that modify specific instances of the recurrence.
   /// </summary>
-  public required List<Guid> OccurrenceOverrides { get; set; }
+  public required List<Guid> OccurrenceOverrides { get; init; }
 
   /// <summary>
   /// Date when the recurrence rule ends.
   /// </summary>
-  public required DateTime EndDate { get; set; }
+  public required DateTime EndDate { get; init; }
 }

@@ -6,5 +6,5 @@ public record CalendarResponseDto : CalendarDto
   /// <summary>
   /// Unique identifier for the calendar record.
   /// </summary>
-  public Guid Id { get; set; }
+  public Guid Id { get; init; }
 }
