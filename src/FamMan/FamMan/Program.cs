@@ -1,10 +1,7 @@
 using FamMan.Client.Pages;
 using FamMan.Components;
 using MudBlazor.Services;
-using Microsoft.Kiota.Abstractions;
-using Microsoft.Kiota.Abstractions.Authentication;
-using Microsoft.Kiota.Http.HttpClientLibrary;
-using FamMan.Clients;
+// Kiota-generated clients removed; remove related usings and registrations
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -19,33 +16,8 @@ builder.Services.AddReverseProxy()
 builder.Services.AddMudServices();
 
 // Configure HttpClients with Aspire service discovery for API clients
-builder.Services.AddHttpClient("EventsApiClient", client =>
-{
-  client.BaseAddress = new Uri("https+http://famman-api-events");
-}).AddServiceDiscovery();
-
-builder.Services.AddHttpClient("ChoresApiClient", client =>
-{
-  client.BaseAddress = new Uri("https+http://famman-api-chores");
-}).AddServiceDiscovery();
-
-
-// Register API Clients
-builder.Services.AddScoped(sp =>
-{
-  var authProvider = new AnonymousAuthenticationProvider();
-  var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("ChoresApiClient");
-  var requestAdapter = new HttpClientRequestAdapter(authProvider, httpClient: httpClient);
-  return new EventsClient(requestAdapter);
-});
-
-builder.Services.AddScoped(sp =>
-{
-  var authProvider = new AnonymousAuthenticationProvider();
-  var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("ChoresApiClient");
-  var requestAdapter = new HttpClientRequestAdapter(authProvider, httpClient: httpClient);
-  return new ChoresClient(requestAdapter);
-});
+// Note: Events and Chores API clients were removed. If you need API clients,
+// re-add them or replace these with alternative registrations.
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
