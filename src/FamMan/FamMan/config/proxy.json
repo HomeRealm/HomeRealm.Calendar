@@ -1,0 +1,34 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "events-route": {
+        "ClusterId": "events-cluster",
+        "Match": {
+          "Path": "/api/events/{**catch-all}"
+        }
+      },
+      "chores-route": {
+        "ClusterId": "chores-cluster",
+        "Match": {
+          "Path": "/api/chores/{**catch-all}"
+        }
+      }
+    },
+    "Clusters": {
+      "events-cluster": {
+        "Destinations": {
+          "events-destination": {
+            "Address": "https+http://famman-api-events"
+          }
+        }
+      },
+      "chores-cluster": {
+        "Destinations": {
+          "chores-destination": {
+            "Address": "https+http://famman-api-chores"
+          }
+        }
+      }
+    }
+  }
+}

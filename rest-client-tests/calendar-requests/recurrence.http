@@ -1,0 +1,64 @@
+@baseUrl = https://localhost:7038
+
+### Create calendar
+# @name calendar
+POST {{baseUrl}}/api/calendars
+Content-Type: application/json
+
+{
+  "name": "Integration Calendar",
+  "description": "Created by REST Client chain",
+  "color": "#00FF00",
+  "owner": "integration-test",
+  "visibility": "private"
+}
+
+### Create calendar event
+# @name event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendar.response.body.id}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false
+}
+
+### Create recurrence rule
+# @name recurrence
+POST {{baseUrl}}/api/recurrence
+Content-Type: application/json
+
+{
+  "eventId": "{{event.response.body.id}}",
+  "rule": "FREQ=DAILY;INTERVAL=1",
+  "occurrenceOverrides": [],
+  "endDate": "2026-12-31T00:00:00Z"
+}
+
+### Get all recurrence rules
+GET {{baseUrl}}/api/recurrence
+
+### Get all recurrence rules for the created event
+GET {{baseUrl}}/api/events/{{event.response.body.id}}/recurrence
+
+### Get recurrence rule by id (uses id from previous POST response)
+GET {{baseUrl}}/api/recurrence/{{recurrence.response.body.id}}
+
+### Update recurrence rule (uses id from previous POST response)
+PUT {{baseUrl}}/api/recurrence/{{recurrence.response.body.id}}
+Content-Type: application/json
+
+{
+  "eventId": "{{event.response.body.id}}",
+  "rule": "FREQ=WEEKLY;BYDAY=MO",
+  "occurrenceOverrides": [],
+  "endDate": "2026-12-31T00:00:00Z"
+}
+
+### Deletes calendar and all associated resources (uses id from previous POST response)
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}

@@ -1,0 +1,30 @@
+using FamMan.Api.Calendars.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace FamMan.Api.Calendars.EntityConfigurations;
+
+public class AttendeeEntityConfiguration : IEntityTypeConfiguration<AttendeeEntity>
+{
+  public void Configure(EntityTypeBuilder<AttendeeEntity> builder)
+  {
+    builder.HasKey(a => a.Id);
+    builder.Property(p => p.Id).ValueGeneratedNever();
+
+    // Foreign key
+    builder.Property(p => p.EventId)
+      .IsRequired();
+
+    builder.Property(p => p.UserId)
+      .IsRequired();
+
+    // Required string fields
+    builder.Property(p => p.Status)
+      .IsRequired()
+      .HasMaxLength(200);
+
+    builder.Property(p => p.Role)
+      .IsRequired()
+      .HasMaxLength(200);
+  }
+}

@@ -1,0 +1,69 @@
+@baseUrl = https://localhost:7038
+
+### Create calendar
+# @name calendar
+POST {{baseUrl}}/api/calendars
+Content-Type: application/json
+
+{
+  "name": "Integration Calendar",
+  "description": "Created by REST Client chain",
+  "color": "#00FF00",
+  "owner": "integration-test",
+  "visibility": "private"
+}
+
+### Create calendar event
+# @name event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "calendarId": "{{calendar.response.body.id}}",
+  "title": "Sample Event",
+  "description": "Integration test event",
+  "start": "2026-02-10T10:00:00Z",
+  "end": "2026-02-10T11:00:00Z",
+  "location": "Conference Room",
+  "allDay": false
+}
+
+### Create recurrence rule
+# @name recurrence
+POST {{baseUrl}}/api/recurrence
+Content-Type: application/json
+
+{
+  "eventId": "{{event.response.body.id}}",
+  "rule": "FREQ=DAILY;INTERVAL=1",
+  "occurrenceOverrides": [],
+  "endDate": "2026-12-31T00:00:00Z"
+}
+
+### Create occurrence override
+# @name occurrenceOverride
+POST {{baseUrl}}/api/occurrence-overrides
+Content-Type: application/json
+
+{
+  "recurrenceId": "{{recurrence.response.body.id}}",
+  "date": "2026-03-01T00:00:00Z"
+}
+
+### Get all occurrence overrides
+GET {{baseUrl}}/api/occurrence-overrides
+
+### Get occurrence override by id (uses id from previous POST response)
+GET {{baseUrl}}/api/occurrence-overrides/{{occurrenceOverride.response.body.id}}
+
+### Update occurrence override (uses id from previous POST response)
+PUT {{baseUrl}}/api/occurrence-overrides/{{occurrenceOverride.response.body.id}}
+Content-Type: application/json
+
+{
+  "recurrenceId": "{{recurrence.response.body.id}}",
+  "date": "2026-03-02T00:00:00Z"
+}
+
+### Delete occurrence override (uses id from previous POST response)
+DELETE {{baseUrl}}/api/calendars/{{calendar.response.body.id}}
