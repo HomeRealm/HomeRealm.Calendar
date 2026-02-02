@@ -1,8 +1,8 @@
-# FamMan Events
+# homerealm Events
 
 ## Understanding the Events API
 
-The Events API is an independent service within the FamMan family management system, built using .NET. Its main purpose is to help families manage specific, common calendar events—such as birthdays, holidays, appointments, and school activities—by providing a dedicated place to create, track, and organize these important dates.
+The Events API is an independent service within the homerealm family management system, built using .NET. Its main purpose is to help families manage specific, common calendar events—such as birthdays, holidays, appointments, and school activities—by providing a dedicated place to create, track, and organize these important dates.
 
 ## Purpose
 
@@ -15,9 +15,9 @@ The Events API is designed to make it easy for families to keep track of recurri
 - **Calendar Display:** Makes events available to the Calendar API for unified family scheduling.
 - **Reliable Technology:** Built with .NET minimal API and leverages the same robust infrastructure as the Calendar API.
 
-## Role in FamMan
+## Role in HomeRealm
 
-Within FamMan, the Events API acts as the specialist for important family dates and activities, particularly those that originate from outside digital systems. It provides a simple way to add and manage events that might otherwise be forgotten, ensuring they are visible on the family calendar.
+Within HomeRealm, the Events API acts as the specialist for important family dates and activities, particularly those that originate from outside digital systems. It provides a simple way to add and manage events that might otherwise be forgotten, ensuring they are visible on the family calendar.
 
 ## Benefits
 

@@ -1,0 +1,14 @@
+using HomeRealm.Api.Calendars.Dtos.Categories;
+
+namespace HomeRealm.Api.Calendars.Interfaces.Categories;
+
+public interface ICategoryService
+{
+  public Task<CategoryResponseDto> CreateCategoryAsync(CategoryDto dto, CancellationToken ct);
+  public Task<(string status, CategoryResponseDto? updatedCategory)> UpdateCategoryAsync(CategoryDto dto, Guid id, CancellationToken ct);
+  public Task<(string status, CategoryResponseDto? category)> GetCategoryAsync(Guid id, CancellationToken ct);
+  public Task<List<CategoryResponseDto>> GetAllCategoriesAsync(CancellationToken ct);
+  public Task DeleteCategoryAsync(Guid id, CancellationToken ct);
+}
+
+

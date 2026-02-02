@@ -1,13 +1,13 @@
-# FamMan Services Architecture
+# HomeRealm Services Architecture
 
-This document illustrates how the FamMan system and its services interact using a Mermaid diagram.
+This document illustrates how the HomeRealm system and its services interact using a Mermaid diagram.
 
 ## Services Diagram
 ```mermaid
 flowchart TD
-    FamMan["FamMan (UI + BFF)"] --> ChoresAPI["Chores API"]
-    FamMan --> CalendarAPI["Calendar API"]
-    FamMan --> EventsAPI["Events API"]
+    HomeRealm["HomeRealm (UI + BFF)"] --> ChoresAPI["Chores API"]
+    HomeRealm --> CalendarAPI["Calendar API"]
+    HomeRealm --> EventsAPI["Events API"]
     ChoresAPI --> CalendarAPI
     EventsAPI --> CalendarAPI
     ChoresAPI --> ChoresDB[("Postgres DB - Chores")]
@@ -15,9 +15,9 @@ flowchart TD
     EventsAPI --> EventsDB[("Postgres DB - Events")]
 ```
 
-## FamMan (UI + BFF)
+## HomeRealm (UI + BFF)
 
-FamMan is a Blazor WebAssembly application with static server-side rendering. It provides a modern, interactive user interface for family management tasks. The Backend-for-Frontend (BFF) leverages YARP (Yet Another Reverse Proxy) to route requests to the correct microservice, ensuring secure and efficient communication between the UI and backend APIs.
+HomeRealm is a Blazor WebAssembly application with static server-side rendering. It provides a modern, interactive user interface for family management tasks. The Backend-for-Frontend (BFF) leverages YARP (Yet Another Reverse Proxy) to route requests to the correct microservice, ensuring secure and efficient communication between the UI and backend APIs.
 
 - **Blazor WebAssembly** for rich client-side interactivity
 - **Static server-side rendering** for fast initial loads and SEO

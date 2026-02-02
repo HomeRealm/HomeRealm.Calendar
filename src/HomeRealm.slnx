@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="../tests/HomeRealm.Tests.Calendars.UnitTests/HomeRealm.Tests.Calendars.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/UI/">
+    <Project Path="HomeRealm/HomeRealm.Client/HomeRealm.Client.csproj" Id="184806a4-33c4-4d52-9db3-dce0c290c4bf" />
+    <Project Path="HomeRealm/HomeRealm/HomeRealm.csproj" Id="e2b8aa09-0380-4181-aa09-6dc6f64a03ee" />
+  </Folder>
+  <Project Path="HomeRealm.Api.Calendars/HomeRealm.Api.Calendars.csproj" />
+  <Project Path="HomeRealm.AppHost/HomeRealm.AppHost.csproj" />
+  <Project Path="HomeRealm.ServiceDefaults/HomeRealm.ServiceDefaults.csproj" />
+</Solution>
+
