@@ -1,6 +1,0 @@
-@FamMan.Api.Chores_HostAddress = http://localhost:5192
-
-GET {{FamMan.Api.Chores_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

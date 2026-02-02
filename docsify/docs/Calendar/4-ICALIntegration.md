@@ -45,4 +45,4 @@ return File(Encoding.UTF8.GetBytes(icalString), "text/calendar", "calendar.ics")
 
 ---
 
-This endpoint allows users to subscribe to FamMan calendars in external apps (Google Calendar, Outlook, Apple Calendar, etc.).
+This endpoint allows users to subscribe to homerealm calendars in external apps (Google Calendar, Outlook, Apple Calendar, etc.).

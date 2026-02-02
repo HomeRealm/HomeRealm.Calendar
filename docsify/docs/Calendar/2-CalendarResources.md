@@ -2,13 +2,13 @@
 
 # Calendar API Core Resources
 
-This document defines the main resources managed by the FamMan Calendar API. Each resource is described with its purpose and key properties.
+This document defines the main resources managed by the homerealm Calendar API. Each resource is described with its purpose and key properties.
 
 ---
 
 ## Occurrence Generation and JSON Output
 
-FamMan Calendar API uses ical.net to generate event occurrences based on recurrence rules (RRULE). While ical.net is capable of producing ICAL output, the API returns occurrences as JSON objects for easier consumption by web and mobile clients.
+homerealm Calendar API uses ical.net to generate event occurrences based on recurrence rules (RRULE). While ical.net is capable of producing ICAL output, the API returns occurrences as JSON objects for easier consumption by web and mobile clients.
 
 Each occurrence is represented as a JSON object with key event details, such as start and end time, summary, and any overrides. This approach combines the robust recurrence logic of ical.net with the convenience of JSON APIs.
 

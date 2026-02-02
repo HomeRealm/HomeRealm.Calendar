@@ -1,0 +1,21 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "calendars-route": {
+        "ClusterId": "calendars-cluster",
+        "Match": {
+          "Path": "/api/{**catch-all}"
+        }
+      }
+    },
+    "Clusters": {
+      "calendars-cluster": {
+        "Destinations": {
+          "calendars-destination": {
+            "Address": "https+http://HomeRealm-api-calendars"
+          }
+        }
+      }
+    }
+  }
+}

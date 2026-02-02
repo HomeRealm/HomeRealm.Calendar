@@ -1,8 +1,8 @@
-# FamMan Calendar
+# homerealm Calendar
 
 ## Understanding the Calendar API
 
-The Calendar API is a core service within the FamMan family management system. Its main purpose is to organize and manage all events that families need to keep track of—such as appointments, chores, birthdays, and holidays—making it easier for everyone to stay coordinated.
+The Calendar API is a core service within the homerealm family management system. Its main purpose is to organize and manage all events that families need to keep track of—such as appointments, chores, birthdays, and holidays—making it easier for everyone to stay coordinated.
 
 ## Purpose
 
@@ -15,9 +15,9 @@ The Calendar API exists to centralize all calendar-related information for a fam
 - **Broad Compatibility:** Supports both direct API access and the widely-used ICAL format, making it easy to connect with many calendar applications.
 - **Reliable Technology:** Built using modern .NET technology and the ical.net library for robust, standards-compliant calendar data.
 
-## Role in FamMan
+## Role in homerealm
 
-Within FamMan, the Calendar API acts as the hub for all scheduling needs. Other services—like the Chores and Events APIs—rely on it to display and manage their scheduled items. This integration ensures that every family activity, from daily chores to special events, appears on a single, shared calendar.
+Within homerealm, the Calendar API acts as the hub for all scheduling needs. Other services—like the Chores and Events APIs—rely on it to display and manage their scheduled items. This integration ensures that every family activity, from daily chores to special events, appears on a single, shared calendar.
 
 
 ## Technical Implementation

@@ -1,4 +1,4 @@
-# Dockerfile for FamMan Docsify Wiki
+# Dockerfile for HomeRealm Docsify Wiki
 
 FROM node:20-alpine
 

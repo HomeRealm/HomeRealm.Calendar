@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Events API is a microservice designed to manage time-based actions and notifications within the FamMan application. It provides a robust system for scheduling, managing, and delivering events at specified times through webhook-based notifications.
+The Events API is a microservice designed to manage time-based actions and notifications within the HomeRealm application. It provides a robust system for scheduling, managing, and delivering events at specified times through webhook-based notifications.
 
 ## Core Functionality
 

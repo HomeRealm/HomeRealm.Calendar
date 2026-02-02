@@ -1,6 +1,6 @@
 # Coding Best Practices
 
-This document outlines the coding standards and best practices for the FamMan application.
+This document outlines the coding standards and best practices for the homerealm application.
 
 ## General Principles
 

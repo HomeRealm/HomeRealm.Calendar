@@ -1,4 +1,4 @@
-# FamMan Documentation Docsify Wiki
+# homerealm Documentation Docsify Wiki
 
 This directory contains the Dockerfile and setup for a local, hot-reload Docsify wiki serving the documentation in `docs/`.
 
@@ -6,17 +6,17 @@ This directory contains the Dockerfile and setup for a local, hot-reload Docsify
 - Auto-generated navigation from markdown structure
 - Dark theme by default
 - Plugins: copy code, zoom image, flexible alerts, tabs, themeable, sidebar collapse, mermaid, search
-- Custom title: "FamMan Documentation"
+- Custom title: "homerealm Documentation"
 
 ## Usage
 
 1. **Build the Docker image:**
    ```sh
-   docker build -t famman-docsify ./docsify
+   docker build -t homerealm-docsify ./docsify
    ```
 2. **Run the container (serves docs on http://localhost:3000):**
    ```sh
-   docker run --rm -it --name famman-docsify -p 3000:3000 famman-docsify
+   docker run --rm -it --name homerealm-docsify -p 3000:3000 homerealm-docsify
    ```
 
 

@@ -34,7 +34,7 @@ This guide explains how Calendar API resources map to ICAL fields using ical.net
 
 ## Occurrence Generation as JSON
 
-While ical.net is used to generate event occurrences according to ICAL standards, the FamMan Calendar API returns these occurrences as JSON objects. This makes it easier for client applications to consume and display event data.
+While ical.net is used to generate event occurrences according to ICAL standards, the homerealm Calendar API returns these occurrences as JSON objects. This makes it easier for client applications to consume and display event data.
 
 ### Example JSON Occurrence Output
 

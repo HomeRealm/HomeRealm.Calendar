@@ -1,7 +1,7 @@
 
 # Recommended Calendar API Design
 
-This section outlines the recommended RESTful API endpoints and usage for the FamMan Calendar API.
+This section outlines the recommended RESTful API endpoints and usage for the homerealm Calendar API.
 
 ---
 
